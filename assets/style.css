@@ -117,6 +117,13 @@ nav ul li a {
     font-weight: 700;
     margin-bottom: 10px;
 }
+.subsection-title {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 600;
+    margin: 2em 0 1em;
+  }
+  
 
 .feature-box p {
     font-size: 18px;
@@ -141,7 +148,6 @@ nav ul li a {
     gap: 30px;
     margin-top: 30px;
 }
-
 .chapter-card {
     background: #FFF;
     padding: 30px;
@@ -150,17 +156,15 @@ nav ul li a {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease;
-}
-
-.chapter-card:hover {
-    transform: translateY(-5px);
-}
-
-.chapter-card a {
     text-decoration: none;
     font-size: 20px;
-    color: #007bff;
+    color: black !important; /* <- force override */
     font-weight: bold;
+    display: block;
+}
+.chapter-card:hover {
+    transform: translateY(-5px);
+    color: black !important; /* make sure it doesn't go blue */
 }
 
 /* Buttons */
@@ -194,3 +198,56 @@ footer {
     text-align: center;
     margin-top: 50px;
 }
+.chapter-top-nav {
+    background: #F3EFE5; /* change this color if you prefer something else */
+    border-bottom: 1px solid #E0DED9;
+    padding: 30px 40px 20px;
+    margin-top: 0;
+  }
+  
+  
+  .chapter-top-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
+  
+  .chapter-top-list li {
+    margin: 0;
+  }
+  
+  .chapter-top-list a {
+    display: block;
+    background: white;
+    border: 1px solid #DDD;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #111;
+    font-size: 14px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .chapter-top-list a:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+/* Fix content spacing */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .chapter-nav-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #111;
+  }
+      

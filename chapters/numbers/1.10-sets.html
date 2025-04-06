@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>1.10 Sets</title>
-  <link rel="stylesheet" href="../../assets/style.css">
+  <meta charset="UTF-8" />
+  <title>1.10-sets – WAEC Math | Cheetah WAEC</title>
+  <meta name="description" content="Master WAEC math basics with Numbers and Numeration: fractions, decimals, indices, surds, number bases, sets, and more — explained with examples.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/style.css" />
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cheetah WAEC - WAEC Mathematics Study Guide",
+    "description": "A comprehensive and interactive guide for Nigerian secondary school students preparing for the WAEC mathematics exam.",
+    "educationalLevel": "Secondary School",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "Algebra", "Numbers and Numeration", "Geometry", "Trigonometry", 
+      "Statistics", "Probability", "Commercial Mathematics", "Vectors", "Transformation"
+    ],
+    "educationalUse": "Study and Practice",
+    "learningResourceType": "StudyGuide",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cheetah WAEC",
+      "url": "https://cheetahwaec.com"
+    }
+  }
+  </script>
+
 </head>
 <body>
+  <!-- Navigation -->
   <nav>
     <div class="nav-container">
-      <h1>
-        <img src="../../assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
-        Cheetah WAEC
+      <h1 style="display: flex; align-items: center;">
+        <a href="../../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <img src="../../assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <span>Cheetah WAEC</span>
+        </a>
       </h1>
       <ul>
-        <li><a href="../../index.html">Home</a></li>
         <li><a href="../../study-guide.html">Study Guide</a></li>
         <li><a href="#">Past Papers</a></li>
         <li><a href="#">Practice</a></li>
@@ -24,9 +53,95 @@
       </ul>
     </div>
   </nav>
-  <div class="container" style="margin-top:150px;">
-    <h2>1.10 Sets</h2>
-    <p>📘 Lesson content goes here...</p>
+
+ <!-- Chapter Navigation Links -->
+  
+ <div class="chapter-top-nav">
+  <h1 class="chapter-nav-title">Section 1: Number and Numeration Chapters</h1>
+  <ul class="chapter-top-list">
+    <li><a href="../numbers/1.1-fractions-and-decimals.html">1.1 Fractions and Decimals</a></li>
+    <li><a href="../numbers/1.2-indices.html">1.2 Indices</a></li>
+    <li><a href="../numbers/1.3-surds.html">1.3 Surds</a></li>
+    <li><a href="../numbers/1.4-exponential-equations.html">1.4 Exponential Equations</a></li>
+    <li><a href="../numbers/1.5-logarithms.html">1.5 Logarithms</a></li>
+    <li><a href="../numbers/1.6-standard-form.html">1.6 Standard Form of a Number</a></li>
+    <li><a href="../numbers/1.7-number-bases.html">1.7 Number Bases</a></li>
+    <li><a href="../numbers/1.8-ratio-and-proportion.html">1.8 Ratio and Proportion</a></li>
+    <li><a href="../numbers/1.9-percentages.html">1.9 Percentages</a></li>
+    <li><a href="../numbers/1.10-sets.html">1.10 Sets</a></li>
+  </ul>
+</div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h3 class="subsection-title">1.10 Sets</h3>
+Set theory is a fundamental branch of mathematics that deals with collections of objects, called sets. These objects are called elements or members of the set. 
+<p><strong>Key Concepts:</strong></p>
+<ul>
+    <li> <p><strong>Union of Sets:</strong></p> The union of two sets \(A\) and \(B\), denoted by \(A \cup B\), is the set of elements that are in \(A\), in \(B\), or in both.
+    \[
+    A \cup B = \{x \mid x \in A \text{ or } x \in B\}.
+    \]
+    <li> <p><strong>Intersection of Sets:</strong></p> The intersection of two sets \(A\) and \(B\), denoted by \(A \cap B\), is the set of elements that are in both \(A\) and \(B\).
+    \[
+    A \cap B = \{x \mid x \in A \text{ and } x \in B\}.
+    \]
+    <li> <p><strong>Complement of a Set:</strong></p> The complement of a set \(A\), denoted by \(A'\), is the set of elements not in \(A\) but in the universal set \(U\).
+    \[
+    A' = \{x \in U \mid x \notin A\}.
+    \]
+    <li> <p><strong>Universal Set:</strong></p> The universal set, denoted by \(U\), is the set that contains all elements under consideration in a particular context. All subsets are defined within this universal set.
+    <li> <p><strong>Cardinality of a Set:</strong></p> The cardinality of a set \(A\), denoted by \(|A|\), is the number of elements in the set.
+    <li> <p><strong>Venn Diagrams:</strong></p> Venn diagrams are visual representations of sets and their relationships, such as union, intersection, and complement.
+</ul>
+    <div style="text-align:center;"><img src="../../assets/images/1.1.png" style="width:70.0%"></div>
+<p><strong>Example 1: Union of Two Sets</strong></p>
+Given \(A = \{1, 2, 3, 4\}\) and \(B = \{3, 4, 5, 6\}\), find \(A \cup B\).
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Step 1: Combine all unique elements of \(A\) and \(B\):
+\[
+A \cup B = \{1, 2, 3, 4, 5, 6\}.
+\]
+Therefore, \(A \cup B = \{1, 2, 3, 4, 5, 6\}\).
+<div style="margin-top:1cm;"></div>
+<p><strong>Example 2: Intersection of Two Sets</strong></p>
+Given \(A = \{1, 2, 3, 4\}\) and \(B = \{3, 4, 5, 6\}\), find \(A \cap B\).
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Step 1: Identify the common elements in \(A\) and \(B\):
+\[
+A \cap B = \{3, 4\}.
+\]
+Therefore, \(A \cap B = \{3, 4\}\).
+<p><strong>Example 3: Complement of a Set</strong></p>
+Given \(U = \{1, 2, 3, 4, 5, 6, 7\}\) and \(A = \{2, 4, 6\}\), find \(A'\).
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Step 1: List all elements in \(U\) that are not in \(A\):
+\[
+A' = \{1, 3, 5, 7\}.
+\]
+Therefore, \(A' = \{1, 3, 5, 7\}\).
+<p><strong>Example 4: Cardinality of Sets and Venn Diagram Application</strong></p>
+In a survey, 20 students like basketball, 15 like football, and 10 like both sports. How many students like at least one of the two sports?
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Step 1: Use the principle of inclusion-exclusion:
+\[
+|A \cup B| = |A| + |B| - |A \cap B|.
+\]
+Step 2: Substitute the values:
+\[
+|A \cup B| = 20 + 15 - 10 = 25.
+\]
+Therefore, 25 students like at least one of the two sports.
   </div>
+
+
 </body>
 </html>

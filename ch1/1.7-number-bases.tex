@@ -1,0 +1,125 @@
+\subsection*{1.7 Number Bases}
+
+Number bases represent the numerical system in which values are expressed. The base indicates the number of unique digits, including zero, that a numeral system uses. Common bases include:
+
+\begin{itemize}
+    \item \textbf{Base 10 (Decimal):} Standard numeric system.
+    \item \textbf{Base 2 (Binary):} Used in computer systems.
+    \item \textbf{Base 16 (Hexadecimal):} Common in programming and computing.
+\end{itemize}
+
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item Converting numbers between bases involves successive division by the new base and noting remainders.
+    \item To perform operations on numbers in any base, first convert them to base 10, perform the operation, and then convert the answer back to the original base.
+\end{itemize}
+
+\begin{flushleft}
+\textbf{Example 1: Conversion from Decimal to Binary}
+
+Convert \(18\) from base 10 to base 2.
+
+\textbf{Solution:} \vspace{0.2cm}
+
+Step 1: Divide by 2 and record remainders:  
+\[
+18 \div 2 = 9 \text{ remainder } 0
+\]
+\[
+9 \div 2 = 4 \text{ remainder } 1
+\]
+\[
+4 \div 2 = 2 \text{ remainder } 0
+\]
+\[
+2 \div 2 = 1 \text{ remainder } 0
+\]
+\[
+1 \div 2 = 0 \text{ remainder } 1
+\]
+
+Step 2: Write the remainders in reverse order:  
+\[
+18_{10} = 10010_2
+\]
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 2: Conversion from Binary to Decimal}
+
+Convert \(1011_2\) to base 10.
+
+\textbf{Solution:} \vspace{0.2cm}
+
+Apply place values:  
+\[
+(1 \cdot 2^3) + (0 \cdot 2^2) + (1 \cdot 2^1) + (1 \cdot 2^0) = 8 + 0 + 2 + 1 = 11
+\]
+
+Therefore, \(1011_2 = 11_{10}\).
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 3: Multiplication in Base 3}
+
+Simplify \(21_3 \cdot 2_3\) in base 3.
+
+\textbf{Solution:} \vspace{0.2cm}
+
+Convert each to decimal:  
+\[
+21_3 = (2 \cdot 3^1) + (1 \cdot 3^0) = 6 + 1 = 7, \quad 2_3 = 2
+\]
+
+Multiply in decimal:  
+\[
+7 \cdot 2 = 14
+\]
+
+Convert 14 to base 3:  
+\[
+14 \div 3 = 4 \text{ remainder } 2, \quad 4 \div 3 = 1 \text{ remainder } 1, \quad 1 \div 3 = 0 \text{ remainder } 1
+\]
+
+Write the remainders in reverse:  
+\[
+14_{10} = 112_3
+\]
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 4: Squaring in Base 2}
+
+Simplify \((11_{\text{two}})^2\).
+
+\textbf{Solution:} \vspace{0.2cm}
+
+Convert to decimal:  
+\[
+11_{\text{two}} = 3
+\]
+
+Square in decimal:  
+\[
+3^2 = 9
+\]
+
+Convert 9 back to binary:  
+\[
+9 \div 2 = 4 \text{ remainder } 1
+\]
+\[
+4 \div 2 = 2 \text{ remainder } 0
+\]
+\[
+2 \div 2 = 1 \text{ remainder } 0
+\]
+\[
+1 \div 2 = 0 \text{ remainder } 1
+\]
+
+Write in reverse order:  
+\[
+9_{10} = 1001_2
+\]
+\end{flushleft}
