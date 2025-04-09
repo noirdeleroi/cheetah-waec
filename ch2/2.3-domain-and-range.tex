@@ -1,0 +1,147 @@
+
+\subsection*{2.3 Domain and Range}
+
+The \textbf{domain} of a function is the set of all possible input values (usually \(x\)) for which the function is defined.  
+The \textbf{range} is the set of all possible output values (usually \(y\)) the function can produce.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item \textbf{Rational Expressions:} Denominators must not be zero. Exclude values of \(x\) that make the denominator zero.
+    \[
+    f(x) = \frac{1}{x - 3} \quad \text{Domain: } x \neq 3
+    \]
+
+    \item \textbf{Irrational Expressions:} Even roots must have non-negative radicands (the expression inside the root).
+    \[
+    f(x) = \sqrt{x - 2} \quad \text{Domain: } x \geq 2
+    \]
+
+    \item \textbf{Logarithmic Functions:} The argument of the logarithm must be positive.
+    \[
+    f(x) = \log(x - 1) \quad \text{Domain: } x > 1
+    \]
+    \item \textbf{Undefined Expressions:} These occur when mathematical operations are not valid for certain input values. Common cases include:
+\begin{itemize}
+    \item Division by zero:
+    \[
+    \frac{1}{x - 2} \quad \text{is undefined at } x = 2
+    \]
+    \item Even roots of negative numbers (in real numbers):
+    \[
+    \sqrt{x - 5} \quad \text{is undefined for } x < 5
+    \]
+    \item Logarithm of non-positive numbers:
+    \[
+    \log(x) \quad \text{is undefined for } x \leq 0
+    \]
+\end{itemize}
+To find the domain, exclude values of \(x\) that make the expression undefined.
+
+\end{itemize}
+
+\textbf{Examples:}
+
+\begin{flushleft}
+\textbf{Example 1: Domain of a Rational Function}
+
+Find the domain of \( f(x) = \frac{2x + 1}{x^2 - 4} \).
+
+\textbf{Solution:} \vspace{0.2cm}
+
+Step 1: Set the denominator not equal to zero:
+\[
+x^2 - 4 \neq 0 \Rightarrow x \neq \pm2
+\]
+
+Therefore, the domain is all real numbers except \( x = -2 \) and \( x = 2 \).
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 2: Domain of a Root Function}
+
+Find the domain of \( f(x) = \sqrt{5 - x} \).
+
+\textbf{Solution:} \vspace{0.2cm}
+
+The expression under the square root must be \(\geq 0\):
+
+\[
+5 - x \geq 0 \Rightarrow x \leq 5
+\]
+
+So, the domain is \( x \leq 5 \).
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 3: Domain of a Logarithmic Function}
+
+Find the domain of \( f(x) = \log(x^2 - 9) \).
+
+\textbf{Solution:} \vspace{0.2cm}
+
+The argument of the log must be positive:
+\[
+x^2 - 9 > 0 \Rightarrow (x - 3)(x + 3) > 0
+\]
+
+This inequality is satisfied when \( x < -3 \) or \( x > 3 \).  
+So the domain is \( (-\infty, -3) \cup (3, \infty) \).
+\end{flushleft}
+\begin{flushleft}
+\textbf{Example 4: Undefined Value in a Rational Expression}
+
+Find the value of \(x\) for which the expression  
+\[
+f(x) = \frac{x + 5}{x + 7}
+\]  
+is undefined.
+
+\textbf{Solution:} \vspace{0.2cm}
+
+A rational expression is undefined when the denominator is zero.
+
+Set the denominator equal to zero:  
+\[
+x + 7 = 0 \Rightarrow x = -7
+\]
+
+Therefore, the expression is undefined at \( \boxed{x = -7} \).
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 5: Undefined Values in a Rational Expression}
+
+Find the values of \(x\) for which the expression  
+\[
+f(x) = \frac{1}{(x - 3)(x^2 - 9)}
+\]  
+is undefined.
+
+\textbf{Solution:} \vspace{0.2cm}
+
+Step 1: Set the denominator equal to zero:
+\[
+(x - 3)(x^2 - 9) = 0
+\]
+
+Step 2: Factor further:
+\[
+x^2 - 9 = (x - 3)(x + 3)
+\]
+
+So the full denominator becomes:
+\[
+(x - 3)(x - 3)(x + 3)
+\]
+
+Step 3: Set each factor equal to zero:
+\[
+x - 3 = 0 \Rightarrow x = 3
+\]
+\[
+x + 3 = 0 \Rightarrow x = -3
+\]
+
+Therefore, the expression is undefined at \( \boxed{x = -3 \text{ and } x = 3} \).
+\end{flushleft}
+

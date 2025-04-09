@@ -41,6 +41,8 @@ def convert_text_to_html(tex):
     ), tex)
     tex = re.sub(r'\\section\*{(.+?)}', r'<h2>\1</h2>', tex)
     tex = re.sub(r'\\subsection\*{(.+?)}', r'<h3 class="subsection-title">\1</h3>', tex)
+    tex = re.sub(r'\\paragraph{(.+?)}', r'<p><strong>\1</strong></p>', tex)
+
     tex = re.sub(r'\\textbf{(.+?)}', r'<p><strong>\1</strong></p>', tex)
     tex = tex.replace("\\begin{itemize}", "<ul>")
     tex = tex.replace("\\end{itemize}", "</ul>")
@@ -64,6 +66,7 @@ def remove_boilerplate(tex):
     tex = re.sub(r'\\end{document}', '', tex)
     tex = tex.replace("\\begin{flushleft}", "")
     tex = tex.replace("\\end{flushleft}", "")
+
     # Convert \vspace{Xcm} to HTML spacing
 
 
@@ -102,8 +105,21 @@ def batch_convert(folder_path, template_path, output_folder):
 
 # Example usage:
 if __name__ == "__main__":
+
     batch_convert(
-        folder_path="D:\python\jupiter_sg\ch1",             # 📁 Folder with .tex files
-        template_path=r"D:\python\jupiter_sg\template.html",      # 📄 Path to template.html
-        output_folder=r"D:\python\jupiter_sg\chapters\numbers"       # 📁 Folder to save .html files
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch1",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template1.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\numbers"       # 📁 Folder to save .html files
     )
+
+    batch_convert(
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch2",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template2.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\algebra"       # 📁 Folder to save .html files
+    )
+    batch_convert(
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch3",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template3.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\geometry"       # 📁 Folder to save .html files
+    )
+

@@ -1,0 +1,167 @@
+
+\subsection*{2.8 Sequences and Series}
+A sequence is an ordered list of numbers that follow a specific pattern, and a series is the sum of the terms of a sequence.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item \textbf{Sequence Definitions:}
+    \begin{itemize}
+        \item \textbf{Sequence:} An ordered list of numbers arranged according to a specific rule or pattern. Each number in the sequence is called a term, and the position of a term is denoted by $n$. Sequences can be defined by a general formula (explicit rule) or a recursive formula. For example: 5, 10, 15, 20,... is a sequence with first term $a_1 = 5$, second term $a_2 = 10$ and so on.
+
+        \item \textbf{General Formula:} A formula that defines the $n$th term of a sequence, $a_n$, in terms of $n$. For examplme $a_n=n^2-2$ will give a sequence -1, 2, 7, 14, 23,...
+        \item \textbf{Recursive Formula:} A formula that defines each term of a sequence in relation to one or more previous terms. For example, $a_1 = 2$, $a_{n+1} = a_n + 3$ will give a sequence 2, 5, 8, 11,...
+    \end{itemize}
+    \item \textbf{Sequence Evaluation:}  
+To evaluate a sequence means to find specific terms using the general formula (nth term) or recursive rule. 
+
+\textbf{Example:}  
+Find the 5th term of the sequence defined by \(T_n = 3n - 2\):  
+\[
+T_5 = 3(5) - 2 = 15 - 2 = 13
+\]
+
+    \item \textbf{Arithmetic Progression (AP):} A sequence where each term increases or decreases by a constant value, called the common difference $d$. The general form is:
+    \[
+    a, a+d, a+2d, \dots
+    \]
+        \begin{itemize}
+            \item \textbf{Nth Term of AP:}
+            \[
+            a_n = a + (n-1)d
+            \]
+            where $a$ is the first term, $d$ is the common difference, and $n$ is the term number.
+            \item \textbf{Sum of the First $n$ Terms of AP:}
+            \[
+            S_n = \frac{n}{2} [2a + (n-1)d]
+            \]
+        \end{itemize}
+    \item \textbf{Geometric Progression (GP):} A sequence where each term is multiplied by a constant value, called the common ratio $r$. The general form is:
+    \[
+    a, ar, ar^2, \dots
+    \]
+        \begin{itemize}
+            \item \textbf{Nth Term of GP:}
+            \[
+            a_n = ar^{n-1}
+            \]
+            where $a$ is the first term, $r$ is the common ratio, and $n$ is the term number.
+            \item \textbf{Sum of the First $n$ Terms of GP:}
+            \[
+            S_n = a \frac{1-r^n}{1-r}, \quad r \neq 1
+            \]
+            \item \textbf{Sum to Infinity of GP:}
+            \[
+            S_\infty = \frac{a}{1-r}, \quad |r| < 1
+            \]
+        \end{itemize}
+    \item \textbf{Sum of Sequences:} The sum of the terms in a sequence, calculated using the formulas above depending on whether the sequence is arithmetic or geometric.
+\end{itemize}
+
+\begin{flushleft}
+\textbf{Example 1: Evaluating Terms in a Sequence}
+
+If \( U_n = n(n^2 + 1) \), evaluate \( U_5 - U_4 \).
+
+\textbf{Solution:} \vspace{0.2cm}
+
+Step 1: Find \( U_5 \):
+\[
+U_5 = 5(5^2 + 1) = 5(25 + 1) = 5 \times 26 = 130
+\]
+
+Step 2: Find \( U_4 \):
+\[
+U_4 = 4(4^2 + 1) = 4(16 + 1) = 4 \times 17 = 68
+\]
+
+Step 3: Subtract:
+\[
+U_5 - U_4 = 130 - 68 = \boxed{62}
+\]
+\end{flushleft}
+
+
+\begin{flushleft}
+\textbf{Example 2: Find the 10th term of the AP $3, 7, 11, \dots$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Identify the values:
+\[
+a = 3, \quad d = 7 - 3 = 4, \quad n = 10.
+\]
+
+Use the formula for the $n$th term:
+\[
+a_n = a + (n-1)d = 3 + (10-1) \cdot 4 = 3 + 36 = 39.
+\]
+
+Therefore, the 10th term is 39.
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 3: Find the sum of the first 8 terms of the AP $5, 9, 13, \dots$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Identify the values:
+\[
+a = 5, \quad d = 9 - 5 = 4, \quad n = 8.
+\]
+
+Use the formula for the sum of the first $n$ terms:
+\[
+S_n = \frac{n}{2} [2a + (n-1)d] = \frac{8}{2} [2 \cdot 5 + (8-1) \cdot 4].
+\]
+
+Simplify:
+\[
+S_n = 4 [10 + 28] = 4 \cdot 38 = 152.
+\]
+
+Therefore, the sum of the first 8 terms is 152.
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 4: Find the 6th term of the GP $2, 4, 8, \dots$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Identify the values:
+\[
+a = 2, \quad r = 4 \div 2 = 2, \quad n = 6.
+\]
+
+Use the formula for the $n$th term:
+\[
+a_n = ar^{n-1} = 2 \cdot 2^{6-1} = 2 \cdot 2^5 = 2 \cdot 32 = 64.
+\]
+
+Therefore, the 6th term is 64.
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 5: Find the sum to infinity of the GP $3, 1.5, 0.75, \dots$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Identify the values:
+\[
+a = 3, \quad r = 1.5 \div 3 = 0.5.
+\]
+
+Use the formula for the sum to infinity:
+\[
+S_\infty = \frac{a}{1-r} = \frac{3}{1-0.5} = \frac{3}{0.5} = 6.
+\]
+
+Therefore, the sum to infinity is 6.
+\end{flushleft}

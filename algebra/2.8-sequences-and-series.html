@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>2.8-sequences-and-series – WAEC Math | Cheetah WAEC</title>
+  <meta name="description" content="Master WAEC math basics with Numbers and Numeration: fractions, decimals, indices, surds, number bases, sets, and more — explained with examples.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cheetah WAEC - WAEC Mathematics Study Guide",
+    "description": "A comprehensive and interactive guide for Nigerian secondary school students preparing for the WAEC mathematics exam.",
+    "educationalLevel": "Secondary School",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "Algebra", "Numbers and Numeration", "Geometry", "Trigonometry", 
+      "Statistics", "Probability", "Commercial Mathematics", "Vectors", "Transformation"
+    ],
+    "educationalUse": "Study and Practice",
+    "learningResourceType": "StudyGuide",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cheetah WAEC",
+      "url": "https://cheetahwaec.com"
+    }
+  }
+  </script>
+
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <h1 style="display: flex; align-items: center;">
+        <a href="../../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <img src="../../assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <span>Cheetah WAEC</span>
+        </a>
+      </h1>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../study-guide.html">Study Guide</a></li>
+        <li><a href="#">Past Papers</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#" class="subscribe-btn">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <div class="container">
+    <h3 class="subsection-title">2.8 Sequences and Series</h3>
+A sequence is an ordered list of numbers that follow a specific pattern, and a series is the sum of the terms of a sequence.
+<p><strong>Key Concepts:</strong></p>
+<ul>
+    <li> <p><strong>Sequence Definitions:</strong></p>
+    <ul>
+        <li> <p><strong>Sequence:</strong></p> An ordered list of numbers arranged according to a specific rule or pattern. Each number in the sequence is called a term, and the position of a term is denoted by \(n\). Sequences can be defined by a general formula (explicit rule) or a recursive formula. For example: 5, 10, 15, 20,... is a sequence with first term \(a_1 = 5\), second term \(a_2 = 10\) and so on.
+        <li> <p><strong>General Formula:</strong></p> A formula that defines the \(n\)th term of a sequence, \(a_n\), in terms of \(n\). For examplme \(a_n=n^2-2\) will give a sequence -1, 2, 7, 14, 23,...
+        <li> <p><strong>Recursive Formula:</strong></p> A formula that defines each term of a sequence in relation to one or more previous terms. For example, \(a_1 = 2\), \(a_{n+1} = a_n + 3\) will give a sequence 2, 5, 8, 11,...
+    </ul>
+    <li> <p><strong>Sequence Evaluation:</strong></p>  
+To evaluate a sequence means to find specific terms using the general formula (nth term) or recursive rule. 
+<p><strong>Example:</strong></p>  
+Find the 5th term of the sequence defined by \(T_n = 3n - 2\):  
+\[
+T_5 = 3(5) - 2 = 15 - 2 = 13
+\]
+    <li> <p><strong>Arithmetic Progression (AP):</strong></p> A sequence where each term increases or decreases by a constant value, called the common difference \(d\). The general form is:
+    \[
+    a, a+d, a+2d, \dots
+    \]
+        <ul>
+            <li> <p><strong>Nth Term of AP:</strong></p>
+            \[
+            a_n = a + (n-1)d
+            \]
+            where \(a\) is the first term, \(d\) is the common difference, and \(n\) is the term number.
+            <li> <p><strong>Sum of the First \(n\) Terms of AP:</strong></p>
+            \[
+            S_n = \frac{n}{2} [2a + (n-1)d]
+            \]
+        </ul>
+    <li> <p><strong>Geometric Progression (GP):</strong></p> A sequence where each term is multiplied by a constant value, called the common ratio \(r\). The general form is:
+    \[
+    a, ar, ar^2, \dots
+    \]
+        <ul>
+            <li> <p><strong>Nth Term of GP:</strong></p>
+            \[
+            a_n = ar^{n-1}
+            \]
+            where \(a\) is the first term, \(r\) is the common ratio, and \(n\) is the term number.
+            <li> <p><strong>Sum of the First \(n\) Terms of GP:</strong></p>
+            \[
+            S_n = a \frac{1-r^n}{1-r}, \quad r \neq 1
+            \]
+            <li> <p><strong>Sum to Infinity of GP:</strong></p>
+            \[
+            S_\infty = \frac{a}{1-r}, \quad |r| < 1
+            \]
+        </ul>
+    <li> <p><strong>Sum of Sequences:</strong></p> The sum of the terms in a sequence, calculated using the formulas above depending on whether the sequence is arithmetic or geometric.
+</ul>
+<p><strong>Example 1: Evaluating Terms in a Sequence</strong></p>
+If \( U_n = n(n^2 + 1) \), evaluate \( U_5 - U_4 \).
+<p><strong>Solution:</strong></p> <div style="margin-top:0.2cm;"></div>
+Step 1: Find \( U_5 \):
+\[
+U_5 = 5(5^2 + 1) = 5(25 + 1) = 5 \times 26 = 130
+\]
+Step 2: Find \( U_4 \):
+\[
+U_4 = 4(4^2 + 1) = 4(16 + 1) = 4 \times 17 = 68
+\]
+Step 3: Subtract:
+\[
+U_5 - U_4 = 130 - 68 = \boxed{62}
+\]
+<p><strong>Example 2: Find the 10th term of the AP \(3, 7, 11, \dots\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Identify the values:
+\[
+a = 3, \quad d = 7 - 3 = 4, \quad n = 10.
+\]
+Use the formula for the \(n\)th term:
+\[
+a_n = a + (n-1)d = 3 + (10-1) \cdot 4 = 3 + 36 = 39.
+\]
+Therefore, the 10th term is 39.
+<p><strong>Example 3: Find the sum of the first 8 terms of the AP \(5, 9, 13, \dots\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Identify the values:
+\[
+a = 5, \quad d = 9 - 5 = 4, \quad n = 8.
+\]
+Use the formula for the sum of the first \(n\) terms:
+\[
+S_n = \frac{n}{2} [2a + (n-1)d] = \frac{8}{2} [2 \cdot 5 + (8-1) \cdot 4].
+\]
+Simplify:
+\[
+S_n = 4 [10 + 28] = 4 \cdot 38 = 152.
+\]
+Therefore, the sum of the first 8 terms is 152.
+<p><strong>Example 4: Find the 6th term of the GP \(2, 4, 8, \dots\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Identify the values:
+\[
+a = 2, \quad r = 4 \div 2 = 2, \quad n = 6.
+\]
+Use the formula for the \(n\)th term:
+\[
+a_n = ar^{n-1} = 2 \cdot 2^{6-1} = 2 \cdot 2^5 = 2 \cdot 32 = 64.
+\]
+Therefore, the 6th term is 64.
+<p><strong>Example 5: Find the sum to infinity of the GP \(3, 1.5, 0.75, \dots\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Identify the values:
+\[
+a = 3, \quad r = 1.5 \div 3 = 0.5.
+\]
+Use the formula for the sum to infinity:
+\[
+S_\infty = \frac{a}{1-r} = \frac{3}{1-0.5} = \frac{3}{0.5} = 6.
+\]
+Therefore, the sum to infinity is 6.
+  </div>
+
+ <!-- Chapter Navigation Links -->
+  
+<!-- Chapter Navigation Links -->
+<div class="chapter-top-nav">
+  <h1 class="chapter-nav-title">Section 2: Algebra Chapters</h1>
+  <ul class="chapter-top-list">
+    <li><a href="../algebra/2.1-algebraic-expression.html">2.1 Algebraic Expression</a></li>
+    <li><a href="../algebra/2.2-polynomials.html">2.2 Polynomials</a></li>
+    <li><a href="../algebra/2.3-domain-and-range.html">2.3 Domain and Range</a></li>
+    <li><a href="../algebra/2.4-equations-and-inequalities.html">2.4 Equations and Inequalities</a></li>
+    <li><a href="../algebra/2.5-simultaneous-equations.html">2.5 Simultaneous Equations</a></li>
+    <li><a href="../algebra/2.6-quadratic-equations-and-inequalities.html">2.6 Quadratic Equations and Inequalities</a></li>
+    <li><a href="../algebra/2.7-remainder-arithmetic.html">2.7 Remainder Arithmetic</a></li>
+    <li><a href="../algebra/2.8-sequences-and-series.html">2.8 Sequences and Series</a></li>
+    <li><a href="../algebra/2.9-matrices-and-determinants.html">2.9 Matrices and Determinants</a></li>
+  </ul>
+</div>
+
+  <div class="back-to-guide">
+    <a href="../../study-guide.html">← Back to Study Guide</a>
+  </div>
+  
+
+  <footer>
+    <p>&copy; 2025 Cheetah WAEC. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

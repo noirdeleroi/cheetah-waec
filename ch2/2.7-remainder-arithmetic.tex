@@ -1,0 +1,122 @@
+
+\subsection*{2.7 Remainder Arithmetic}
+Remainder arithmetic, also known as modular arithmetic, deals with integers under division by a fixed number (the modulus). It is commonly used in number theory and cryptography.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item \textbf{Modulo Operation:} The modulo operation finds the remainder when one integer is divided by another. For example, $11 \equiv 2 \,(\text{mod } 3)$, because 11 gives the remainder 2 when $8$ is divided by $3$ ($\frac{11}{3} = 3 + \frac{2}{3}$). \\Formally, $a \equiv r \,(\text{mod } m)$ if $a = qm + r$, where $q$ is the quotient and $0 \leq r < m$.
+
+    \item \textbf{Congruence Modulo:} Two integers $a$ and $b$ are congruent modulo $m$, written as $a \equiv b \,(\text{mod } m)$, if their difference is divisible by $m$. Formally:
+    \[
+    a \equiv b \,(\text{mod } m) \iff m \,|\, (a - b).
+    \]
+    
+    \item \textbf{Multiplication Table Modulo $m$:} A table showing the products of integers under modulo $m$, useful for understanding modular arithmetic operations.
+\end{itemize}
+
+\begin{flushleft}
+\textbf{Example 1: Verify if $17 \equiv 5 \,(\text{mod } 6)$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Check if $17 - 5$ is divisible by 6:
+\[
+17 - 5 = 12.
+\]
+Since $12$ is divisible by $6$, we conclude:
+\[
+17 \equiv 5 \,(\text{mod } 6).
+\]
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 2: Compute $(7 + 10) \,(\text{mod } 5)$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Add the numbers:
+\[
+7 + 10 = 17.
+\]
+
+Find the remainder when $17$ is divided by $5$:
+\[
+17 \div 5 = 3 \text{ remainder } 2.
+\]
+
+Therefore:
+\[
+(7 + 10) \,(\text{mod } 5) = 2.
+\]
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 3: Compute $(9 \cdot 8) \,(\text{mod } 7)$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Multiply the numbers:
+\[
+9 \cdot 8 = 72.
+\]
+
+Find the remainder when $72$ is divided by $7$:
+\[
+72 \div 7 = 10 \text{ remainder } 2.
+\]
+
+Therefore:
+\[
+(9 \cdot 8) \,(\text{mod } 7) = 2.
+\]
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 4: Compute $3^4 \,(\text{mod } 5)$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Calculate the power:
+\[
+3^4 = 81.
+\]
+
+Find the remainder when $81$ is divided by $5$:
+\[
+81 \div 5 = 16 \text{ remainder } 1.
+\]
+
+Therefore:
+\[
+3^4 \,(\text{mod } 5) = 1.
+\]
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Example 5: Multiplication Table Modulo $4$.}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\vspace{0.5cm}
+
+Construct the table for integers $0, 1, 2, 3$ modulo $4$:
+\[
+\begin{array}{c|cccc}
+\cdot \,(\text{mod } 4) & 0 & 1 & 2 & 3 \\\\ \hline
+0 & 0 & 0 & 0 & 0 \\\\
+1 & 0 & 1 & 2 & 3 \\\\
+2 & 0 & 2 & 0 & 2 \\\\
+3 & 0 & 3 & 2 & 1 \\\\
+\end{array}
+\]
+
+This table shows the results of multiplication under modulo $4$.
+\end{flushleft}

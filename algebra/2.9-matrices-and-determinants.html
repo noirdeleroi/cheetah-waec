@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>2.9-matrices-and-determinants – WAEC Math | Cheetah WAEC</title>
+  <meta name="description" content="Master WAEC math basics with Numbers and Numeration: fractions, decimals, indices, surds, number bases, sets, and more — explained with examples.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cheetah WAEC - WAEC Mathematics Study Guide",
+    "description": "A comprehensive and interactive guide for Nigerian secondary school students preparing for the WAEC mathematics exam.",
+    "educationalLevel": "Secondary School",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "Algebra", "Numbers and Numeration", "Geometry", "Trigonometry", 
+      "Statistics", "Probability", "Commercial Mathematics", "Vectors", "Transformation"
+    ],
+    "educationalUse": "Study and Practice",
+    "learningResourceType": "StudyGuide",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cheetah WAEC",
+      "url": "https://cheetahwaec.com"
+    }
+  }
+  </script>
+
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <h1 style="display: flex; align-items: center;">
+        <a href="../../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <img src="../../assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <span>Cheetah WAEC</span>
+        </a>
+      </h1>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../study-guide.html">Study Guide</a></li>
+        <li><a href="#">Past Papers</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#" class="subscribe-btn">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <div class="container">
+    <h3 class="subsection-title">2.9 Matrices and Determinants</h3>
+Matrices are rectangular arrays of numbers arranged in rows and columns, used to represent and solve systems of linear equations and perform transformations in geometry.
+<p><strong>Key Concepts:</strong></p>
+<ul>
+    <li> <p><strong>Matrix Definition:</strong></p> A matrix is an array of numbers, symbols, or expressions arranged in rows and columns. For example:
+    \[
+    A = \begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \end{bmatrix}
+    \]
+    <li> <p><strong>Size of a Matrix:</strong></p> The size of a matrix is defined as the number of rows \(\times\) the number of columns. For example, the above matrix \(A\) is a \(3 \times 3\) matrix.
+    <li> <p><strong>Basic Operations with Matrices:</strong></p>
+    <ul>
+        <li> <p><strong>Addition and Subtraction:</strong></p> Matrices of the same size are added or subtracted element by element.
+        <li> <p><strong>Multiplication:</strong></p> To multiply two matrices, the number of columns in the first matrix must equal the number of rows in the second matrix. \\
+        The element in the \(i\)th row and \(j\)th column of the product matrix is the sum of the products of the corresponding elements of the \(i\)th row of the first matrix and the \(j\)th column of the second matrix. \\
+        \[
+\begin{bmatrix} a_1 & b_1 \\\\ c_1 & d_1 \end{bmatrix} \cdot \begin{bmatrix} a_2 & b_2 \\\\ c_2 & d_2 \end{bmatrix} = \begin{bmatrix} a_1a_2 + b_1c_2 & a_1b_2 + b_1d_2 \\\\ c_1a_2 + d_1c_2 & c_1b_2 + d_1d_2 \end{bmatrix}
+\]
+    </ul>
+    <li> <p><strong>Determinant:</strong></p> The determinant is a scalar value associated with a square matrix, used to determine whether the matrix is invertible. For a \(2 \times 2\) matrix:
+    \[
+    \text{If } A = \begin{bmatrix} a & b \\\\ c & d \end{bmatrix}, \quad \text{then } \det(A) = ad - bc.
+    \]
+    <li> <p><strong>Inverse Matrix:</strong></p> The inverse of a square matrix \(A\), denoted \(A^{-1}\), exists if and only if \(\det(A) \neq 0\). For a \(2 \times 2\) matrix:
+    \[
+    A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\\\ -c & a \end{bmatrix}.
+    \]
+</ul>
+<p><strong>Example 1: Add the matrices \(A = \begin{bmatrix} 1 & 2 \\\\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\\\ 7 & 8 \end{bmatrix}\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Add corresponding elements:
+\[
+A + B = \begin{bmatrix} 1+5 & 2+6 \\\\ 3+7 & 4+8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\\\ 10 & 12 \end{bmatrix}.
+\]
+Therefore, \(A + B = \begin{bmatrix} 6 & 8 \\\\ 10 & 12 \end{bmatrix}\).
+<p><strong>Example 2: Find the determinant of \(A = \begin{bmatrix} 3 & 4 \\\\ 2 & 1 \end{bmatrix}\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Use the formula for the determinant of a \(2 \times 2\) matrix:
+\[
+\det(A) = (3)(1) - (4)(2) = 3 - 8 = -5.
+\]
+Therefore, \(\det(A) = -5\).
+<p><strong>Example 3: Multiply the matrices \(A = \begin{bmatrix} 1 & 2 \\\\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 2 & 0 \\\\ 1 & 3 \end{bmatrix}\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Use the rule for matrix multiplication:
+\[
+A \cdot B = \begin{bmatrix} (1)(2)+(2)(1) & (1)(0)+(2)(3) \\\\ (3)(2)+(4)(1) & (3)(0)+(4)(3) \end{bmatrix} = \begin{bmatrix} 4 & 6 \\\\ 10 & 12 \end{bmatrix}.
+\]
+Therefore, \(A \cdot B = \begin{bmatrix} 4 & 6 \\\\ 10 & 12 \end{bmatrix}\).
+<p><strong>Example 4: Find the inverse of \(A = \begin{bmatrix} 2 & 3 \\\\ 1 & 4 \end{bmatrix}\).</strong></p>
+<div style="margin-top:0.5cm;"></div>
+<p><strong>Solution:</strong></p>
+<div style="margin-top:0.5cm;"></div>
+Step 1: Calculate the determinant:
+\[
+\det(A) = (2)(4) - (3)(1) = 8 - 3 = 5.
+\]
+Step 2: Use the formula for the inverse of a \(2 \times 2\) matrix:
+\[
+A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\\\ -c & a \end{bmatrix} = \frac{1}{5} \begin{bmatrix} 4 & -3 \\\\ -1 & 2 \end{bmatrix}.
+\]
+Therefore:
+\[
+A^{-1} = \begin{bmatrix} \frac{4}{5} & -\frac{3}{5} \\\\ -\frac{1}{5} & \frac{2}{5} \end{bmatrix}.
+\]
+  </div>
+
+ <!-- Chapter Navigation Links -->
+  
+<!-- Chapter Navigation Links -->
+<div class="chapter-top-nav">
+  <h1 class="chapter-nav-title">Section 2: Algebra Chapters</h1>
+  <ul class="chapter-top-list">
+    <li><a href="../algebra/2.1-algebraic-expression.html">2.1 Algebraic Expression</a></li>
+    <li><a href="../algebra/2.2-polynomials.html">2.2 Polynomials</a></li>
+    <li><a href="../algebra/2.3-domain-and-range.html">2.3 Domain and Range</a></li>
+    <li><a href="../algebra/2.4-equations-and-inequalities.html">2.4 Equations and Inequalities</a></li>
+    <li><a href="../algebra/2.5-simultaneous-equations.html">2.5 Simultaneous Equations</a></li>
+    <li><a href="../algebra/2.6-quadratic-equations-and-inequalities.html">2.6 Quadratic Equations and Inequalities</a></li>
+    <li><a href="../algebra/2.7-remainder-arithmetic.html">2.7 Remainder Arithmetic</a></li>
+    <li><a href="../algebra/2.8-sequences-and-series.html">2.8 Sequences and Series</a></li>
+    <li><a href="../algebra/2.9-matrices-and-determinants.html">2.9 Matrices and Determinants</a></li>
+  </ul>
+</div>
+
+  <div class="back-to-guide">
+    <a href="../../study-guide.html">← Back to Study Guide</a>
+  </div>
+  
+
+  <footer>
+    <p>&copy; 2025 Cheetah WAEC. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
