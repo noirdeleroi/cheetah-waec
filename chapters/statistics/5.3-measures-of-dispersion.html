@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>5.3-measures-of-dispersion – WAEC Math | Cheetah WAEC</title>
+  <meta name="description" content="Master WAEC math basics with Numbers and Numeration: fractions, decimals, indices, surds, number bases, sets, and more — explained with examples.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cheetah WAEC - WAEC Mathematics Study Guide",
+    "description": "A comprehensive and interactive guide for Nigerian secondary school students preparing for the WAEC mathematics exam.",
+    "educationalLevel": "Secondary School",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "Algebra", "Numbers and Numeration", "Geometry", "Trigonometry", 
+      "Statistics", "Probability", "Commercial Mathematics", "Vectors", "Transformation"
+    ],
+    "educationalUse": "Study and Practice",
+    "learningResourceType": "StudyGuide",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cheetah WAEC",
+      "url": "https://cheetahwaec.com"
+    }
+  }
+  </script>
+
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <h1 style="display: flex; align-items: center;">
+        <a href="../../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <img src="../../assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <span>Cheetah WAEC</span>
+        </a>
+      </h1>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../study-guide.html">Study Guide</a></li>
+        <li><a href="#">Past Papers</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#" class="subscribe-btn">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <div class="container">
+    <h3 class="subsection-title">5.3 Measures of Dispersion</h3>
+Measures of dispersion describe how spread out the data is. The key measures include range, quartiles, variance, mean deviation, and standard deviation.
+<p><strong>Key Concepts:</strong></p>
+<ul>
+	<li> <p><strong>Range:</strong></p> The difference between the maximum and minimum values in a dataset.
+	\[
+	\text{Range} = \max(x) - \min(x)
+	\]
+	<li> <p><strong>Quantiles:</strong></p> Values that divide a data set into equal parts. Common quantiles include:
+	<ul>
+		<li> <p><strong>Quartiles:</strong></p> Divide the data into four equal parts.
+		<li> <p><strong>Median (Q2):</strong></p> The middle value of an ordered data set.
+		<li> <p><strong>Lower Quartile (Q1):</strong></p> The median of the lower half of data.
+		<li> <p><strong>Upper Quartile (Q3):</strong></p> The median of the upper half of data.
+		<li> <p><strong>Interquartile Range (IQR):</strong></p> Measures the spread of the middle 50% of data.
+		\[
+		\text{IQR} = Q3 - Q1
+		\]
+		<li> <p><strong>Semi-Interquartile Range:</strong></p> Half of the interquartile range.
+		\[
+		\text{SIQR} = \frac{Q3 - Q1}{2}
+		\]
+	</ul>
+	<li> <p><strong>Mean Deviation:</strong></p> The average absolute deviation of each data point from the mean.
+	\[
+	\text{Mean Deviation} = \frac{\sum |x - \bar{x}|}{n}
+	\]
+	<li> <p><strong>Variance:</strong></p> Measures the average squared deviation from the mean.
+	\[
+	\sigma^2 = \frac{\sum (x - \bar{x})^2}{n}
+	\]
+	<li> <p><strong>Standard Deviation:</strong></p> The square root of variance, showing the spread of data.
+	\[
+	\sigma = \sqrt{\sigma^2}
+	\]
+</ul>
+<p><strong>Examples:</strong></p>
+	<p><strong>Example 1: Find the range, quartiles, and interquartile range for the following data set.</strong></p>
+	<p><strong>Given Data:</strong></p> \\ 
+	\(4, 8, 15, 16, 23, 42, 50, 55, 60\)
+	<div style="margin-top:0.5cm;"></div>
+	<p><strong>Solution:</strong></p>
+	<p><strong>Step 1: Find the Range</strong></p>
+	\[
+	\text{Range} = 60 - 4 = 56.
+	\]
+	<p><strong>Step 2: Find the Quartiles</strong></p>
+	<ul>
+		<li> Median (Q2): The middle value is \(23\).
+		<li> Lower Quartile (Q1): The median of the lower half (\(4, 8, 15, 16\)) is:
+		\[
+		Q1 = \frac{8+15}{2} = 11.5.
+		\]
+		<li> Upper Quartile (Q3): The median of the upper half (\(42, 50, 55, 60\)) is:
+		\[
+		Q3 = \frac{50+55}{2} = 52.5.
+		\]
+	</ul>
+	<p><strong>Step 3: Calculate Interquartile Range (IQR)</strong></p>
+	\[
+	\text{IQR} = Q3 - Q1 = 52.5 - 11.5 = 41.
+	\]
+	<p><strong>Step 4: Compute Semi-Interquartile Range</strong></p>
+	\[
+	\text{SIQR} = \frac{IQR}{2} = \frac{41}{2} = 20.5.
+	\]
+	Thus, the range is **56**, IQR is **41**, and SIQR is **20.5**.
+	<p><strong>Example 2: Find the Mean Deviation, Variance, and Standard Deviation for the following data set.</strong></p>
+	<p><strong>Given Data:</strong></p> \\ 
+	\(5, 10, 15, 20, 25\)
+	<div style="margin-top:0.5cm;"></div>
+	<p><strong>Solution:</strong></p>
+	<p><strong>Step 1: Compute the Mean</strong></p>
+	\[
+	\bar{x} = \frac{5+10+15+20+25}{5} = \frac{75}{5} = 15.
+	\]
+	<p><strong>Step 2: Compute Mean Deviation</strong></p>
+	\[
+	\sum |x - \bar{x}| = |5-15| + |10-15| + |15-15| + |20-15| + |25-15|
+	\]
+	\[
+	= 10 + 5 + 0 + 5 + 10 = 30.
+	\]
+	\[
+	\text{Mean Deviation} = \frac{30}{5} = 6.
+	\]
+	<p><strong>Step 3: Compute Variance</strong></p>
+	\[
+	\sigma^2 = \frac{\sum (x - \bar{x})^2}{n}
+	\]
+	\[
+	= \frac{(5-15)^2 + (10-15)^2 + (15-15)^2 + (20-15)^2 + (25-15)^2}{5}
+	\]
+	\[
+	= \frac{100 + 25 + 0 + 25 + 100}{5} = \frac{250}{5} = 50.
+	\]
+	<p><strong>Step 4: Compute Standard Deviation</strong></p>
+	\[
+	\sigma = \sqrt{50} \approx 7.07.
+	\]
+	Thus, the mean deviation is **6**, variance is **50**, and standard deviation is **7.07**.
+  </div>
+
+ <!-- Chapter Navigation Links -->
+  
+ <div class="chapter-top-nav">
+  <h1 class="chapter-nav-title">Section 5: Statistics Chapters</h1>
+  <ul class="chapter-top-list">
+    <li><a href="../statistics/5.1-data-representation.html">5.1 Data Representation</a></li>
+    <li><a href="../statistics/5.2-measures-of-central-tendency.html">5.2 Measures of Central Tendency</a></li>
+    <li><a href="../statistics/5.3-measures-of-dispersion.html">5.3 Measures of Dispersion</a></li>
+  </ul>
+</div>
+
+
+
+  <div class="back-to-guide">
+    <a href="../../study-guide.html">← Back to Study Guide</a>
+  </div>
+  
+
+  <footer>
+    <p>&copy; 2025 Cheetah WAEC. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

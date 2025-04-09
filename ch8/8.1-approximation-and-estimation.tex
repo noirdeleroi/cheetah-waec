@@ -1,0 +1,141 @@
+
+\subsection*{8.1 Approximation and Estimation}
+Approximation and estimation are useful techniques in numerical computations to simplify calculations while maintaining accuracy.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+	\item \textbf{Significant Figures:} Significant figures include all nonzero digits, any zeros between nonzero digits, and trailing zeros in a decimal number.
+	
+	\begin{itemize}
+		\item Examples of significant figures:
+		\begin{itemize}
+			\item 123 has 3 significant figures.
+			\item 0.004567 has 4 significant figures (leading zeros are not significant).
+			\item 50.00 has 4 significant figures (trailing zeros in a decimal are significant).
+		\end{itemize}
+		
+		\item Rounding to a given number of significant figures:
+		\begin{itemize}
+			\item Identify the required number of significant figures.
+			\item Look at the next digit after the last significant figure:
+			\begin{itemize}
+				\item If the next digit is 5 or greater, round up the last significant digit.
+				\item If the next digit is less than 5, leave the last significant digit unchanged.
+			\end{itemize}
+		\end{itemize}
+		
+		\item Example: 0.00723456 rounded to 3 significant figures is **0.00723**.
+		\item Example: 456.78 rounded to 2 significant figures is **460** (since 6 is greater than 5, round up).
+		
+		\item \textbf{Which zeros are significant?}
+		\begin{itemize}
+			\item \textbf{Zeros between nonzero digits} (Captive Zeros) are significant.
+			\begin{itemize}
+				\item Example: 105 has 3 significant figures.
+				\item Example: 20.08 has 4 significant figures.
+			\end{itemize}
+			\item \textbf{Leading zeros} (before the first nonzero digit) are not significant.
+			\begin{itemize}
+				\item Example: 0.0047 has 2 significant figures.
+				\item Example: 0.000230 has 3 significant figures.
+			\end{itemize}
+			\item \textbf{Trailing zeros in a decimal number} are significant.
+			\begin{itemize}
+				\item Example: 50.00 has 4 significant figures.
+				\item Example: 2.500 has 4 significant figures.
+			\end{itemize}
+			\item \textbf{Trailing zeros in a whole number without a decimal} are not significant.
+			\begin{itemize}
+				\item Example: 1500 has 2 significant figures.
+				\item Example: 42000 has 2 significant figures.
+				\item However, 1500.0 has 5 significant figures (because of the decimal point).
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	
+	\item \textbf{Decimal Places:} The number of digits after the decimal point.
+	\begin{itemize}
+		\item Example: 12.3456 rounded to 2 decimal places is 12.35.
+	\end{itemize}
+	
+	\item \textbf{Rounding:} Adjusting a number to a given decimal place or significant figure.
+	\begin{itemize}
+		\item Example: 457 rounded to the nearest ten is 460.
+	\end{itemize}
+	\item \textbf{Absolute Error:}  
+	The absolute error is the difference between the measured (or estimated) value and the true value. It represents the size of the error without considering its direction (positive or negative).  
+	\[
+	\text{Absolute Error} = |\text{Measured Value} - \text{True Value}|
+	\]
+	
+	\item \textbf{Percentage Error:} The relative difference between an estimated value and the actual value.
+	\[
+	\text{Percentage Error} = \left( \frac{| \text{Approximate Value} - \text{Exact Value} |}{\text{Exact Value}} \right) \times 100
+	\]
+	
+	\item \textbf{Estimation Techniques:} Approximating calculations to simplify operations, such as using rounding to estimate sums and products.
+	
+	\item \textbf{Solving Equations Correct to n Decimal Places:} Finding numerical solutions to equations with a specified accuracy.
+\end{itemize}
+
+\textbf{Examples:}
+
+\begin{flushleft}
+	\textbf{Example 1: Rounding a Number to Significant Figures}
+	
+	Round 0.00723456 to 3 significant figures.
+	
+	\textbf{Solution:}
+	
+	The first three significant figures are 7, 2, and 3. Therefore, rounding to 3 significant figures:
+	\[
+	0.00723456 \approx 0.00723.
+	\]
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 2: Calculating Percentage Error}
+	
+	An estimated value for a quantity is 48.3, while the actual value is 50. Find the percentage error.
+	
+	\textbf{Solution:}
+	
+	Step 1: Compute the absolute error.
+	\[
+	| 48.3 - 50 | = 1.7.
+	\]
+	
+	Step 2: Compute the percentage error.
+	\[
+	\text{Percentage Error} = \left( \frac{1.7}{50} \right) \times 100 = 3.4\%.
+	\]
+	
+	Thus, the percentage error is **3.4\%**.
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 3: Solving an Equation Correct to 2 Decimal Places}
+	
+	Solve $x^2 - 2x - 3 = 0$ correct to 2 decimal places.
+	
+	\textbf{Solution:}
+	
+	Using the quadratic formula:
+	\[
+	x = \frac{-(-2) \pm \sqrt{(-2)^2 - 4(1)(-3)}}{2(1)}
+	\]
+	\[
+	x = \frac{2 \pm \sqrt{4 + 12}}{2} = \frac{2 \pm \sqrt{16}}{2}
+	\]
+	\[
+	x = \frac{2 \pm 4}{2}.
+	\]
+	
+	Thus, the two roots are:
+	\[
+	x = \frac{2 + 4}{2} = 3.00, \quad x = \frac{2 - 4}{2} = -1.00.
+	\]
+	
+	The solutions correct to **2 decimal places** are **$x = 3.00$ and $x = -1.00$**.
+\end{flushleft}
+

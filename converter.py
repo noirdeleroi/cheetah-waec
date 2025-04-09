@@ -49,6 +49,14 @@ def convert_text_to_html(tex):
     tex = tex.replace("\\item", "<li>")
     tex = tex.replace("\n\n", "<br><br>")
     tex = re.sub(
+    r'\\captionof\{figure\}\{(.+?)\}',
+    r'<figcaption style="text-align: center; font-style: italic; margin-top: 8px;">\1</figcaption>',
+    tex
+)
+
+
+
+    tex = re.sub(
     r'\\includegraphics\[width=([0-9.]+)\\textwidth\]{(.+?)}',
     lambda m: f'<div style="text-align:center;"><img src="../../assets/images/{html.escape(m.group(2))}" style="width:{float(m.group(1)) * 100}%"></div>',
     tex
@@ -121,5 +129,30 @@ if __name__ == "__main__":
         folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch3",             # 📁 Folder with .tex files
         template_path=r"C:\Users\User\Documents\work\jupiter_sg\template3.html",      # 📄 Path to template.html
         output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\geometry"       # 📁 Folder to save .html files
+    )
+    batch_convert(
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch4",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template4.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\Trigonometry"       # 📁 Folder to save .html files
+    )
+    batch_convert(
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch5",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template5.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\statistics"       # 📁 Folder to save .html files
+    )
+    batch_convert(
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch6",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template6.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\probability"       # 📁 Folder to save .html files
+    )
+    batch_convert(
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch7",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template7.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\commertial-mathematics"       # 📁 Folder to save .html files
+    )
+    batch_convert(
+        folder_path=r"C:\Users\User\Documents\work\jupiter_sg\ch8",             # 📁 Folder with .tex files
+        template_path=r"C:\Users\User\Documents\work\jupiter_sg\template8.html",      # 📄 Path to template.html
+        output_folder=r"C:\Users\User\Documents\work\jupiter_sg\chapters\miscellaneous"       # 📁 Folder to save .html files
     )
 

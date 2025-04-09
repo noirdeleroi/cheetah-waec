@@ -1,0 +1,110 @@
+
+\subsection*{8.4 Vectors in 2D}
+
+Vectors are mathematical quantities that have both magnitude (size) and direction. In two-dimensional space, a vector is represented as:
+\[
+\mathbf{v} = \begin{pmatrix} x \\ y \end{pmatrix}
+\]
+where \(x\) and \(y\) are the horizontal and vertical components, respectively.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+	\item \textbf{Vector Representation:} A vector can be written in component form \( \mathbf{v} = (x, y) \), or as a directed line segment from one point to another.
+	\item \textbf{Vector Addition:} 
+	\[
+	\mathbf{a} + \mathbf{b} = \begin{pmatrix} a_x + b_x \\ a_y + b_y \end{pmatrix}
+	\]
+	\item \textbf{Vector Subtraction:} 
+	\[
+	\mathbf{a} - \mathbf{b} = \begin{pmatrix} a_x - b_x \\ a_y - b_y \end{pmatrix}
+	\]
+	\item \textbf{Multiplication by a Scalar:} 
+	\[
+	k\mathbf{v} = \begin{pmatrix} kx \\ ky \end{pmatrix}
+	\]
+	\item \textbf{Magnitude of a Vector:} The length of a vector is given by:
+	\[
+	|\mathbf{v}| = \sqrt{x^2 + y^2}
+	\]
+	\item \textbf{Unit Vector:} A vector with magnitude 1, given by:
+	\[
+	\hat{\mathbf{v}} = \frac{\mathbf{v}}{|\mathbf{v}|}
+	\]
+	\item \textbf{Dot Product:} The dot product of two vectors is:
+	\[
+	\mathbf{a} \cdot \mathbf{b} = a_x b_x + a_y b_y
+	\]
+	\item \textbf{Direction of a Vector:} The angle \( \theta \) a vector makes with the positive x-axis is:
+	\[
+	\theta = \tan^{-1} \left(\frac{y}{x}\right)
+	\]
+\end{itemize}
+
+\textbf{Examples:}
+
+\begin{flushleft}
+	\textbf{Example 1: Adding Two Vectors}
+	
+	Given \( \mathbf{a} = (3, 4) \) and \( \mathbf{b} = (-2, 1) \), find \( \mathbf{a} + \mathbf{b} \).
+	
+	\textbf{Solution:} \vspace{0.2cm}
+	
+	\[
+	\mathbf{a} + \mathbf{b} = \begin{pmatrix} 3 + (-2) \\ 4 + 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 5 \end{pmatrix}
+	\]
+	
+	Thus, the sum is \( \boxed{(1,5)} \).
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 2: Finding the Magnitude of a Vector}
+	
+	Find the magnitude of the vector \( \mathbf{v} = (5, -12) \).
+	
+	\textbf{Solution:} \vspace{0.2cm}
+	
+	\[
+	|\mathbf{v}| = \sqrt{5^2 + (-12)^2} = \sqrt{25 + 144} = \sqrt{169} = 13
+	\]
+	
+	Thus, the magnitude is \( \boxed{13} \).
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 3: Finding the Unit Vector}
+	
+	Find the unit vector in the direction of \( \mathbf{v} = (6, 8) \).
+	
+	\textbf{Solution:} \vspace{0.2cm}
+	
+	Step 1: Find the magnitude:
+	\[
+	|\mathbf{v}| = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10
+	\]
+	
+	Step 2: Compute the unit vector:
+	\[
+	\hat{\mathbf{v}} = \frac{1}{10} \begin{pmatrix} 6 \\ 8 \end{pmatrix} = \begin{pmatrix} 0.6 \\ 0.8 \end{pmatrix}
+	\]
+	
+	Thus, the unit vector is \( \boxed{(0.6, 0.8)} \).
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 4: Angle of a Vector}
+	
+	Find the angle \( \theta \) of the vector \( \mathbf{v} = (4, 3) \) with the x-axis.
+	
+	\textbf{Solution:} \vspace{0.2cm}
+	
+	\[
+	\theta = \tan^{-1} \left(\frac{3}{4} \right)
+	\]
+	
+	Using a calculator:
+	\[
+	\theta = \tan^{-1}(0.75) \approx 36.87^\circ
+	\]
+	
+	Thus, the angle is \( \boxed{36.87^\circ} \).
+\end{flushleft}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>8.1-approximation-and-estimation – WAEC Math | Cheetah WAEC</title>
+  <meta name="description" content="Master WAEC math basics with Numbers and Numeration: fractions, decimals, indices, surds, number bases, sets, and more — explained with examples.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cheetah WAEC - WAEC Mathematics Study Guide",
+    "description": "A comprehensive and interactive guide for Nigerian secondary school students preparing for the WAEC mathematics exam.",
+    "educationalLevel": "Secondary School",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "Algebra", "Numbers and Numeration", "Geometry", "Trigonometry", 
+      "Statistics", "Probability", "Commercial Mathematics", "Vectors", "Transformation"
+    ],
+    "educationalUse": "Study and Practice",
+    "learningResourceType": "StudyGuide",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cheetah WAEC",
+      "url": "https://cheetahwaec.com"
+    }
+  }
+  </script>
+
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <h1 style="display: flex; align-items: center;">
+        <a href="../../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <img src="../../assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <span>Cheetah WAEC</span>
+        </a>
+      </h1>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../study-guide.html">Study Guide</a></li>
+        <li><a href="#">Past Papers</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#" class="subscribe-btn">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <div class="container">
+    <h3 class="subsection-title">8.1 Approximation and Estimation</h3>
+Approximation and estimation are useful techniques in numerical computations to simplify calculations while maintaining accuracy.
+<p><strong>Key Concepts:</strong></p>
+<ul>
+	<li> <p><strong>Significant Figures:</strong></p> Significant figures include all nonzero digits, any zeros between nonzero digits, and trailing zeros in a decimal number.
+	<ul>
+		<li> Examples of significant figures:
+		<ul>
+			<li> 123 has 3 significant figures.
+			<li> 0.004567 has 4 significant figures (leading zeros are not significant).
+			<li> 50.00 has 4 significant figures (trailing zeros in a decimal are significant).
+		</ul>
+		<li> Rounding to a given number of significant figures:
+		<ul>
+			<li> Identify the required number of significant figures.
+			<li> Look at the next digit after the last significant figure:
+			<ul>
+				<li> If the next digit is 5 or greater, round up the last significant digit.
+				<li> If the next digit is less than 5, leave the last significant digit unchanged.
+			</ul>
+		</ul>
+		<li> Example: 0.00723456 rounded to 3 significant figures is **0.00723**.
+		<li> Example: 456.78 rounded to 2 significant figures is **460** (since 6 is greater than 5, round up).
+		<li> <p><strong>Which zeros are significant?</strong></p>
+		<ul>
+			<li> <p><strong>Zeros between nonzero digits</strong></p> (Captive Zeros) are significant.
+			<ul>
+				<li> Example: 105 has 3 significant figures.
+				<li> Example: 20.08 has 4 significant figures.
+			</ul>
+			<li> <p><strong>Leading zeros</strong></p> (before the first nonzero digit) are not significant.
+			<ul>
+				<li> Example: 0.0047 has 2 significant figures.
+				<li> Example: 0.000230 has 3 significant figures.
+			</ul>
+			<li> <p><strong>Trailing zeros in a decimal number</strong></p> are significant.
+			<ul>
+				<li> Example: 50.00 has 4 significant figures.
+				<li> Example: 2.500 has 4 significant figures.
+			</ul>
+			<li> <p><strong>Trailing zeros in a whole number without a decimal</strong></p> are not significant.
+			<ul>
+				<li> Example: 1500 has 2 significant figures.
+				<li> Example: 42000 has 2 significant figures.
+				<li> However, 1500.0 has 5 significant figures (because of the decimal point).
+			</ul>
+		</ul>
+	</ul>
+	<li> <p><strong>Decimal Places:</strong></p> The number of digits after the decimal point.
+	<ul>
+		<li> Example: 12.3456 rounded to 2 decimal places is 12.35.
+	</ul>
+	<li> <p><strong>Rounding:</strong></p> Adjusting a number to a given decimal place or significant figure.
+	<ul>
+		<li> Example: 457 rounded to the nearest ten is 460.
+	</ul>
+	<li> <p><strong>Absolute Error:</strong></p>  
+	The absolute error is the difference between the measured (or estimated) value and the true value. It represents the size of the error without considering its direction (positive or negative).  
+	\[
+	\text{Absolute Error} = |\text{Measured Value} - \text{True Value}|
+	\]
+	<li> <p><strong>Percentage Error:</strong></p> The relative difference between an estimated value and the actual value.
+	\[
+	\text{Percentage Error} = \left( \frac{| \text{Approximate Value} - \text{Exact Value} |}{\text{Exact Value}} \right) \times 100
+	\]
+	<li> <p><strong>Estimation Techniques:</strong></p> Approximating calculations to simplify operations, such as using rounding to estimate sums and products.
+	<li> <p><strong>Solving Equations Correct to n Decimal Places:</strong></p> Finding numerical solutions to equations with a specified accuracy.
+</ul>
+<p><strong>Examples:</strong></p>
+	<p><strong>Example 1: Rounding a Number to Significant Figures</strong></p>
+	Round 0.00723456 to 3 significant figures.
+	<p><strong>Solution:</strong></p>
+	The first three significant figures are 7, 2, and 3. Therefore, rounding to 3 significant figures:
+	\[
+	0.00723456 \approx 0.00723.
+	\]
+	<p><strong>Example 2: Calculating Percentage Error</strong></p>
+	An estimated value for a quantity is 48.3, while the actual value is 50. Find the percentage error.
+	<p><strong>Solution:</strong></p>
+	Step 1: Compute the absolute error.
+	\[
+	| 48.3 - 50 | = 1.7.
+	\]
+	Step 2: Compute the percentage error.
+	\[
+	\text{Percentage Error} = \left( \frac{1.7}{50} \right) \times 100 = 3.4\%.
+	\]
+	Thus, the percentage error is **3.4\%**.
+	<p><strong>Example 3: Solving an Equation Correct to 2 Decimal Places</strong></p>
+	Solve \(x^2 - 2x - 3 = 0\) correct to 2 decimal places.
+	<p><strong>Solution:</strong></p>
+	Using the quadratic formula:
+	\[
+	x = \frac{-(-2) \pm \sqrt{(-2)^2 - 4(1)(-3)}}{2(1)}
+	\]
+	\[
+	x = \frac{2 \pm \sqrt{4 + 12}}{2} = \frac{2 \pm \sqrt{16}}{2}
+	\]
+	\[
+	x = \frac{2 \pm 4}{2}.
+	\]
+	Thus, the two roots are:
+	\[
+	x = \frac{2 + 4}{2} = 3.00, \quad x = \frac{2 - 4}{2} = -1.00.
+	\]
+	The solutions correct to **2 decimal places** are **\(x = 3.00\) and \(x = -1.00\)**.
+  </div>
+
+ <!-- Chapter Navigation Links -->
+
+<div class="chapter-top-nav">
+  <h1 class="chapter-nav-title">Section 8: Miscellaneous Topics</h1>
+  <ul class="chapter-top-list">
+    <li><a href="../miscellaneous/8.1-approximation-and-estimation.html">8.1 Approximation and Estimation</a></li>
+    <li><a href="../miscellaneous/8.2-symbolic-notation.html">8.2 Symbolic Notation</a></li>
+    <li><a href="../miscellaneous/8.3-sets-of-numbers.html">8.3 Sets of Numbers</a></li>
+    <li><a href="../miscellaneous/8.4-vectors-in-2d.html">8.4 Vectors in 2D</a></li>
+    <li><a href="../miscellaneous/8.5-definite-and-indefinite-integrals.html">8.5 Definite and Indefinite Integrals</a></li>
+  </ul>
+</div>
+
+
+  <div class="back-to-guide">
+    <a href="../../study-guide.html">← Back to Study Guide</a>
+  </div>
+  
+
+  <footer>
+    <p>&copy; 2025 Cheetah WAEC. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

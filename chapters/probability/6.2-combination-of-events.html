@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>6.2-combination-of-events – WAEC Math | Cheetah WAEC</title>
+  <meta name="description" content="Master WAEC math basics with Numbers and Numeration: fractions, decimals, indices, surds, number bases, sets, and more — explained with examples.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Cheetah WAEC - WAEC Mathematics Study Guide",
+    "description": "A comprehensive and interactive guide for Nigerian secondary school students preparing for the WAEC mathematics exam.",
+    "educationalLevel": "Secondary School",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "Algebra", "Numbers and Numeration", "Geometry", "Trigonometry", 
+      "Statistics", "Probability", "Commercial Mathematics", "Vectors", "Transformation"
+    ],
+    "educationalUse": "Study and Practice",
+    "learningResourceType": "StudyGuide",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cheetah WAEC",
+      "url": "https://cheetahwaec.com"
+    }
+  }
+  </script>
+
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <h1 style="display: flex; align-items: center;">
+        <a href="../../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <img src="../../assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <span>Cheetah WAEC</span>
+        </a>
+      </h1>
+      <ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../study-guide.html">Study Guide</a></li>
+        <li><a href="#">Past Papers</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#" class="subscribe-btn">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <div class="container">
+    <h3 class="subsection-title">6.2 Combination of Events</h3>
+In probability, events can be combined using the **addition law** (for "or" situations) and the **multiplication law** (for "and" situations). Events can also be classified as **mutually exclusive** or **independent**.
+<p><strong>Key Concepts:</strong></p>
+<ul>
+	<li> <p><strong>Addition Law of Probability:</strong></p> Used for the probability of either event A or event B occurring.
+	\[
+	P(A \cup B) = P(A) + P(B) - P(A \cap B).
+	\]
+		<div style="text-align:center;"><img src="../../assets/images/6.1.png" style="width:60.0%"></div>
+	<li> <p><strong>Mutually Exclusive Events:</strong></p> Two events that cannot happen at the same time.
+	\[
+	P(A \cap B) = 0.
+	\]
+	If A and B are mutually exclusive, then:
+	\[
+	P(A \cup B) = P(A) + P(B).
+	\]
+	<li> <p><strong>Independent Events:</strong></p> The occurrence of one event does not affect the probability of the other.
+	\[
+	P(A \cap B) = P(A) \times P(B).
+	\]
+</ul>
+<p><strong>Examples:</strong></p>
+	<p><strong>Example 1: Addition Rule with Overlapping Events</strong></p>
+	A deck of 52 cards contains 13 hearts and 13 face cards. If a card is drawn at random, what is the probability that it is a heart or a face card?
+	<p><strong>Solution:</strong></p>
+	Step 1: Use the addition formula:
+	\[
+	P(A \cup B) = P(A) + P(B) - P(A \cap B).
+	\]
+	Step 2: Find the probabilities:
+	\[
+	P(\text{Heart}) = \frac{13}{52}, \quad P(\text{Face Card}) = \frac{12}{52}.
+	\]
+	Since there are 3 face cards in hearts, 
+	\[
+	P(\text{Heart} \cap \text{Face Card}) = \frac{3}{52}.
+	\]
+	Step 3: Compute:
+	\[
+	P(\text{Heart or Face Card}) = \frac{13}{52} + \frac{12}{52} - \frac{3}{52} = \frac{22}{52} = \frac{11}{26}.
+	\]
+	<p><strong>Example 2: Probability of Independent Events</strong></p>
+	A fair die is rolled, and a coin is flipped. What is the probability of getting a 4 on the die and heads on the coin?
+	<p><strong>Solution:</strong></p>
+	Step 1: Identify the probabilities:
+	\[
+	P(\text{Rolling a 4}) = \frac{1}{6}, \quad P(\text{Flipping Heads}) = \frac{1}{2}.
+	\]
+	Step 2: Since these are independent events, use the multiplication rule:
+	\[
+	P(4 \cap H) = P(4) \times P(H) = \frac{1}{6} \times \frac{1}{2} = \frac{1}{12}.
+	\]
+	<p><strong>Example 3: Mutually Exclusive Events</strong></p>
+	A bag contains 5 red marbles and 7 blue marbles. If one marble is drawn at random, what is the probability that it is either red or blue?
+	<p><strong>Solution:</strong></p>
+	Since drawing a red marble and drawing a blue marble are mutually exclusive events, we use:
+	\[
+	P(A \cup B) = P(A) + P(B).
+	\]
+	\[
+	P(\text{Red}) = \frac{5}{12}, \quad P(\text{Blue}) = \frac{7}{12}.
+	\]
+	\[
+	P(\text{Red or Blue}) = \frac{5}{12} + \frac{7}{12} = 1.
+	\]
+	Since one of these must occur, the probability is 1.
+	<p><strong>Example 4: Probability of Winning Independent Contracts</strong></p>
+	A building contractor tendered for two independent contracts, \(X\) and \(Y\). The probabilities that he will win contract \(X\) is 0.5 and not win contract \(Y\) is 0.3. What is the probability that he will:
+	\begin{enumerate}
+		<li> Win both contracts?
+		<li> Win exactly one of the contracts?
+		<li> Win neither of the contracts?
+	\end{enumerate}
+	<p><strong>Solution:</strong></p>
+	Let:
+	\[
+	P(X) = 0.5, \quad P(\text{Not } Y) = 0.3.
+	\]
+	Since \(P(\text{Not } Y) = 0.3\), then:
+	\[
+	P(Y) = 1 - 0.3 = 0.7.
+	\]
+	<p><strong>(i) Probability of Winning Both Contracts:</strong></p>
+	Since the events are independent:
+	\[
+	P(X \cap Y) = P(X) \times P(Y) = 0.5 \times 0.7 = 0.35.
+	\]
+	<p><strong>(ii) Probability of Winning Exactly One Contract:</strong></p>
+	This occurs in two ways:
+	- Wins \(X\) and loses \(Y\): \(P(X \cap \text{Not } Y) = P(X) \times P(\text{Not } Y)\).
+	- Loses \(X\) and wins \(Y\): \(P(\text{Not } X \cap Y) = P(\text{Not } X) \times P(Y)\).
+	Since \(P(\text{Not } X) = 1 - 0.5 = 0.5\), we compute:
+	\[
+	P(X \cap \text{Not } Y) = 0.5 \times 0.3 = 0.15.
+	\]
+	\[
+	P(\text{Not } X \cap Y) = 0.5 \times 0.7 = 0.35.
+	\]
+	Adding both cases:
+	\[
+	P(\text{Exactly one contract}) = 0.15 + 0.35 = 0.50.
+	\]
+	<p><strong>(iii) Probability of Winning Neither Contract:</strong></p>
+	\[
+	P(\text{Not } X \cap \text{Not } Y) = P(\text{Not } X) \times P(\text{Not } Y).
+	\]
+	\[
+	= 0.5 \times 0.3 = 0.15.
+	\]
+	<p><strong>Final Answers:</strong></p>
+	<ul>
+		<li> Probability of winning both contracts: \(0.35\).
+		<li> Probability of winning exactly one contract: \(0.50\).
+		<li> Probability of winning neither contract: \(0.15\).
+	</ul>
+  </div>
+
+ <!-- Chapter Navigation Links -->
+  
+ <div class="chapter-top-nav">
+  <h1 class="chapter-nav-title">Section 6: Probability Chapters</h1>
+  <ul class="chapter-top-list">
+    <li><a href="../probability/6.1-simple-probability.html">6.1 Simple Probability</a></li>
+    <li><a href="../probability/6.2-combination-of-events.html">6.2 Combination of Events</a></li>
+    <li><a href="../probability/6.3-probability-calculations-from-various-graphs.html">6.3 Probability Calculations from Various Graphs</a></li>
+  </ul>
+</div>
+
+
+
+  <div class="back-to-guide">
+    <a href="../../study-guide.html">← Back to Study Guide</a>
+  </div>
+  
+
+  <footer>
+    <p>&copy; 2025 Cheetah WAEC. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

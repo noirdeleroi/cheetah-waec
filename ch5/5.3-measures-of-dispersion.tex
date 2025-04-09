@@ -1,0 +1,130 @@
+
+\subsection*{5.3 Measures of Dispersion}
+Measures of dispersion describe how spread out the data is. The key measures include range, quartiles, variance, mean deviation, and standard deviation.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+	\item \textbf{Range:} The difference between the maximum and minimum values in a dataset.
+	\[
+	\text{Range} = \max(x) - \min(x)
+	\]
+	
+	\item \textbf{Quantiles:} Values that divide a data set into equal parts. Common quantiles include:
+	\begin{itemize}
+		\item \textbf{Quartiles:} Divide the data into four equal parts.
+		\item \textbf{Median (Q2):} The middle value of an ordered data set.
+		\item \textbf{Lower Quartile (Q1):} The median of the lower half of data.
+		\item \textbf{Upper Quartile (Q3):} The median of the upper half of data.
+		\item \textbf{Interquartile Range (IQR):} Measures the spread of the middle 50% of data.
+		\[
+		\text{IQR} = Q3 - Q1
+		\]
+		\item \textbf{Semi-Interquartile Range:} Half of the interquartile range.
+		\[
+		\text{SIQR} = \frac{Q3 - Q1}{2}
+		\]
+	\end{itemize}
+	
+	\item \textbf{Mean Deviation:} The average absolute deviation of each data point from the mean.
+	\[
+	\text{Mean Deviation} = \frac{\sum |x - \bar{x}|}{n}
+	\]
+	
+	\item \textbf{Variance:} Measures the average squared deviation from the mean.
+	\[
+	\sigma^2 = \frac{\sum (x - \bar{x})^2}{n}
+	\]
+	
+	\item \textbf{Standard Deviation:} The square root of variance, showing the spread of data.
+	\[
+	\sigma = \sqrt{\sigma^2}
+	\]
+\end{itemize}
+
+\textbf{Examples:}
+
+\begin{flushleft}
+	\textbf{Example 1: Find the range, quartiles, and interquartile range for the following data set.}
+	
+	\textbf{Given Data:} \\ 
+	$4, 8, 15, 16, 23, 42, 50, 55, 60$
+	
+	\vspace{0.5cm}
+	\textbf{Solution:}
+	
+	\textbf{Step 1: Find the Range}
+	\[
+	\text{Range} = 60 - 4 = 56.
+	\]
+	
+	\textbf{Step 2: Find the Quartiles}
+	\begin{itemize}
+		\item Median (Q2): The middle value is $23$.
+		\item Lower Quartile (Q1): The median of the lower half ($4, 8, 15, 16$) is:
+		\[
+		Q1 = \frac{8+15}{2} = 11.5.
+		\]
+		\item Upper Quartile (Q3): The median of the upper half ($42, 50, 55, 60$) is:
+		\[
+		Q3 = \frac{50+55}{2} = 52.5.
+		\]
+	\end{itemize}
+	
+	\textbf{Step 3: Calculate Interquartile Range (IQR)}
+	\[
+	\text{IQR} = Q3 - Q1 = 52.5 - 11.5 = 41.
+	\]
+	
+	\textbf{Step 4: Compute Semi-Interquartile Range}
+	\[
+	\text{SIQR} = \frac{IQR}{2} = \frac{41}{2} = 20.5.
+	\]
+	
+	Thus, the range is **56**, IQR is **41**, and SIQR is **20.5**.
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 2: Find the Mean Deviation, Variance, and Standard Deviation for the following data set.}
+	
+	\textbf{Given Data:} \\ 
+	$5, 10, 15, 20, 25$
+	
+	\vspace{0.5cm}
+	\textbf{Solution:}
+	
+	\textbf{Step 1: Compute the Mean}
+	\[
+	\bar{x} = \frac{5+10+15+20+25}{5} = \frac{75}{5} = 15.
+	\]
+	
+	\textbf{Step 2: Compute Mean Deviation}
+	\[
+	\sum |x - \bar{x}| = |5-15| + |10-15| + |15-15| + |20-15| + |25-15|
+	\]
+	\[
+	= 10 + 5 + 0 + 5 + 10 = 30.
+	\]
+	
+	\[
+	\text{Mean Deviation} = \frac{30}{5} = 6.
+	\]
+	
+	\textbf{Step 3: Compute Variance}
+	\[
+	\sigma^2 = \frac{\sum (x - \bar{x})^2}{n}
+	\]
+	\[
+	= \frac{(5-15)^2 + (10-15)^2 + (15-15)^2 + (20-15)^2 + (25-15)^2}{5}
+	\]
+	
+	\[
+	= \frac{100 + 25 + 0 + 25 + 100}{5} = \frac{250}{5} = 50.
+	\]
+	
+	\textbf{Step 4: Compute Standard Deviation}
+	\[
+	\sigma = \sqrt{50} \approx 7.07.
+	\]
+	
+	Thus, the mean deviation is **6**, variance is **50**, and standard deviation is **7.07**.
+\end{flushleft}

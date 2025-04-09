@@ -1,0 +1,104 @@
+
+\subsection*{8.2 Symbolic Notation}
+
+Symbolic notation is used in logic and mathematics to express statements and relationships clearly and concisely.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+	\item \textbf{Logical Statements:} A statement is a sentence that is either true or false but not both.
+	
+	\item \textbf{Truth Values:} A statement can be either:
+	\[
+	\text{True (T)} \quad \text{or} \quad \text{False (F)}
+	\]
+	
+	\item \textbf{Logical Connectives:}
+	\begin{itemize}
+		\item **Negation ($\neg P$):** The opposite of a statement.
+		\[
+		\text{If } P \text{ is "It is raining," then } \neg P \text{ is "It is not raining."}
+		\]
+		\item **Conjunction ($P \land Q$):** True if both statements are true.
+		\[
+		P \land Q \text{ is true only if both } P \text{ and } Q \text{ are true.}
+		\]
+		\item **Disjunction ($P \lor Q$):** True if at least one statement is true.
+		\[
+		P \lor Q \text{ is true if either } P \text{ or } Q \text{ (or both) are true.}
+		\]
+		\item Contrapositive: The contrapositive of an implication states that if $A \Rightarrow B$ is true, then its contrapositive $\neg B \Rightarrow \neg A$ is also true.
+		
+		\[
+		(A \Rightarrow B) \Leftrightarrow (\neg B \Rightarrow \neg A)
+		\]
+		
+		\textbf{Example:}  
+		If the statement "If it is raining, then the ground is wet" ($A \Rightarrow B$) is true, then the contrapositive "If the ground is not wet, then it is not raining" ($\neg B \Rightarrow \neg A$) must also be true.
+		
+		\item **Implication ($P \Rightarrow Q$):** If $P$ is true, then $Q$ must be true.
+		\[
+		\text{"If it rains, then the ground is wet."}
+		\]
+		\item Contrapositive Rule: If an implication $A \Rightarrow B$ is true, then its contrapositive $\neg B \Rightarrow \neg A$ is also true. This means that if "A implies B" is valid, then "Not B implies Not A" is also valid.
+		
+		\[
+		(A \Rightarrow B) \Leftrightarrow (\neg B \Rightarrow \neg A)
+		\]
+		
+		\textbf{Example:}  
+		If "If it is raining, then the ground is wet" ($A \Rightarrow B$) is true, then "If the ground is not wet, then it is not raining" ($\neg B \Rightarrow \neg A$) must also be true.
+		
+		\item **Biconditional ($P \Leftrightarrow Q$):** True if $P$ and $Q$ are either both true or both false.
+		\[
+		\text{"A shape is a square if and only if it has four equal sides and right angles."}
+		\]
+	\end{itemize}
+	
+	
+\end{itemize}
+
+\textbf{Examples:}
+
+\begin{flushleft}
+	\textbf{Example 1: Determine the truth value of the following statement:}  
+	"If 2 is an even number, then 3 is an odd number."
+	
+	\textbf{Solution:}  
+	The statement can be written as:
+	\[
+	P \Rightarrow Q, \quad \text{where } P: \text{"2 is even"} \text{ and } Q: \text{"3 is odd"}.
+	\]
+	Since both $P$ and $Q$ are true, the implication is **true**.
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 2: Determine the truth value of the following compound statement:}  
+	"It is raining and it is sunny."
+	
+	\textbf{Solution:}  
+	The statement is of the form $P \land Q$. If it is raining ($P$ is true) but it is not sunny ($Q$ is false), then:
+	\[
+	P \land Q = F.
+	\]
+	Thus, the statement is **false**.
+\end{flushleft}
+\begin{flushleft}
+	\textbf{Example 2: Contrapositive of a Statement}
+	
+	Consider the statement:  
+	"If a number is divisible by 6, then it is divisible by 2."
+	
+	\textbf{Solution:}
+	
+	This can be written as an implication:
+	\[
+	A \Rightarrow B, \quad \text{where } A: \text{"A number is divisible by 6"} \text{ and } B: \text{"The number is divisible by 2"}.
+	\]
+	
+	The contrapositive of this statement is:
+	\[
+	\neg B \Rightarrow \neg A, \quad \text{"If a number is not divisible by 2, then it is not divisible by 6."}
+	\]
+	
+	Since this contrapositive is logically equivalent to the original statement, it must also be **true**.
+\end{flushleft}

@@ -1,0 +1,97 @@
+
+\subsection*{8.5 Definite and Indefinite Integrals}
+
+Integration is the reverse process of differentiation and is used to find areas under curves, accumulated quantities, and antiderivatives.
+
+\textbf{Key Concepts:}
+\begin{itemize}
+	\item \textbf{Indefinite Integral:} Represents a family of functions whose derivative is the given function. It includes an arbitrary constant \(C\):
+	\[
+	\int f(x) \,dx = F(x) + C
+	\]
+	\item \textbf{Definite Integral:} Represents the area under a curve between two limits \(a\) and \(b\):
+	\[
+	\int_a^b f(x) \,dx = F(b) - F(a)
+	\]
+	where \( F(x) \) is the antiderivative of \( f(x) \).
+	\item \textbf{Basic Integration Rules:}
+	\[
+	\int x^n \,dx = \frac{x^{n+1}}{n+1} + C, \quad \text{for } n \neq -1
+	\]
+	\[
+	\int e^x \,dx = e^x + C
+	\]
+	\[
+	\int \sin x \,dx = -\cos x + C, \quad \int \cos x \,dx = \sin x + C
+	\]
+\end{itemize}
+
+\textbf{Examples:}
+
+\begin{flushleft}
+	\textbf{Example 1: Indefinite Integral}
+	
+	Evaluate:
+	\[
+	\int (3x^2 + 4x - 5) \,dx
+	\]
+	
+	\textbf{Solution:} \vspace{0.2cm}
+	
+	\[
+	\int (3x^2 + 4x - 5) \,dx = \frac{3x^3}{3} + \frac{4x^2}{2} - 5x + C
+	\]
+	
+	\[
+	= x^3 + 2x^2 - 5x + C
+	\]
+	
+	Thus, the answer is \( \boxed{x^3 + 2x^2 - 5x + C} \).
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 2: Definite Integral}
+	
+	Evaluate:
+	\[
+	\int_1^3 (2x + 1) \,dx
+	\]
+	
+	\textbf{Solution:} \vspace{0.2cm}
+	
+	Find the antiderivative:
+	\[
+	\int (2x + 1) \,dx = x^2 + x
+	\]
+	
+	Evaluate at the limits:
+	\[
+	F(3) = 3^2 + 3 = 9 + 3 = 12, \quad F(1) = 1^2 + 1 = 1 + 1 = 2
+	\]
+	
+	\[
+	\int_1^3 (2x + 1) \,dx = 12 - 2 = 10
+	\]
+	
+	Thus, the answer is \( \boxed{10} \).
+\end{flushleft}
+
+\begin{flushleft}
+	\textbf{Example 3: Finding Area Under a Curve}
+	
+	Find the area under \( f(x) = x^2 \) from \( x = 0 \) to \( x = 2 \).
+	
+	\textbf{Solution:} \vspace{0.2cm}
+	
+	\[
+	\int_0^2 x^2 \,dx = \frac{x^3}{3} \Big|_0^2
+	\]
+	
+	Evaluate at the limits:
+	\[
+	\frac{2^3}{3} - \frac{0^3}{3} = \frac{8}{3} - 0 = \frac{8}{3}
+	\]
+	
+	Thus, the area under the curve is \( \boxed{\frac{8}{3}} \).
+\end{flushleft}
+
