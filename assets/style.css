@@ -598,6 +598,7 @@ footer {
   border: none;
   font-weight: 700;
   cursor: pointer;
+  color: black; 
 }
 
 @media (max-width: 768px) {
