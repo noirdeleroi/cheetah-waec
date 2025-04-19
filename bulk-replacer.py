@@ -1,12 +1,12 @@
 from pathlib import Path
 
 # Set the folder where your HTML files are located
-html_folder = Path(r"C:\Users\User\Documents\work\jupiter_sg")  # 🔁 Adjust this path to your folder
+html_folder = Path(r"C:\Users\User\Documents\work\jupiter_sg\chapters")  # 🔁 Adjust this path to your folder
 
 # Replacement rules
 replacements = {
-    '<li><a href="contact.html">Contact Us</a></li>':
-    '<li><a href="contact.html">About Us</a></li>',
+    '<li><a href="../telegram.html">Telegram Bot</a></li>':
+    '<li><a href="../../telegram.html">Telegram Bot</a></li>',
 
 }
 
