@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://cheetahwaec.com/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/past-papers</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/telegram-bot</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/contact</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/subscribe</loc>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Study Guide Subpages -->
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/numbers</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/algebra</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/geometry</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/trigonometry</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/statistics</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/probability</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/commercial-mathematics</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cheetahwaec.com/study-guide/miscellaneous-topics</loc>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
