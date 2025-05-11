@@ -1,0 +1,62 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #fafafa;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.left-panel, .right-panel {
+  padding: 2rem;
+}
+
+.left-panel {
+  width: 60%;
+  border-right: 1px solid #ddd;
+  position: relative;
+}
+
+.right-panel {
+  width: 40%;
+  background-color: #f4f4f4;
+}
+
+button#toggleHelp {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.step {
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.step.help-mode {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.step.help-mode:hover {
+  background-color: #ffa500;
+}
+
+#explanation-panel {
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-left: 2px solid #ddd;
+  width: 40%;
+  margin-left: auto;
+}
+

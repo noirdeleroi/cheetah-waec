@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LaTeX Solution Viewer</title>
+  <link rel="stylesheet" href="style2.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <button id="toggleHelp">I'm stupid help me</button>
+      <div id="solution">
+        <div class="step" data-step="1">
+          Solve the equation:
+          \[ 2^x + 8^x = 130 \]
+          <strong>Step 1: Express all terms with the same base.</strong><br/>
+          Since \(8 = 2^3\), we can write:
+          \[ 8^x = (2^3)^x = 2^{3x} \]
+          So the equation becomes:
+          \[ 2^x + 2^{3x} = 130 \]
+        </div>
+        <div class="step" data-step="2">
+          <strong>Step 2: Substitute </strong> \(y = 2^x\). Then \(2^{3x} = (2^x)^3 = y^3\), so:
+          \[ y + y^3 = 130 \]
+        </div>
+        <div class="step" data-step="3">
+          <strong>Step 3: Rearrange the equation.</strong>
+          \[ y^3 + y - 130 = 0 \]
+        </div>
+        <div class="step" data-step="4">
+          <strong>Step 4: Solve the cubic equation.</strong><br/>
+          Try rational root theorem. Try \(y = 5\):
+          \[ 5^3 + 5 = 125 + 5 = 130 \]<br/>
+          So \(y = 5\) is a root. Then \(2^x = 5\)
+        </div>
+        <div class="step" data-step="5">
+          <strong>Step 5: Solve for \(x\).</strong>
+          \[ 2^x = 5 \Rightarrow x = \log_2 5 \]
+          <strong>Final Answer:</strong>
+          \[ \boxed{x = \log_2 5} \]
+        </div>
+      </div>
+    </div>
+    <div class="right-panel" id="explanation">
+      <p>Select a step to get more help.</p>
+    </div>
+  </div>
+  <script src="script2.js"></script>
+</body>
+</html>
