@@ -132,4 +132,3 @@ supabase.auth.onAuthStateChange(() => {
 });
 
 refreshSession().catch(() => {});
-

@@ -42,7 +42,7 @@
       background: #fff;
       box-sizing: border-box;
     }
-    button {
+    .btn {
       padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid #111;
@@ -50,15 +50,54 @@
       color: #fff;
       font-weight: 700;
       cursor: pointer;
+      width: 100%;
     }
-    button.secondary {
+    .btn.secondary {
       background: transparent;
       color: #111;
     }
-    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .muted { color: #555; font-size: 14px; }
     .danger { color: #b00020; }
     .success { color: #0b6b2b; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    .kpi {
+      background: #f3f1ec;
+      border: 1px solid #e0ded9;
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .kpi h4 { margin: 0 0 6px 0; }
+    .kpi ul { margin: 8px 0 0 18px; color: #333; }
+    .btn-google {
+      background: #fff;
+      color: #111;
+      border: 1px solid #E0DED9;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+    .gmark {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid #E0DED9;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -86,13 +125,35 @@
   <div class="content">
     <div class="card">
       <h2 style="margin-top: 0;">Login</h2>
-      <p class="muted" style="margin-top: 6px;">
-        Sign in to use Practice mode.
-      </p>
+      <div class="hero">
+        <div>
+          <p class="muted" style="margin-top: 6px;">
+            Practice mode requires sign-in. This helps keep your session secure and lets us protect the question bank from abuse.
+          </p>
+          <p class="muted" style="margin-top: 6px;">
+            Tip: Google sign-in is the fastest option.
+          </p>
+        </div>
+        <div class="kpi">
+          <h4>Why sign in?</h4>
+          <ul>
+            <li>Access Practice filters (year/topic/difficulty)</li>
+            <li>Keep your session on this device</li>
+            <li>Enable future progress tracking</li>
+          </ul>
+        </div>
+      </div>
       <div id="status" class="muted"></div>
     </div>
 
     <div class="card">
+      <button id="btnGoogle" type="button" class="btn btn-google">
+        <span class="gmark">G</span>
+        Continue with Google
+      </button>
+      <p class="muted" style="margin: 10px 0 0 0;">
+        Or use email and password:
+      </p>
       <div class="row">
         <div>
           <label for="email">Email</label>
@@ -105,9 +166,8 @@
       </div>
 
       <div class="row" style="margin-top: 12px;">
-        <button id="btnSignIn" type="button">Sign in</button>
-        <button id="btnSignUp" type="button" class="secondary">Sign up</button>
-        <button id="btnGoogle" type="button" class="secondary">Continue with Google</button>
+        <button id="btnSignIn" type="button" class="btn">Sign in</button>
+        <button id="btnSignUp" type="button" class="btn secondary">Create account</button>
       </div>
 
       <div id="message" class="muted" style="margin-top: 10px;"></div>
@@ -120,4 +180,3 @@
   <script type="module" src="assets/login.js"></script>
 </body>
 </html>
-

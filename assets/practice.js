@@ -10,12 +10,18 @@ const btnSignOut = el("btnSignOut");
 
 const modeYearWrap = el("modeYear");
 const modeTopicWrap = el("modeTopic");
-const yearSelect = el("yearSelect");
-const domainSelect = el("domainSelect");
-const topicSelect = el("topicSelect");
-const difficultySelect = el("difficultySelect");
-const btnStartYear = el("btnStartYear");
-const btnStartTopic = el("btnStartTopic");
+const btnModeYear = el("btnModeYear");
+const btnModeTopic = el("btnModeTopic");
+
+const yearChips = el("yearChips");
+const btnLoadYear = el("btnLoadYear");
+
+const domainTabs = el("domainTabs");
+const topicChips = el("topicChips");
+const difficultySeg = el("difficultySeg");
+const btnLoadTopic = el("btnLoadTopic");
+const btnShuffleTopic = el("btnShuffleTopic");
+
 const filterMessageEl = el("filterMessage");
 
 const pagerCard = el("pagerCard");
@@ -118,7 +124,7 @@ function renderQuestions(rows) {
     currentQuestionsById.set(q.question_id, q);
 
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "card question-card";
     card.dataset.qid = q.question_id;
 
     const meta = [];
@@ -177,8 +183,8 @@ function renderQuestions(rows) {
       </div>
       <div class="choices" style="margin-top:14px;">${choicesHtml}</div>
       <div class="row" style="margin-top:12px; align-items:flex-start;">
-        <button type="button" data-action="check" data-qid="${q.question_id}">Check answer</button>
-        <button type="button" class="secondary" data-action="solution" data-qid="${q.question_id}" ${solutionBtnDisabled}>${solutionBtnText}</button>
+        <button type="button" class="btn" data-action="check" data-qid="${q.question_id}">Check answer</button>
+        <button type="button" class="btn secondary" data-action="solution" data-qid="${q.question_id}" ${solutionBtnDisabled}>${solutionBtnText}</button>
         <div class="status result" style="min-width:220px;"></div>
       </div>
       <div class="solution" style="margin-top:14px; display:none;"></div>
@@ -246,10 +252,11 @@ async function fetchDistinctValues(column, opts = {}) {
   // PostgREST doesn't support DISTINCT easily; we scan a limited number of rows and dedupe client-side.
   // Works well for low-cardinality columns (year/domain/topic/difficulty).
   const values = new Set();
-  const limit = opts.limit ?? 5000;
-  const pageSize = opts.pageSize ?? 1000;
+  // Increase page size to reduce round-trips; cap total rows to avoid runaway scans on huge tables.
+  const maxRows = opts.maxRows ?? 200000;
+  const pageSize = opts.pageSize ?? 10000;
 
-  for (let from = 0; from < limit; from += pageSize) {
+  for (let from = 0; from < maxRows; from += pageSize) {
     let q = supabase
       .from(TABLE)
       .select(column)
@@ -279,8 +286,24 @@ async function fetchDistinctValues(column, opts = {}) {
   return Array.from(values);
 }
 
+function renderChipButtons(container, items, getKey, getLabel, activeKey) {
+  container.innerHTML = "";
+  if (!items || items.length === 0) return;
+  const frag = document.createDocumentFragment();
+  for (const item of items) {
+    const key = getKey(item);
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `chip${key === activeKey ? " active" : ""}`;
+    btn.setAttribute("data-key", String(key));
+    btn.textContent = getLabel(item);
+    frag.appendChild(btn);
+  }
+  container.appendChild(frag);
+}
+
 async function loadYears() {
-  yearSelect.innerHTML = `<option value="">Loading years...</option>`;
+  yearChips.innerHTML = `<span class="muted">Loading years...</span>`;
   try {
     const rawYears = await fetchDistinctValues("year");
     const years = rawYears
@@ -289,20 +312,24 @@ async function loadYears() {
       .sort((a, b) => b - a);
 
     if (years.length === 0) {
-      yearSelect.innerHTML = `<option value="">No years found</option>`;
+      yearChips.innerHTML = `<span class="muted">No years found.</span>`;
       return;
     }
-    yearSelect.innerHTML =
-      `<option value="">Select a year</option>` +
-      years.map((y) => `<option value="${y}">${y}</option>`).join("");
+    renderChipButtons(
+      yearChips,
+      years,
+      (y) => y,
+      (y) => String(y),
+      currentYear
+    );
   } catch (e) {
-    yearSelect.innerHTML = `<option value="">Failed to load years</option>`;
+    yearChips.innerHTML = `<span class="muted">Failed to load years.</span>`;
     setFilterMessage(e.message || "Failed to load years.", "danger");
   }
 }
 
 async function loadDomains() {
-  domainSelect.innerHTML = `<option value="">Loading domains...</option>`;
+  domainTabs.innerHTML = `<span class="muted">Loading domains...</span>`;
   try {
     const rawDomains = await fetchDistinctValues("domain");
     const domains = rawDomains
@@ -311,24 +338,25 @@ async function loadDomains() {
       .sort((a, b) => a.localeCompare(b));
 
     if (domains.length === 0) {
-      domainSelect.innerHTML = `<option value="">No domains found</option>`;
+      domainTabs.innerHTML = `<span class="muted">No domains found.</span>`;
       return;
     }
-    domainSelect.innerHTML =
-      `<option value="">Select a domain</option>` +
-      domains.map((d) => `<option value="${d}">${d}</option>`).join("");
+    renderChipButtons(
+      domainTabs,
+      domains,
+      (d) => d,
+      (d) => d,
+      currentDomain
+    );
   } catch (e) {
-    domainSelect.innerHTML = `<option value="">Failed to load domains</option>`;
+    domainTabs.innerHTML = `<span class="muted">Failed to load domains.</span>`;
     setFilterMessage(e.message || "Failed to load domains.", "danger");
   }
 }
 
 async function loadTopicsForDomain(domain) {
-  topicSelect.innerHTML = `<option value="">Loading topics...</option>`;
-  if (!domain) {
-    topicSelect.innerHTML = `<option value="">Select a domain first</option>`;
-    return;
-  }
+  topicChips.innerHTML = `<span class="muted">${domain ? "Loading topics..." : "Select a domain above."}</span>`;
+  if (!domain) return;
 
   try {
     const rawTopics = await fetchDistinctValues("topic", {
@@ -341,15 +369,18 @@ async function loadTopicsForDomain(domain) {
       .sort((a, b) => a.localeCompare(b));
 
     if (topics.length === 0) {
-      topicSelect.innerHTML = `<option value="">No topics found</option>`;
+      topicChips.innerHTML = `<span class="muted">No topics found.</span>`;
       return;
     }
-
-    topicSelect.innerHTML =
-      `<option value="">Select a topic</option>` +
-      topics.map((t) => `<option value="${t}">${t}</option>`).join("");
+    renderChipButtons(
+      topicChips,
+      topics,
+      (t) => t,
+      (t) => t,
+      currentTopic
+    );
   } catch (e) {
-    topicSelect.innerHTML = `<option value="">Failed to load topics</option>`;
+    topicChips.innerHTML = `<span class="muted">Failed to load topics.</span>`;
     setFilterMessage(e.message || "Failed to load topics.", "danger");
   }
 }
@@ -422,13 +453,11 @@ async function fetchQuestionsByIds(ids) {
 
 async function startYear() {
   setFilterMessage("");
-  const y = Number(yearSelect.value);
-  if (!Number.isFinite(y)) {
+  if (!Number.isFinite(Number(currentYear))) {
     setFilterMessage("Select a year first.", "danger");
     return;
   }
   currentMode = "year";
-  currentYear = y;
   currentPage = 1;
 
   try {
@@ -448,21 +477,15 @@ async function startYear() {
 
 async function startTopic() {
   setFilterMessage("");
-  const d = String(domainSelect.value || "").trim();
-  const t = String(topicSelect.value || "").trim();
-  if (!d) {
+  if (!currentDomain) {
     setFilterMessage("Select a domain first.", "danger");
     return;
   }
-  if (!t) {
+  if (!currentTopic) {
     setFilterMessage("Select a topic first.", "danger");
     return;
   }
-
   currentMode = "topic";
-  currentDomain = d;
-  currentTopic = t;
-  currentDifficulty = String(difficultySelect.value || "").trim().toLowerCase();
   currentPage = 1;
 
   try {
@@ -475,6 +498,8 @@ async function startTopic() {
     const slice = topicShuffledIds.slice(0, PAGE_SIZE);
     const rows = await fetchQuestionsByIds(slice);
     renderQuestions(rows);
+
+    btnShuffleTopic.disabled = topicShuffledIds.length <= 1;
   } catch (e) {
     setFilterMessage(e.message || "Failed to load topic questions.", "danger");
     topicShuffledIds = [];
@@ -510,6 +535,10 @@ function onModeChange(mode) {
   currentMode = mode;
   modeYearWrap.style.display = mode === "year" ? "block" : "none";
   modeTopicWrap.style.display = mode === "topic" ? "block" : "none";
+
+  btnModeYear.classList.toggle("active", mode === "year");
+  btnModeTopic.classList.toggle("active", mode === "topic");
+
   setFilterMessage("");
   totalCount = 0;
   totalPages = 0;
@@ -518,20 +547,82 @@ function onModeChange(mode) {
   resetQuestionsUI();
 }
 
+function syncLoadButtons() {
+  btnLoadYear.disabled = !Number.isFinite(Number(currentYear));
+  btnLoadTopic.disabled = !(currentDomain && currentTopic);
+  btnShuffleTopic.disabled = !(currentMode === "topic" && topicShuffledIds.length > 1);
+}
+
+function onDifficultyChanged(diff) {
+  currentDifficulty = String(diff || "").trim().toLowerCase();
+  const btns = Array.from(difficultySeg.querySelectorAll(".chip"));
+  btns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-diff") === currentDifficulty));
+  syncLoadButtons();
+
+  // If the user already picked a domain+topic, refresh immediately for better UX.
+  if (currentMode === "topic" && currentDomain && currentTopic) {
+    startTopic().catch(() => {});
+  }
+}
+
 // Events
-document.addEventListener("change", (e) => {
-  const r = e.target && e.target.closest && e.target.closest('input[name="mode"]');
-  if (!r) return;
-  onModeChange(r.value);
+btnModeYear.addEventListener("click", () => onModeChange("year"));
+btnModeTopic.addEventListener("click", () => onModeChange("topic"));
+
+yearChips.addEventListener("click", (e) => {
+  const b = e.target && e.target.closest && e.target.closest(".chip");
+  if (!b) return;
+  const y = Number(b.getAttribute("data-key"));
+  if (!Number.isFinite(y)) return;
+  currentYear = y;
+  Array.from(yearChips.querySelectorAll(".chip")).forEach((x) => x.classList.toggle("active", x === b));
+  syncLoadButtons();
+
+  if (currentMode === "year") {
+    startYear().catch(() => {});
+  }
 });
 
-domainSelect.addEventListener("change", async () => {
-  setFilterMessage("");
-  await loadTopicsForDomain(String(domainSelect.value || "").trim());
+domainTabs.addEventListener("click", async (e) => {
+  const b = e.target && e.target.closest && e.target.closest(".chip");
+  if (!b) return;
+  const d = String(b.getAttribute("data-key") || "").trim();
+  if (!d) return;
+  currentDomain = d;
+  currentTopic = null;
+  topicShuffledIds = [];
+  Array.from(domainTabs.querySelectorAll(".chip")).forEach((x) => x.classList.toggle("active", x === b));
+  await loadTopicsForDomain(currentDomain);
+  syncLoadButtons();
 });
 
-btnStartYear.addEventListener("click", startYear);
-btnStartTopic.addEventListener("click", startTopic);
+topicChips.addEventListener("click", (e) => {
+  const b = e.target && e.target.closest && e.target.closest(".chip");
+  if (!b) return;
+  const t = String(b.getAttribute("data-key") || "").trim();
+  if (!t) return;
+  currentTopic = t;
+  Array.from(topicChips.querySelectorAll(".chip")).forEach((x) => x.classList.toggle("active", x === b));
+  syncLoadButtons();
+
+  if (currentMode === "topic") {
+    startTopic().catch(() => {});
+  }
+});
+
+difficultySeg.addEventListener("click", (e) => {
+  const b = e.target && e.target.closest && e.target.closest(".chip");
+  if (!b) return;
+  onDifficultyChanged(b.getAttribute("data-diff") || "");
+});
+
+btnLoadYear.addEventListener("click", startYear);
+btnLoadTopic.addEventListener("click", startTopic);
+btnShuffleTopic.addEventListener("click", async () => {
+  if (currentMode !== "topic" || !topicShuffledIds.length) return;
+  shuffleInPlace(topicShuffledIds);
+  await goToPage(1);
+});
 
 btnPrev.addEventListener("click", () => goToPage(currentPage - 1));
 btnNext.addEventListener("click", () => goToPage(currentPage + 1));
@@ -587,6 +678,8 @@ questionsWrap.addEventListener("click", (e) => {
 
   authStatusEl.textContent = session.user.email || session.user.id;
   updatePager();
+  onDifficultyChanged("");
+  syncLoadButtons();
 
   await Promise.all([loadYears(), loadDomains()]);
   await loadTopicsForDomain("");
@@ -595,4 +688,3 @@ questionsWrap.addEventListener("click", (e) => {
 supabase.auth.onAuthStateChange((_event, session) => {
   if (!session) location.href = "login.html";
 });
-

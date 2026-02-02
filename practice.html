@@ -18,20 +18,29 @@
 
   <!-- MathJax (problem_text/solution_text already contain LaTeX like \(..\) / \[..\]) -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    // Support both \(..\) and $..$ delimiters in DB content.
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+      },
+    };
+  </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
     body { background: #f8f6f2; }
     .content {
-      max-width: 900px;
+      max-width: 1040px;
       margin: 100px auto 60px auto;
       padding: 0 20px;
       font-family: sans-serif;
     }
     .card {
       background: #fff;
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 18px;
+      padding: 22px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.04);
       margin-bottom: 18px;
     }
@@ -46,7 +55,7 @@
       background: #fff;
       box-sizing: border-box;
     }
-    button {
+    .btn {
       padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid #111;
@@ -54,12 +63,16 @@
       color: #fff;
       font-weight: 700;
       cursor: pointer;
+      transition: transform 0.06s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
-    button.secondary {
+    .btn:hover { box-shadow: 0 10px 22px rgba(0,0,0,0.08); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0px); box-shadow: none; }
+    .btn.secondary {
       background: transparent;
       color: #111;
+      border-color: #E0DED9;
     }
-    button:disabled {
+    .btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
@@ -73,6 +86,74 @@
       border-radius: 999px;
       font-size: 13px;
       color: #333;
+    }
+    .section-title { margin: 0 0 10px 0; }
+    .subtitle { margin: 6px 0 0 0; }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; }
+    }
+    .mode-toggle {
+      display: inline-flex;
+      border: 1px solid #E0DED9;
+      border-radius: 999px;
+      padding: 4px;
+      background: #f8f6f2;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .mode-toggle .btn {
+      border-radius: 999px;
+      border-color: transparent;
+      background: transparent;
+      color: #111;
+      padding: 10px 14px;
+      box-shadow: none;
+      transform: none;
+    }
+    .mode-toggle .btn.active {
+      background: #111;
+      color: #fff;
+    }
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .chip {
+      border: 1px solid #E0DED9;
+      background: #fff;
+      color: #111;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.06s ease;
+    }
+    .chip:hover { background: #f8f6f2; transform: translateY(-1px); }
+    .chip.active { background: #111; color: #fff; border-color: #111; }
+    .segmented {
+      display: inline-flex;
+      border: 1px solid #E0DED9;
+      border-radius: 999px;
+      padding: 4px;
+      background: #f8f6f2;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .segmented .chip { margin: 0; }
+    .hint {
+      border: 1px dashed #E0DED9;
+      border-radius: 14px;
+      padding: 12px;
+      background: #fbfaf7;
     }
     .choices { margin-top: 14px; }
     .choice {
@@ -96,6 +177,16 @@
     }
     .danger { color: #b00020; }
     .success { color: #0b6b2b; }
+    .question-card .row { align-items: flex-start; }
+    .question-card .btn { width: auto; }
+    .question-card .btn.secondary { border-color: #E0DED9; }
+    .pager {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
   </style>
 </head>
 <body>
@@ -122,76 +213,61 @@
 
   <div class="content">
     <div class="card">
-      <h2 style="margin-top: 0;">Practice</h2>
-      <p class="muted" style="margin-top: 6px; margin-bottom: 10px;">
-        Select a mode, then practice questions in batches of 10.
-      </p>
-      <div class="row" style="align-items: flex-start;">
+      <div class="split">
         <div>
-          <div class="muted">Signed in:</div>
-          <div id="authStatus" class="status" style="font-weight: 700;"></div>
+          <h2 class="section-title">Practice</h2>
+          <p class="muted subtitle">
+            Pick a mode and solve questions in pages of 10. Your answers are checked instantly, and you can reveal full solutions.
+          </p>
+          <div class="hint" style="margin-top: 12px;">
+            <div class="muted">Signed in as</div>
+            <div id="authStatus" class="status" style="font-weight: 800;"></div>
+          </div>
         </div>
-        <div style="text-align: right;">
-          <button id="btnSignOut" type="button" class="secondary">Sign out</button>
+        <div>
+          <div class="hint">
+            <div style="font-weight:800; margin-bottom:6px;">How it works</div>
+            <div class="muted">1) Choose year or topic</div>
+            <div class="muted">2) Load questions</div>
+            <div class="muted">3) Check answers / open solutions</div>
+            <div style="margin-top: 10px;">
+              <button id="btnSignOut" type="button" class="btn secondary">Sign out</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h3 style="margin-top: 0;">Mode</h3>
-      <div class="row">
-        <label style="display:flex; gap:10px; align-items:center; font-weight:700;">
-          <input type="radio" name="mode" value="year" checked />
-          By year
-        </label>
-        <label style="display:flex; gap:10px; align-items:center; font-weight:700;">
-          <input type="radio" name="mode" value="topic" />
-          By topic
-        </label>
+      <h3 class="section-title">Choose a mode</h3>
+      <div class="mode-toggle" role="tablist" aria-label="Practice mode">
+        <button id="btnModeYear" type="button" class="btn active" data-mode="year">By year</button>
+        <button id="btnModeTopic" type="button" class="btn" data-mode="topic">By topic</button>
       </div>
 
       <div id="modeYear" style="margin-top: 14px;">
-        <div class="row">
-          <div>
-            <label for="yearSelect">Year</label>
-            <select id="yearSelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
-              <option value="">Loading years...</option>
-            </select>
-          </div>
-          <div style="display:flex; align-items:flex-end;">
-            <button id="btnStartYear" type="button">Start</button>
-          </div>
+        <div class="muted">Choose a year (newest first):</div>
+        <div id="yearChips" class="chip-grid"></div>
+        <div style="margin-top: 12px;">
+          <button id="btnLoadYear" type="button" class="btn" disabled>Load questions</button>
         </div>
       </div>
 
       <div id="modeTopic" style="margin-top: 14px; display:none;">
-        <div class="row">
-          <div>
-            <label for="domainSelect">Domain</label>
-            <select id="domainSelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
-              <option value="">Loading domains...</option>
-            </select>
-          </div>
-          <div>
-            <label for="topicSelect">Topic</label>
-            <select id="topicSelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
-              <option value="">Select a domain first</option>
-            </select>
-          </div>
+        <div class="muted">Step 1: pick a domain</div>
+        <div id="domainTabs" class="chip-grid"></div>
+        <div class="muted" style="margin-top: 14px;">Step 2: pick a topic</div>
+        <div id="topicChips" class="chip-grid"></div>
+        <div class="muted" style="margin-top: 14px;">Difficulty</div>
+        <div id="difficultySeg" class="segmented" aria-label="Difficulty">
+          <button type="button" class="chip active" data-diff="">All</button>
+          <button type="button" class="chip" data-diff="easy">Easy</button>
+          <button type="button" class="chip" data-diff="medium">Medium</button>
+          <button type="button" class="chip" data-diff="hard">Hard</button>
         </div>
         <div class="row" style="margin-top: 12px;">
-          <div>
-            <label for="difficultySelect">Difficulty</label>
-            <select id="difficultySelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
-              <option value="">All difficulties</option>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-          <div style="display:flex; align-items:flex-end;">
-            <button id="btnStartTopic" type="button">Start</button>
-          </div>
+          <button id="btnLoadTopic" type="button" class="btn" disabled>Load questions</button>
+          <button id="btnShuffleTopic" type="button" class="btn secondary" disabled>Shuffle</button>
         </div>
       </div>
 
@@ -199,10 +275,10 @@
     </div>
 
     <div class="card" id="pagerCard" style="display:none;">
-      <div class="row">
-        <button id="btnPrev" type="button" class="secondary">Previous</button>
+      <div class="pager">
+        <button id="btnPrev" type="button" class="btn secondary">Previous</button>
         <div id="pageInfo" class="muted" style="text-align:center;"></div>
-        <button id="btnNext" type="button" class="secondary">Next</button>
+        <button id="btnNext" type="button" class="btn secondary">Next</button>
       </div>
     </div>
 
