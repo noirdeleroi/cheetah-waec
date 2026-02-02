@@ -23,6 +23,7 @@ const emailEl = el("email");
 const passwordEl = el("password");
 const btnSignIn = el("btnSignIn");
 const btnSignUp = el("btnSignUp");
+const btnGoogle = el("btnGoogle");
 const btnSignOut = el("btnSignOut");
 
 const practiceCard = el("practiceCard");
@@ -349,6 +350,37 @@ btnSignUp.addEventListener("click", async () => {
   } finally {
     btnSignIn.disabled = false;
     btnSignUp.disabled = false;
+  }
+});
+
+btnGoogle.addEventListener("click", async () => {
+  setAuthMessage("");
+  btnSignIn.disabled = true;
+  btnSignUp.disabled = true;
+  btnGoogle.disabled = true;
+  try {
+    const origin =
+      typeof location !== "undefined" &&
+      location.origin &&
+      location.origin !== "null" &&
+      (location.protocol === "http:" || location.protocol === "https:")
+        ? location.origin
+        : null;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        ...(origin ? { redirectTo: `${origin}/practice.html` } : {}),
+      },
+    });
+    if (error) throw error;
+    // Redirect happens automatically.
+  } catch (e) {
+    setAuthMessage(e.message || "Google sign-in failed.", "danger");
+  } finally {
+    btnSignIn.disabled = false;
+    btnSignUp.disabled = false;
+    btnGoogle.disabled = false;
   }
 });
 
