@@ -85,6 +85,49 @@ function normalizeAnswer(a) {
   return String(a).trim().toUpperCase();
 }
 
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function setAiFeedback(card, text) {
+  const box = card.querySelector(".ai-feedback");
+  if (!box) return;
+  const content = box.querySelector(".content");
+  if (!content) return;
+  const safe = escapeHtml(text).replace(/\n/g, "<br>");
+  content.innerHTML = safe;
+  box.style.display = "block";
+  typesetMath();
+}
+
+function clearAiFeedback(card) {
+  const box = card.querySelector(".ai-feedback");
+  if (!box) return;
+  const content = box.querySelector(".content");
+  if (content) content.innerHTML = "";
+  box.style.display = "none";
+}
+
+function clearChoiceHighlights(card) {
+  card.querySelectorAll(".choice.correct,.choice.wrong").forEach((n) => {
+    n.classList.remove("correct");
+    n.classList.remove("wrong");
+  });
+}
+
+function markSelectedChoice(card, groupName, isCorrect) {
+  const checked = card.querySelector(`input[name="${groupName}"]:checked`);
+  if (!checked) return;
+  const label = checked.closest(".choice");
+  if (!label) return;
+  label.classList.add(isCorrect ? "correct" : "wrong");
+}
+
 function shuffleInPlace(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -158,9 +201,9 @@ function renderQuestions(rows) {
             ([key, val]) => `
               <label class="choice">
                 <input type="radio" name="${groupName}" value="${key}">
-                <div>
-                  <div style="font-weight:700;">${key}</div>
-                  <div>${val ?? ""}</div>
+                <div class="choice-body">
+                  <div class="choice-letter">${key}</div>
+                  <div class="choice-text">${val ?? ""}</div>
                 </div>
               </label>
             `
@@ -189,6 +232,10 @@ function renderQuestions(rows) {
         <button type="button" class="btn" data-action="check" data-qid="${q.question_id}">Check answer</button>
         <button type="button" class="btn secondary" data-action="solution" data-qid="${q.question_id}" ${solutionBtnDisabled}>${solutionBtnText}</button>
         <div class="status result" style="min-width:220px;"></div>
+      </div>
+      <div class="ai-feedback">
+        <div class="title">AI feedback</div>
+        <div class="content"></div>
       </div>
       <div class="solution" style="margin-top:14px; display:none;"></div>
     `;
@@ -377,11 +424,13 @@ async function loadTopicsForDomain(domain) {
       topicChips.innerHTML = `<span class="muted">No topics found.</span>`;
       return;
     }
+
+    const topicItems = ["__ALL__", ...topics];
     renderChipButtons(
       topicChips,
-      topics,
+      topicItems,
       (t) => t,
-      (t) => t,
+      (t) => (t === "__ALL__" ? "All" : t),
       currentTopic
     );
   } catch (e) {
@@ -423,9 +472,12 @@ async function fetchTopicIds(domain, topic, difficulty) {
       .from(TABLE)
       .select("question_id")
       .eq("domain", domain)
-      .eq("topic", topic)
       .order("question_id", { ascending: true })
       .range(from, from + pageSize - 1);
+
+    if (topic && topic !== "__ALL__") {
+      q = q.eq("topic", topic);
+    }
 
     if (difficulty) {
       q = q.ilike("problem_difficulty", `%${difficulty}%`);
@@ -660,24 +712,32 @@ questionsWrap.addEventListener("click", (e) => {
 
     const isFrq = String(q.mcq_frq || "").toUpperCase() === "FRQ";
     if (!isFrq) {
+      clearAiFeedback(card);
+      clearChoiceHighlights(card);
       const userAns = normalizeAnswer(rawUserAns);
       const expected = normalizeAnswer(q.correct_answer);
       if (!expected) {
         setCardResult(card, "No correct_answer in DB for this question.", "danger");
         return;
       }
-      if (userAns === expected) {
+      const ok = userAns === expected;
+      if (ok) {
         setCardResult(card, "Correct.", "success");
       } else {
         setCardResult(card, `Wrong. Your answer: ${userAns}.`, "danger");
       }
+      // Highlight selected option box for MCQ.
+      const groupName = `mcq_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+      markSelectedChoice(card, groupName, ok);
       return;
     }
 
     // FRQ: grade via Edge Function (OpenRouter). Do NOT grade locally.
+    clearChoiceHighlights(card);
     const checkBtn = card.querySelector('button[data-action="check"]');
     if (checkBtn) checkBtn.disabled = true;
     setCardResult(card, "Checking with AI...", "muted");
+    clearAiFeedback(card);
 
     supabase.functions
       .invoke("check-frq-answer", {
@@ -697,9 +757,10 @@ questionsWrap.addEventListener("click", (e) => {
         const expl = typeof res?.explanation === "string" ? res.explanation : "";
         setCardResult(
           card,
-          correct ? `Correct. ${expl}`.trim() : `Wrong. ${expl}`.trim(),
+          correct ? "Correct." : "Wrong.",
           correct ? "success" : "danger"
         );
+        if (expl) setAiFeedback(card, expl);
       })
       .catch((err) => {
         setCardResult(card, String(err?.message || err) || "AI check failed.", "danger");

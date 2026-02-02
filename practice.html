@@ -167,6 +167,11 @@
       background: #fff;
     }
     .choice input { width: auto; margin-top: 2px; }
+    .choice-body { display: flex; gap: 12px; align-items: baseline; }
+    .choice-letter { min-width: 26px; font-weight: 800; }
+    .choice-text { flex: 1; }
+    .choice.correct { border-color: #0b6b2b; background: #f1fbf5; }
+    .choice.wrong { border-color: #b00020; background: #fff5f5; }
     .question-image {
       max-width: 100%;
       height: auto;
@@ -180,6 +185,15 @@
     .question-card .row { align-items: flex-start; }
     .question-card .btn { width: auto; }
     .question-card .btn.secondary { border-color: #E0DED9; }
+    .ai-feedback {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #fbfaf7;
+      border: 1px dashed #E0DED9;
+      display: none;
+    }
+    .ai-feedback .title { font-weight: 800; margin-bottom: 6px; }
     .pager {
       display: flex;
       justify-content: space-between;
@@ -263,7 +277,6 @@
           <button type="button" class="chip active" data-diff="">All</button>
           <button type="button" class="chip" data-diff="easy">Easy</button>
           <button type="button" class="chip" data-diff="medium">Medium</button>
-          <button type="button" class="chip" data-diff="hard">Hard</button>
         </div>
         <div class="row" style="margin-top: 12px;">
           <button id="btnLoadTopic" type="button" class="btn" disabled>Load questions</button>
