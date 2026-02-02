@@ -122,60 +122,91 @@
 
   <div class="content">
     <div class="card">
-      <h2 style="margin-top: 0;">Practice (Test Integration)</h2>
-      <p class="muted" style="margin-top: 6px;">
-        Login with Supabase, then load a random question from <code>questions_waec_math</code>.
+      <h2 style="margin-top: 0;">Practice</h2>
+      <p class="muted" style="margin-top: 6px; margin-bottom: 10px;">
+        Select a mode, then practice questions in batches of 10.
       </p>
-      <div id="authStatus" class="status muted"></div>
-    </div>
-
-    <div class="card" id="authCard">
-      <h3 style="margin-top: 0;">Login</h3>
-      <div class="row">
+      <div class="row" style="align-items: flex-start;">
         <div>
-          <label for="email">Email</label>
-          <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+          <div class="muted">Signed in:</div>
+          <div id="authStatus" class="status" style="font-weight: 700;"></div>
         </div>
-        <div>
-          <label for="password">Password</label>
-          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+        <div style="text-align: right;">
+          <button id="btnSignOut" type="button" class="secondary">Sign out</button>
         </div>
       </div>
-      <div class="row" style="margin-top: 12px;">
-        <button id="btnSignIn" type="button">Sign in</button>
-        <button id="btnSignUp" type="button" class="secondary">Sign up</button>
-        <button id="btnGoogle" type="button" class="secondary">Continue with Google</button>
-        <button id="btnSignOut" type="button" class="secondary" style="display:none;">Sign out</button>
-      </div>
-      <div id="authMessage" class="muted" style="margin-top: 10px;"></div>
-    </div>
-
-    <div class="card" id="practiceCard" style="display:none;">
-      <div class="row">
-        <button id="btnRandom" type="button">Load random question</button>
-        <button id="btnShowSolution" type="button" class="secondary" disabled>Show solution</button>
-      </div>
-
-      <div id="questionMeta" class="meta" style="display:none;"></div>
-      <img id="questionImage" class="question-image" alt="Question image" />
-
-      <div id="problem" style="margin-top: 14px;"></div>
-      <div id="choices" class="choices"></div>
-
-      <div class="row" style="margin-top: 12px;">
-        <button id="btnCheck" type="button" disabled>Check answer</button>
-        <div id="result" class="status"></div>
-      </div>
-
-      <div id="solution" style="margin-top: 14px; display:none;"></div>
     </div>
 
     <div class="card">
-      <p class="muted" style="margin:0;">
-        Note: if question loading fails with a permissions error, you likely need an RLS policy in Supabase to allow
-        <code>authenticated</code> users to <code>select</code> from <code>questions_waec_math</code>.
-      </p>
+      <h3 style="margin-top: 0;">Mode</h3>
+      <div class="row">
+        <label style="display:flex; gap:10px; align-items:center; font-weight:700;">
+          <input type="radio" name="mode" value="year" checked />
+          By year
+        </label>
+        <label style="display:flex; gap:10px; align-items:center; font-weight:700;">
+          <input type="radio" name="mode" value="topic" />
+          By topic
+        </label>
+      </div>
+
+      <div id="modeYear" style="margin-top: 14px;">
+        <div class="row">
+          <div>
+            <label for="yearSelect">Year</label>
+            <select id="yearSelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
+              <option value="">Loading years...</option>
+            </select>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button id="btnStartYear" type="button">Start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="modeTopic" style="margin-top: 14px; display:none;">
+        <div class="row">
+          <div>
+            <label for="domainSelect">Domain</label>
+            <select id="domainSelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
+              <option value="">Loading domains...</option>
+            </select>
+          </div>
+          <div>
+            <label for="topicSelect">Topic</label>
+            <select id="topicSelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
+              <option value="">Select a domain first</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 12px;">
+          <div>
+            <label for="difficultySelect">Difficulty</label>
+            <select id="difficultySelect" style="width:100%; padding:12px; border:1px solid #E0DED9; border-radius:10px;">
+              <option value="">All difficulties</option>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button id="btnStartTopic" type="button">Start</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="filterMessage" class="muted" style="margin-top: 10px;"></div>
     </div>
+
+    <div class="card" id="pagerCard" style="display:none;">
+      <div class="row">
+        <button id="btnPrev" type="button" class="secondary">Previous</button>
+        <div id="pageInfo" class="muted" style="text-align:center;"></div>
+        <button id="btnNext" type="button" class="secondary">Next</button>
+      </div>
+    </div>
+
+    <div id="questions"></div>
   </div>
 
   <script type="module" src="assets/practice.js"></script>

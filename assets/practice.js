@@ -1,84 +1,55 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-// Supabase project config (anon key is public by design).
-const SUPABASE_URL = "https://casohrqgydyyvcclqwqm.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhc29ocnFneWR5eXZjY2xxd3FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc1MTY2MzYsImV4cCI6MjA2MzA5MjYzNn0.ct9XbPcvqZSG_HBLMzxRmxoH4dWfMArlRNw9s3wYt9I";
+import { SUPABASE_URL, supabase } from "./supabaseClient.js";
 
 const TABLE = "questions_waec_math";
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-  },
-});
+const PAGE_SIZE = 10;
 
 const el = (id) => document.getElementById(id);
 
 const authStatusEl = el("authStatus");
-const authMessageEl = el("authMessage");
-const emailEl = el("email");
-const passwordEl = el("password");
-const btnSignIn = el("btnSignIn");
-const btnSignUp = el("btnSignUp");
-const btnGoogle = el("btnGoogle");
 const btnSignOut = el("btnSignOut");
 
-const practiceCard = el("practiceCard");
-const btnRandom = el("btnRandom");
-const btnCheck = el("btnCheck");
-const btnShowSolution = el("btnShowSolution");
-const questionMeta = el("questionMeta");
-const questionImage = el("questionImage");
-const problemEl = el("problem");
-const choicesEl = el("choices");
-const resultEl = el("result");
-const solutionEl = el("solution");
+const modeYearWrap = el("modeYear");
+const modeTopicWrap = el("modeTopic");
+const yearSelect = el("yearSelect");
+const domainSelect = el("domainSelect");
+const topicSelect = el("topicSelect");
+const difficultySelect = el("difficultySelect");
+const btnStartYear = el("btnStartYear");
+const btnStartTopic = el("btnStartTopic");
+const filterMessageEl = el("filterMessage");
 
-let currentQuestion = null;
-let currentChoices = null;
-let solutionShown = false;
+const pagerCard = el("pagerCard");
+const btnPrev = el("btnPrev");
+const btnNext = el("btnNext");
+const pageInfo = el("pageInfo");
 
-function setAuthMessage(msg, kind = "muted") {
-  authMessageEl.className = kind;
-  authMessageEl.textContent = msg || "";
+const questionsWrap = el("questions");
+
+let currentMode = "year";
+let currentYear = null;
+let currentDomain = null;
+let currentTopic = null;
+let currentDifficulty = "";
+
+let currentPage = 1;
+let totalPages = 0;
+let totalCount = 0;
+
+// For topic mode random ordering.
+let topicShuffledIds = [];
+
+// Current page data lookup for button actions.
+let currentQuestionsById = new Map();
+
+function setFilterMessage(msg, kind = "muted") {
+  filterMessageEl.className = kind;
+  filterMessageEl.textContent = msg || "";
 }
 
-function setResult(msg, kind = "") {
-  resultEl.className = `status ${kind}`.trim();
-  resultEl.textContent = msg || "";
-}
-
-function resetQuestionUI() {
-  currentQuestion = null;
-  currentChoices = null;
-  solutionShown = false;
-  questionMeta.style.display = "none";
-  questionMeta.innerHTML = "";
-  questionImage.style.display = "none";
-  questionImage.removeAttribute("src");
-  problemEl.innerHTML = "";
-  choicesEl.innerHTML = "";
-  solutionEl.style.display = "none";
-  solutionEl.innerHTML = "";
-  btnCheck.disabled = true;
-  btnShowSolution.disabled = true;
-  setResult("");
-}
-
-function storagePublicUrlFromImagePath(imagePath) {
-  // Supports:
-  // - full URL: https://...
-  // - "bucket/path/to/file.png" (recommended)
-  // - "/bucket/path/to/file.png"
-  if (!imagePath || typeof imagePath !== "string") return null;
-  const trimmed = imagePath.trim();
-  if (!trimmed) return null;
-  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
-  const normalized = trimmed.startsWith("/") ? trimmed.slice(1) : trimmed;
-  return `${SUPABASE_URL}/storage/v1/object/public/${normalized}`;
+function typesetMath() {
+  if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+    window.MathJax.typesetPromise().catch(() => {});
+  }
 }
 
 function safeJsonParse(text) {
@@ -90,139 +61,17 @@ function safeJsonParse(text) {
   }
 }
 
-function typesetMath() {
-  // MathJax is loaded async; call if present.
-  if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
-    window.MathJax.typesetPromise().catch(() => {});
-  }
-}
-
-function renderChoices(choicesObj) {
-  choicesEl.innerHTML = "";
-
-  if (!choicesObj || typeof choicesObj !== "object") {
-    // Fallback: free-form answer (still uses correct_answer in DB for this test page).
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = `
-      <label style="display:block; font-weight:600; margin-bottom:6px;">Your answer</label>
-      <input id="freeAnswer" type="text" placeholder="Type your answer" />
-      <p class="muted" style="margin:8px 0 0 0;">No choices_json found for this question.</p>
-    `;
-    choicesEl.appendChild(wrapper);
-    return;
-  }
-
-  const entries = Object.entries(choicesObj)
-    .filter(([k]) => typeof k === "string" && k.trim())
-    .sort(([a], [b]) => a.localeCompare(b));
-
-  const title = document.createElement("div");
-  title.className = "muted";
-  title.style.marginTop = "6px";
-  title.textContent = "Choose one:";
-  choicesEl.appendChild(title);
-
-  entries.forEach(([key, value]) => {
-    const row = document.createElement("label");
-    row.className = "choice";
-    row.innerHTML = `
-      <input type="radio" name="mcq" value="${key}" />
-      <div>
-        <div style="font-weight:700;">${key}</div>
-        <div>${value ?? ""}</div>
-      </div>
-    `;
-    choicesEl.appendChild(row);
-  });
-}
-
-function renderQuestion(q) {
-  resetQuestionUI();
-  currentQuestion = q;
-
-  const meta = [];
-  if (q.year) meta.push(`Year: ${q.year}`);
-  if (q.number) meta.push(`No: ${q.number}`);
-  if (q.topic) meta.push(`Topic: ${q.topic}`);
-  if (q.problem_difficulty) meta.push(`Difficulty: ${q.problem_difficulty}`);
-  meta.push(`ID: ${q.question_id}`);
-
-  questionMeta.style.display = "flex";
-  questionMeta.innerHTML = meta.map((t) => `<div class="pill">${t}</div>`).join("");
-
-  const imgUrl = storagePublicUrlFromImagePath(q.image_path);
-  if (imgUrl) {
-    questionImage.src = imgUrl;
-    questionImage.style.display = "block";
-  }
-
-  // problem_text is stored as HTML containing MathJax-compatible LaTeX.
-  problemEl.innerHTML = q.problem_text || "<p class='muted'>No problem_text.</p>";
-
-  currentChoices = safeJsonParse(q.choices_json);
-  renderChoices(currentChoices);
-
-  btnCheck.disabled = false;
-  btnShowSolution.disabled = !q.solution_text;
-
-  typesetMath();
-}
-
-async function getRandomQuestion() {
-  setResult("");
-  setAuthMessage("");
-  btnRandom.disabled = true;
-  btnCheck.disabled = true;
-  btnShowSolution.disabled = true;
-
-  try {
-    // Count rows (exact count is OK for this test page; we can optimize later via an Edge Function / RPC).
-    const countResp = await supabase
-      .from(TABLE)
-      .select("question_id", { count: "exact", head: true });
-
-    if (countResp.error) throw countResp.error;
-    const count = countResp.count || 0;
-    if (!count) throw new Error("No questions found in questions_waec_math.");
-
-    const offset = Math.floor(Math.random() * count);
-
-    const { data, error } = await supabase
-      .from(TABLE)
-      .select(
-        "question_id, year, number, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image"
-      )
-      .order("question_id", { ascending: true })
-      .range(offset, offset);
-
-    if (error) throw error;
-    const q = Array.isArray(data) ? data[0] : null;
-    if (!q) throw new Error("Random question query returned no row.");
-
-    renderQuestion(q);
-  } catch (e) {
-    resetQuestionUI();
-    const msg =
-      (e && typeof e.message === "string" && e.message) ||
-      "Failed to load a random question.";
-    setResult(msg, "danger");
-  } finally {
-    btnRandom.disabled = false;
-    btnCheck.disabled = !currentQuestion;
-    btnShowSolution.disabled = !currentQuestion?.solution_text;
-  }
-}
-
-function getUserAnswer() {
-  if (!currentQuestion) return null;
-
-  if (currentChoices && typeof currentChoices === "object") {
-    const checked = document.querySelector("input[name='mcq']:checked");
-    return checked ? String(checked.value) : null;
-  }
-
-  const free = el("freeAnswer");
-  return free ? String(free.value || "").trim() : null;
+function storagePublicUrlFromPath(path) {
+  // Supports:
+  // - full URL
+  // - "bucket/path/to/file.png" (public storage object path)
+  // - "/bucket/path/to/file.png"
+  if (!path || typeof path !== "string") return null;
+  const trimmed = path.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
+  const normalized = trimmed.startsWith("/") ? trimmed.slice(1) : trimmed;
+  return `${SUPABASE_URL}/storage/v1/object/public/${normalized}`;
 }
 
 function normalizeAnswer(a) {
@@ -230,178 +79,520 @@ function normalizeAnswer(a) {
   return String(a).trim().toUpperCase();
 }
 
-function toggleSolution() {
-  if (!currentQuestion || !currentQuestion.solution_text) return;
-  solutionShown = !solutionShown;
-  solutionEl.style.display = solutionShown ? "block" : "none";
-  btnShowSolution.textContent = solutionShown ? "Hide solution" : "Show solution";
+function shuffleInPlace(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
-  if (solutionShown) {
-    const imgUrl = storagePublicUrlFromImagePath(currentQuestion.solution_image);
-    const imgHtml = imgUrl
-      ? `<img class="question-image" style="display:block;" src="${imgUrl}" alt="Solution image" />`
-      : "";
-    solutionEl.innerHTML = `${imgHtml}${currentQuestion.solution_text}`;
+function updatePager() {
+  if (!totalPages || totalPages < 1) {
+    pagerCard.style.display = "none";
+    return;
+  }
+  pagerCard.style.display = "block";
+  pageInfo.textContent = `Page ${currentPage} of ${totalPages} (${totalCount} questions)`;
+  btnPrev.disabled = currentPage <= 1;
+  btnNext.disabled = currentPage >= totalPages;
+}
+
+function resetQuestionsUI() {
+  currentQuestionsById = new Map();
+  questionsWrap.innerHTML = "";
+}
+
+function renderQuestions(rows) {
+  resetQuestionsUI();
+  if (!rows || rows.length === 0) {
+    questionsWrap.innerHTML =
+      "<div class='card'><p class='muted'>No questions found for this filter.</p></div>";
     typesetMath();
-  }
-}
-
-function checkAnswer() {
-  if (!currentQuestion) return;
-  setResult("");
-
-  const userAnswer = getUserAnswer();
-  if (!userAnswer) {
-    setResult("Select (or type) an answer first.", "danger");
     return;
   }
 
-  // For the test integration page we compare locally.
-  // Later we should move this to a Supabase Edge Function to avoid exposing answers.
-  const expected = normalizeAnswer(currentQuestion.correct_answer);
-  const got = normalizeAnswer(userAnswer);
+  const frag = document.createDocumentFragment();
 
-  if (!expected) {
-    setResult("This question has no correct_answer in DB.", "danger");
+  rows.forEach((q) => {
+    currentQuestionsById.set(q.question_id, q);
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.qid = q.question_id;
+
+    const meta = [];
+    if (q.year) meta.push(`Year: ${q.year}`);
+    if (q.number) meta.push(`No: ${q.number}`);
+    if (q.domain) meta.push(`Domain: ${q.domain}`);
+    if (q.topic) meta.push(`Topic: ${q.topic}`);
+    if (q.problem_difficulty) meta.push(`Difficulty: ${q.problem_difficulty}`);
+    meta.push(`ID: ${q.question_id}`);
+
+    const imageUrl = storagePublicUrlFromPath(q.image_path);
+    const imageHtml = imageUrl
+      ? `<img class="question-image" style="display:block;" src="${imageUrl}" alt="Question image" />`
+      : "";
+
+    const choicesObj = typeof q.choices_json === "string" ? safeJsonParse(q.choices_json) : null;
+    const groupName = `mcq_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+
+    let choicesHtml = "";
+    if (choicesObj && typeof choicesObj === "object") {
+      const entries = Object.entries(choicesObj)
+        .filter(([k]) => typeof k === "string" && k.trim())
+        .sort(([a], [b]) => a.localeCompare(b));
+
+      choicesHtml =
+        `<div class="muted" style="margin-top:6px;">Choose one:</div>` +
+        entries
+          .map(
+            ([key, val]) => `
+              <label class="choice">
+                <input type="radio" name="${groupName}" value="${key}">
+                <div>
+                  <div style="font-weight:700;">${key}</div>
+                  <div>${val ?? ""}</div>
+                </div>
+              </label>
+            `
+          )
+          .join("");
+    } else {
+      const inputId = `freeAnswer_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+      choicesHtml = `
+        <label style="display:block; font-weight:600; margin-bottom:6px;">Your answer</label>
+        <input id="${inputId}" type="text" placeholder="Type your answer" />
+      `;
+    }
+
+    const solutionBtnDisabled = q.solution_text ? "" : "disabled";
+    const solutionBtnText = q.solution_text ? "Show solution" : "No solution";
+
+    card.innerHTML = `
+      <div class="meta">${meta.map((t) => `<div class="pill">${t}</div>`).join("")}</div>
+      ${imageHtml}
+      <div class="problem" style="margin-top:14px;">
+        ${q.problem_text || "<p class='muted'>No problem_text.</p>"}
+      </div>
+      <div class="choices" style="margin-top:14px;">${choicesHtml}</div>
+      <div class="row" style="margin-top:12px; align-items:flex-start;">
+        <button type="button" data-action="check" data-qid="${q.question_id}">Check answer</button>
+        <button type="button" class="secondary" data-action="solution" data-qid="${q.question_id}" ${solutionBtnDisabled}>${solutionBtnText}</button>
+        <div class="status result" style="min-width:220px;"></div>
+      </div>
+      <div class="solution" style="margin-top:14px; display:none;"></div>
+    `;
+
+    frag.appendChild(card);
+  });
+
+  questionsWrap.appendChild(frag);
+  typesetMath();
+}
+
+function getAnswerFromCard(card, q) {
+  const choicesObj = typeof q.choices_json === "string" ? safeJsonParse(q.choices_json) : null;
+  if (choicesObj && typeof choicesObj === "object") {
+    const groupName = `mcq_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+    const checked = card.querySelector(`input[name="${groupName}"]:checked`);
+    return checked ? String(checked.value) : "";
+  }
+  const inputId = `freeAnswer_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+  const inp = card.querySelector(`#${CSS.escape(inputId)}`);
+  return inp ? String(inp.value || "").trim() : "";
+}
+
+function setCardResult(card, msg, kind) {
+  const res = card.querySelector(".result");
+  if (!res) return;
+  res.className = `status result ${kind || ""}`.trim();
+  res.textContent = msg || "";
+}
+
+function toggleSolution(card, q) {
+  const sol = card.querySelector(".solution");
+  const btn = card.querySelector('button[data-action="solution"]');
+  if (!sol || !btn) return;
+
+  const isOpen = sol.style.display !== "none";
+  if (isOpen) {
+    sol.style.display = "none";
+    btn.textContent = "Show solution";
     return;
   }
 
-  if (got === expected) {
-    setResult("Correct.", "success");
-  } else {
-    setResult(`Wrong. Your answer: ${got}.`, "danger");
-  }
+  const imgUrl = storagePublicUrlFromPath(q.solution_image);
+  const imgHtml = imgUrl
+    ? `<img class="question-image" style="display:block;" src="${imgUrl}" alt="Solution image" />`
+    : "";
+  sol.innerHTML = `${imgHtml}${q.solution_text || ""}`;
+  sol.style.display = "block";
+  btn.textContent = "Hide solution";
+  typesetMath();
 }
 
-async function refreshUIFromSession() {
+async function requireSessionOrRedirect() {
   const { data } = await supabase.auth.getSession();
   const session = data?.session || null;
-
   if (!session) {
-    authStatusEl.textContent = "Not signed in.";
-    btnSignOut.style.display = "none";
-    practiceCard.style.display = "none";
-    resetQuestionUI();
-    return;
+    location.href = "login.html";
+    return null;
   }
-
-  authStatusEl.textContent = `Signed in as ${session.user.email || session.user.id}`;
-  btnSignOut.style.display = "inline-block";
-  practiceCard.style.display = "block";
+  return session;
 }
 
-btnSignIn.addEventListener("click", async () => {
-  setAuthMessage("");
-  const email = String(emailEl.value || "").trim();
-  const password = String(passwordEl.value || "").trim();
-  if (!email || !password) {
-    setAuthMessage("Enter email + password.", "danger");
+async function fetchDistinctValues(column, opts = {}) {
+  // PostgREST doesn't support DISTINCT easily; we scan a limited number of rows and dedupe client-side.
+  // Works well for low-cardinality columns (year/domain/topic/difficulty).
+  const values = new Set();
+  const limit = opts.limit ?? 5000;
+  const pageSize = opts.pageSize ?? 1000;
+
+  for (let from = 0; from < limit; from += pageSize) {
+    let q = supabase
+      .from(TABLE)
+      .select(column)
+      .not(column, "is", null);
+
+    if (opts.filters) {
+      for (const f of opts.filters) {
+        if (f.op === "eq") q = q.eq(f.col, f.val);
+        if (f.op === "ilike") q = q.ilike(f.col, f.val);
+      }
+    }
+
+    // Ordering helps stable pagination; not required for dedupe.
+    q = q.order(column, { ascending: true }).range(from, from + pageSize - 1);
+
+    const { data, error } = await q;
+    if (error) throw error;
+    if (!data || data.length === 0) break;
+    for (const row of data) {
+      const v = row?.[column];
+      if (v === null || v === undefined) continue;
+      values.add(v);
+    }
+    if (data.length < pageSize) break;
+  }
+
+  return Array.from(values);
+}
+
+async function loadYears() {
+  yearSelect.innerHTML = `<option value="">Loading years...</option>`;
+  try {
+    const rawYears = await fetchDistinctValues("year");
+    const years = rawYears
+      .map((y) => Number(y))
+      .filter((y) => Number.isFinite(y))
+      .sort((a, b) => b - a);
+
+    if (years.length === 0) {
+      yearSelect.innerHTML = `<option value="">No years found</option>`;
+      return;
+    }
+    yearSelect.innerHTML =
+      `<option value="">Select a year</option>` +
+      years.map((y) => `<option value="${y}">${y}</option>`).join("");
+  } catch (e) {
+    yearSelect.innerHTML = `<option value="">Failed to load years</option>`;
+    setFilterMessage(e.message || "Failed to load years.", "danger");
+  }
+}
+
+async function loadDomains() {
+  domainSelect.innerHTML = `<option value="">Loading domains...</option>`;
+  try {
+    const rawDomains = await fetchDistinctValues("domain");
+    const domains = rawDomains
+      .map((d) => String(d).trim())
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
+
+    if (domains.length === 0) {
+      domainSelect.innerHTML = `<option value="">No domains found</option>`;
+      return;
+    }
+    domainSelect.innerHTML =
+      `<option value="">Select a domain</option>` +
+      domains.map((d) => `<option value="${d}">${d}</option>`).join("");
+  } catch (e) {
+    domainSelect.innerHTML = `<option value="">Failed to load domains</option>`;
+    setFilterMessage(e.message || "Failed to load domains.", "danger");
+  }
+}
+
+async function loadTopicsForDomain(domain) {
+  topicSelect.innerHTML = `<option value="">Loading topics...</option>`;
+  if (!domain) {
+    topicSelect.innerHTML = `<option value="">Select a domain first</option>`;
     return;
   }
 
-  btnSignIn.disabled = true;
-  btnSignUp.disabled = true;
   try {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) throw error;
-    setAuthMessage("Signed in.", "success");
-  } catch (e) {
-    setAuthMessage(e.message || "Sign in failed.", "danger");
-  } finally {
-    btnSignIn.disabled = false;
-    btnSignUp.disabled = false;
-  }
-});
+    const rawTopics = await fetchDistinctValues("topic", {
+      filters: [{ op: "eq", col: "domain", val: domain }],
+    });
 
-btnSignUp.addEventListener("click", async () => {
-  setAuthMessage("");
-  const email = String(emailEl.value || "").trim();
-  const password = String(passwordEl.value || "").trim();
-  if (!email || !password) {
-    setAuthMessage("Enter email + password.", "danger");
+    const topics = rawTopics
+      .map((t) => String(t).trim())
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
+
+    if (topics.length === 0) {
+      topicSelect.innerHTML = `<option value="">No topics found</option>`;
+      return;
+    }
+
+    topicSelect.innerHTML =
+      `<option value="">Select a topic</option>` +
+      topics.map((t) => `<option value="${t}">${t}</option>`).join("");
+  } catch (e) {
+    topicSelect.innerHTML = `<option value="">Failed to load topics</option>`;
+    setFilterMessage(e.message || "Failed to load topics.", "danger");
+  }
+}
+
+async function fetchYearCount(year) {
+  const { error, count } = await supabase
+    .from(TABLE)
+    .select("question_id", { count: "exact", head: true })
+    .eq("year", year);
+  if (error) throw error;
+  return count || 0;
+}
+
+async function fetchYearPage(year, page) {
+  const from = (page - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
+  const { data, error } = await supabase
+    .from(TABLE)
+    .select(
+      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image"
+    )
+    .eq("year", year)
+    .order("question_id", { ascending: true })
+    .range(from, to);
+
+  if (error) throw error;
+  return data || [];
+}
+
+async function fetchTopicIds(domain, topic, difficulty) {
+  const ids = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    let q = supabase
+      .from(TABLE)
+      .select("question_id")
+      .eq("domain", domain)
+      .eq("topic", topic)
+      .order("question_id", { ascending: true })
+      .range(from, from + pageSize - 1);
+
+    if (difficulty) {
+      q = q.ilike("problem_difficulty", `%${difficulty}%`);
+    }
+
+    const { data, error } = await q;
+    if (error) throw error;
+    if (!data || data.length === 0) break;
+    for (const row of data) {
+      if (row?.question_id) ids.push(String(row.question_id));
+    }
+    if (data.length < pageSize) break;
+  }
+  return ids;
+}
+
+async function fetchQuestionsByIds(ids) {
+  if (!ids || ids.length === 0) return [];
+  const { data, error } = await supabase
+    .from(TABLE)
+    .select(
+      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image"
+    )
+    .in("question_id", ids);
+  if (error) throw error;
+
+  const byId = new Map((data || []).map((r) => [r.question_id, r]));
+  return ids.map((id) => byId.get(id)).filter(Boolean);
+}
+
+async function startYear() {
+  setFilterMessage("");
+  const y = Number(yearSelect.value);
+  if (!Number.isFinite(y)) {
+    setFilterMessage("Select a year first.", "danger");
+    return;
+  }
+  currentMode = "year";
+  currentYear = y;
+  currentPage = 1;
+
+  try {
+    totalCount = await fetchYearCount(currentYear);
+    totalPages = Math.ceil(totalCount / PAGE_SIZE) || 0;
+    updatePager();
+    const rows = await fetchYearPage(currentYear, currentPage);
+    renderQuestions(rows);
+  } catch (e) {
+    setFilterMessage(e.message || "Failed to load year questions.", "danger");
+    totalCount = 0;
+    totalPages = 0;
+    updatePager();
+    renderQuestions([]);
+  }
+}
+
+async function startTopic() {
+  setFilterMessage("");
+  const d = String(domainSelect.value || "").trim();
+  const t = String(topicSelect.value || "").trim();
+  if (!d) {
+    setFilterMessage("Select a domain first.", "danger");
+    return;
+  }
+  if (!t) {
+    setFilterMessage("Select a topic first.", "danger");
     return;
   }
 
-  btnSignIn.disabled = true;
-  btnSignUp.disabled = true;
-  try {
-    const origin =
-      typeof location !== "undefined" &&
-      location.origin &&
-      location.origin !== "null" &&
-      (location.protocol === "http:" || location.protocol === "https:")
-        ? location.origin
-        : null;
+  currentMode = "topic";
+  currentDomain = d;
+  currentTopic = t;
+  currentDifficulty = String(difficultySelect.value || "").trim().toLowerCase();
+  currentPage = 1;
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        ...(origin ? { emailRedirectTo: `${origin}/practice.html` } : {}),
-      },
-    });
-    if (error) throw error;
-    setAuthMessage(
-      "Sign up complete. If email confirmation is enabled, check your inbox to confirm, then sign in.",
-      "success"
-    );
+  try {
+    const ids = await fetchTopicIds(currentDomain, currentTopic, currentDifficulty);
+    topicShuffledIds = shuffleInPlace(ids);
+    totalCount = topicShuffledIds.length;
+    totalPages = Math.ceil(totalCount / PAGE_SIZE) || 0;
+    updatePager();
+
+    const slice = topicShuffledIds.slice(0, PAGE_SIZE);
+    const rows = await fetchQuestionsByIds(slice);
+    renderQuestions(rows);
   } catch (e) {
-    setAuthMessage(e.message || "Sign up failed.", "danger");
-  } finally {
-    btnSignIn.disabled = false;
-    btnSignUp.disabled = false;
+    setFilterMessage(e.message || "Failed to load topic questions.", "danger");
+    topicShuffledIds = [];
+    totalCount = 0;
+    totalPages = 0;
+    updatePager();
+    renderQuestions([]);
   }
+}
+
+async function goToPage(page) {
+  if (page < 1 || page > totalPages) return;
+  currentPage = page;
+  updatePager();
+
+  try {
+    if (currentMode === "year") {
+      const rows = await fetchYearPage(currentYear, currentPage);
+      renderQuestions(rows);
+      return;
+    }
+
+    const from = (currentPage - 1) * PAGE_SIZE;
+    const slice = topicShuffledIds.slice(from, from + PAGE_SIZE);
+    const rows = await fetchQuestionsByIds(slice);
+    renderQuestions(rows);
+  } catch (e) {
+    setFilterMessage(e.message || "Failed to load page.", "danger");
+  }
+}
+
+function onModeChange(mode) {
+  currentMode = mode;
+  modeYearWrap.style.display = mode === "year" ? "block" : "none";
+  modeTopicWrap.style.display = mode === "topic" ? "block" : "none";
+  setFilterMessage("");
+  totalCount = 0;
+  totalPages = 0;
+  currentPage = 1;
+  updatePager();
+  resetQuestionsUI();
+}
+
+// Events
+document.addEventListener("change", (e) => {
+  const r = e.target && e.target.closest && e.target.closest('input[name="mode"]');
+  if (!r) return;
+  onModeChange(r.value);
 });
 
-btnGoogle.addEventListener("click", async () => {
-  setAuthMessage("");
-  btnSignIn.disabled = true;
-  btnSignUp.disabled = true;
-  btnGoogle.disabled = true;
-  try {
-    const origin =
-      typeof location !== "undefined" &&
-      location.origin &&
-      location.origin !== "null" &&
-      (location.protocol === "http:" || location.protocol === "https:")
-        ? location.origin
-        : null;
-
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        ...(origin ? { redirectTo: `${origin}/practice.html` } : {}),
-      },
-    });
-    if (error) throw error;
-    // Redirect happens automatically.
-  } catch (e) {
-    setAuthMessage(e.message || "Google sign-in failed.", "danger");
-  } finally {
-    btnSignIn.disabled = false;
-    btnSignUp.disabled = false;
-    btnGoogle.disabled = false;
-  }
+domainSelect.addEventListener("change", async () => {
+  setFilterMessage("");
+  await loadTopicsForDomain(String(domainSelect.value || "").trim());
 });
+
+btnStartYear.addEventListener("click", startYear);
+btnStartTopic.addEventListener("click", startTopic);
+
+btnPrev.addEventListener("click", () => goToPage(currentPage - 1));
+btnNext.addEventListener("click", () => goToPage(currentPage + 1));
 
 btnSignOut.addEventListener("click", async () => {
-  setAuthMessage("");
   try {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-    setAuthMessage("Signed out.", "success");
-  } catch (e) {
-    setAuthMessage(e.message || "Sign out failed.", "danger");
+    await supabase.auth.signOut();
+  } finally {
+    location.href = "login.html";
   }
 });
 
-btnRandom.addEventListener("click", getRandomQuestion);
-btnCheck.addEventListener("click", checkAnswer);
-btnShowSolution.addEventListener("click", toggleSolution);
+questionsWrap.addEventListener("click", (e) => {
+  const btn = e.target && e.target.closest && e.target.closest("button[data-action]");
+  if (!btn) return;
+  const action = btn.getAttribute("data-action");
+  const qid = btn.getAttribute("data-qid");
+  if (!qid) return;
 
-supabase.auth.onAuthStateChange(() => {
-  refreshUIFromSession().catch(() => {});
+  const card = btn.closest(".card");
+  const q = currentQuestionsById.get(qid);
+  if (!card || !q) return;
+
+  if (action === "check") {
+    const userAns = normalizeAnswer(getAnswerFromCard(card, q));
+    if (!userAns) {
+      setCardResult(card, "Select (or type) an answer first.", "danger");
+      return;
+    }
+    const expected = normalizeAnswer(q.correct_answer);
+    if (!expected) {
+      setCardResult(card, "No correct_answer in DB for this question.", "danger");
+      return;
+    }
+    if (userAns === expected) {
+      setCardResult(card, "Correct.", "success");
+    } else {
+      setCardResult(card, `Wrong. Your answer: ${userAns}.`, "danger");
+    }
+    return;
+  }
+
+  if (action === "solution") {
+    if (!q.solution_text) return;
+    toggleSolution(card, q);
+  }
 });
 
-// Initial state
-refreshUIFromSession().catch(() => {});
+// Init
+(async () => {
+  const session = await requireSessionOrRedirect();
+  if (!session) return;
+
+  authStatusEl.textContent = session.user.email || session.user.id;
+  updatePager();
+
+  await Promise.all([loadYears(), loadDomains()]);
+  await loadTopicsForDomain("");
+})();
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  if (!session) location.href = "login.html";
+});
+
