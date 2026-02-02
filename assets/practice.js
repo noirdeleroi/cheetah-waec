@@ -29,6 +29,11 @@ const btnPrev = el("btnPrev");
 const btnNext = el("btnNext");
 const pageInfo = el("pageInfo");
 
+const pagerCardBottom = el("pagerCardBottom");
+const btnPrevBottom = el("btnPrevBottom");
+const btnNextBottom = el("btnNextBottom");
+const pageInfoBottom = el("pageInfoBottom");
+
 const questionsWrap = el("questions");
 
 let currentMode = "year";
@@ -139,12 +144,17 @@ function shuffleInPlace(arr) {
 function updatePager() {
   if (!totalPages || totalPages < 1) {
     pagerCard.style.display = "none";
+    pagerCardBottom.style.display = "none";
     return;
   }
   pagerCard.style.display = "block";
+  pagerCardBottom.style.display = "block";
   pageInfo.textContent = `Page ${currentPage} of ${totalPages} (${totalCount} questions)`;
+  pageInfoBottom.textContent = pageInfo.textContent;
   btnPrev.disabled = currentPage <= 1;
   btnNext.disabled = currentPage >= totalPages;
+  btnPrevBottom.disabled = btnPrev.disabled;
+  btnNextBottom.disabled = btnNext.disabled;
 }
 
 function resetQuestionsUI() {
@@ -211,10 +221,12 @@ function renderQuestions(rows) {
           .join("");
     } else {
       const inputId = `freeAnswer_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+      const isMedium = String(q.problem_difficulty || "").toLowerCase().includes("medium");
       choicesHtml = `
         <label style="display:block; font-weight:600; margin-bottom:6px;">Your answer</label>
         <input id="${inputId}" type="text" placeholder="Type your final answer" />
         ${isFrq ? `<p class="muted" style="margin:8px 0 0 0;">FRQ answers are checked by AI.</p>` : ``}
+        ${(isFrq && isMedium) ? `<div class="hint" style="margin-top:10px;"><div style="font-weight:800; margin-bottom:6px;">Answer format</div><div class="muted">You can write your answer in any form. If there are multiple parts, separate them with <strong>;</strong><br>Example: <code>x&gt;=5; 12/5; diagram</code></div></div>` : ``}
       `;
     }
 
@@ -457,6 +469,7 @@ async function fetchYearPage(year, page) {
       "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image, mcq_frq"
     )
     .eq("year", year)
+    .order("number", { ascending: true, nullsFirst: false })
     .order("question_id", { ascending: true })
     .range(from, to);
 
@@ -650,6 +663,16 @@ domainTabs.addEventListener("click", async (e) => {
   topicShuffledIds = [];
   Array.from(domainTabs.querySelectorAll(".chip")).forEach((x) => x.classList.toggle("active", x === b));
   await loadTopicsForDomain(currentDomain);
+  // Auto-select "All" topic and load immediately.
+  const allBtn = topicChips.querySelector('.chip[data-key="__ALL__"]');
+  if (allBtn) {
+    currentTopic = "__ALL__";
+    Array.from(topicChips.querySelectorAll(".chip")).forEach((x) => x.classList.toggle("active", x === allBtn));
+    syncLoadButtons();
+    if (currentMode === "topic") {
+      startTopic().catch(() => {});
+    }
+  }
   syncLoadButtons();
 });
 
@@ -683,6 +706,8 @@ btnShuffleTopic.addEventListener("click", async () => {
 
 btnPrev.addEventListener("click", () => goToPage(currentPage - 1));
 btnNext.addEventListener("click", () => goToPage(currentPage + 1));
+btnPrevBottom.addEventListener("click", () => goToPage(currentPage - 1));
+btnNextBottom.addEventListener("click", () => goToPage(currentPage + 1));
 
 btnSignOut.addEventListener("click", async () => {
   try {
@@ -789,6 +814,8 @@ questionsWrap.addEventListener("click", (e) => {
 
   await Promise.all([loadYears(), loadDomains()]);
   await loadTopicsForDomain("");
+  // Default mode is "By topic".
+  onModeChange("topic");
 })();
 
 supabase.auth.onAuthStateChange((_event, session) => {

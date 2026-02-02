@@ -179,6 +179,8 @@
       margin: 12px auto 0 auto;
       border-radius: 12px;
       border: 1px solid #E0DED9;
+      max-height: 340px;
+      object-fit: contain;
     }
     .danger { color: #b00020; }
     .success { color: #0b6b2b; }
@@ -257,19 +259,11 @@
     <div class="card">
       <h3 class="section-title">Choose a mode</h3>
       <div class="mode-toggle" role="tablist" aria-label="Practice mode">
-        <button id="btnModeYear" type="button" class="btn active" data-mode="year">By year</button>
-        <button id="btnModeTopic" type="button" class="btn" data-mode="topic">By topic</button>
+        <button id="btnModeTopic" type="button" class="btn active" data-mode="topic">By topic</button>
+        <button id="btnModeYear" type="button" class="btn" data-mode="year">By year</button>
       </div>
 
-      <div id="modeYear" style="margin-top: 14px;">
-        <div class="muted">Choose a year (newest first):</div>
-        <div id="yearChips" class="chip-grid"></div>
-        <div style="margin-top: 12px;">
-          <button id="btnLoadYear" type="button" class="btn" disabled>Load questions</button>
-        </div>
-      </div>
-
-      <div id="modeTopic" style="margin-top: 14px; display:none;">
+      <div id="modeTopic" style="margin-top: 14px;">
         <div class="muted">Step 1: pick a domain</div>
         <div id="domainTabs" class="chip-grid"></div>
         <div class="muted" style="margin-top: 14px;">Step 2: pick a topic</div>
@@ -286,6 +280,14 @@
         </div>
       </div>
 
+      <div id="modeYear" style="margin-top: 14px; display:none;">
+        <div class="muted">Choose a year (newest first):</div>
+        <div id="yearChips" class="chip-grid"></div>
+        <div style="margin-top: 12px;">
+          <button id="btnLoadYear" type="button" class="btn" disabled>Load questions</button>
+        </div>
+      </div>
+
       <div id="filterMessage" class="muted" style="margin-top: 10px;"></div>
     </div>
 
@@ -298,6 +300,14 @@
     </div>
 
     <div id="questions"></div>
+
+    <div class="card" id="pagerCardBottom" style="display:none;">
+      <div class="pager">
+        <button id="btnPrevBottom" type="button" class="btn secondary">Previous</button>
+        <div id="pageInfoBottom" class="muted" style="text-align:center;"></div>
+        <button id="btnNextBottom" type="button" class="btn secondary">Next</button>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="assets/practice.js"></script>
