@@ -90,6 +90,12 @@ function normalizeAnswer(a) {
   return String(a).trim().toUpperCase();
 }
 
+function hasEmbeddedLinksInHtml(html) {
+  // If problem_text already embeds images/links, don't render image_path separately (avoids duplicates).
+  const s = String(html || "");
+  return /<img\b/i.test(s) || /<a\b/i.test(s);
+}
+
 function escapeHtml(s) {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -188,10 +194,10 @@ function renderQuestions(rows) {
     if (q.problem_difficulty) meta.push(`Difficulty: ${q.problem_difficulty}`);
     meta.push(`ID: ${q.question_id}`);
 
-    const imageUrl = storagePublicUrlFromPath(q.image_path);
-    const imageHtml = imageUrl
-      ? `<img class="question-image" style="display:block;" src="${imageUrl}" alt="Question image" />`
-      : "";
+    const embeddedLinks = hasEmbeddedLinksInHtml(q.problem_text);
+    const imageUrl = !embeddedLinks ? storagePublicUrlFromPath(q.image_path) : null;
+    const imageHtml =
+      imageUrl ? `<img class="question-image" style="display:block;" src="${imageUrl}" alt="Question image" />` : "";
 
     const isFrq = String(q.mcq_frq || "").toUpperCase() === "FRQ";
     const choicesObj =
@@ -292,11 +298,8 @@ function toggleSolution(card, q) {
     return;
   }
 
-  const imgUrl = storagePublicUrlFromPath(q.solution_image);
-  const imgHtml = imgUrl
-    ? `<img class="question-image" style="display:block;" src="${imgUrl}" alt="Solution image" />`
-    : "";
-  sol.innerHTML = `${imgHtml}${q.solution_text || ""}`;
+  // If solution_text embeds images, they will render via HTML.
+  sol.innerHTML = `${q.solution_text || ""}`;
   sol.style.display = "block";
   btn.textContent = "Hide solution";
   typesetMath();
@@ -466,7 +469,7 @@ async function fetchYearPage(year, page) {
   const { data, error } = await supabase
     .from(TABLE)
     .select(
-      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image, mcq_frq"
+      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, mcq_frq"
     )
     .eq("year", year)
     .order("number", { ascending: true, nullsFirst: false })
@@ -512,7 +515,7 @@ async function fetchQuestionsByIds(ids) {
   const { data, error } = await supabase
     .from(TABLE)
     .select(
-      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image, mcq_frq"
+      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, mcq_frq"
     )
     .in("question_id", ids);
   if (error) throw error;
