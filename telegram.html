@@ -1,243 +1,116 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VX6VXK0L0H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VX6VXK0L0H');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX6VXK0L0H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VX6VXK0L0H');
+  </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Primary Meta Tags -->
-<meta name="title" content="Cheetah WAEC – Master WAEC Mathematics with Speed and Precision">
-<meta name="description" content="Prepare for the WAEC Math exam with Cheetah WAEC. Access study guides, solve past questions, and get personalized feedback via our Telegram bot.">
-<meta name="keywords" content="WAEC, WAEC math, WAEC study guide, WAEC past papers, WAEC practice, Cheetah WAEC, WAEC questions, WAEC bot, WAEC preparation, West African Examinations Council">
-<meta name="author" content="Cheetah WAEC Team">
-<meta name="robots" content="index, follow">
+  <meta name="title" content="Cheetah WAEC – Practice WAEC Mathematics" />
+  <meta name="description" content="Practice WAEC Mathematics by year or topic and get instant feedback." />
+  <meta name="keywords" content="WAEC, WAEC math, WAEC practice, past papers, study guide" />
+  <meta name="author" content="Cheetah WAEC Team" />
+  <meta name="robots" content="index, follow" />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://cheetahwaec.com/">
-<meta property="og:title" content="Cheetah WAEC – Master WAEC Mathematics with Speed and Precision">
-<meta property="og:description" content="Master WAEC Math with Cheetah WAEC’s study guide and Telegram practice bot.">
-  <title>Study Guide – Cheetah WAEC</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cheetahwaec.com/" />
+  <meta property="og:title" content="Cheetah WAEC – Practice WAEC Mathematics" />
+  <meta property="og:description" content="Practice by year or topic and get instant feedback." />
+
+  <title>Practice – Cheetah WAEC</title>
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
-  <!-- JSON-LD Structured Data -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Cheetah WAEC",
-    "url": "https://cheetahwaec.com",
-    "logo": "https://cheetahwaec.com/assets/images/logo.png",
-    "description": "Cheetah WAEC helps students prepare for the WAEC Math exam with a smart Telegram bot and a detailed study guide.",
-    "sameAs": [
-      "https://t.me/cheetahwaecbot",
-      "https://www.instagram.com/cheetahwaec",
-      "https://www.tiktok.com/@cheetahwaec"
-    ]
-  }
-  </script>
-  <style>
-    body {
-      background: #f8f6f2;
-    }
 
+  <style>
+    body { background: #f8f6f2; }
     .content {
-      max-width: 800px;
+      max-width: 850px;
       margin: 100px auto 60px auto;
       padding: 0 20px;
       font-family: sans-serif;
     }
-
-    .content h2 {
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+      margin-bottom: 18px;
     }
-
-    .content h3 {
-      font-size: 24px;
-      margin-top: 40px;
+    .muted { color: #555; font-size: 14px; }
+    .btn {
+      display: inline-block;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
     }
-
-    .content h4 {
-      font-size: 20px;
-      margin-top: 20px;
+    .btn.secondary {
+      background: transparent;
+      color: #111;
+      border-color: #E0DED9;
     }
-
-    .content ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .content ul li {
-      margin: 6px 0;
-    }
-
-    .content a {
-  color: #444444; /* Orange to match your brand */
-  text-decoration: none;
-}
-
-.content a:hover {
-  color: #E65C00;
-  text-decoration: underline;
-}
-
-    footer {
-      margin-top: 80px;
-      text-align: center;
-    }
-
-    a {
-  color: #FF6600;
-  text-decoration: none;
-  font-weight: 500;
-    }
-
-</style>
+  </style>
 </head>
 <body>
   <nav>
     <div class="nav-container">
       <h1 style="display: flex; align-items: center;">
-        <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+        <a href="/index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
           <img src="assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
           <span>Cheetah WAEC</span>
         </a>
       </h1>
       <button class="menu-toggle">☰</button>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="study-guide.html">Study Guide</a></li>
-        <li><a href="past-papers.html">Past Papers</a></li>
-        <li><a href="practice.html">Practice</a></li>
-        <li><a href="telegram.html">Telegram Bot</a></li>
-        <li><a href="contact.html">About Us</a></li>
-        <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/study-guide.html">Study Guide</a></li>
+        <li><a href="/past-papers.html">Past Papers</a></li>
+        <li><a href="/practice.html">Practice</a></li>
+        <li><a href="/contact.html">About Us</a></li>
+        <li><a href="/subscribe.html" class="subscribe-btn">Donate</a></li>
       </ul>
     </div>
   </nav>
 
   <div class="content">
-    <!-- Bot Access Button -->
-    <div class="chapter-card" style="max-width: 400px; margin: 40px auto;">
-      <a href="https://t.me/cheetahwaecbot" target="_blank" style="text-decoration: none; color: inherit;">
-        🚀 Launch Cheetah WAEC Bot
-      </a>
-    </div>
-  
-    <!-- Title -->
-    <h2 style="text-align: center; margin-top: 60px;">How to use the bot</h2>
-    <p style="text-align: center; font-style: italic; color: #444; margin-top: -10px;">
-      A short note: 📱 🖥️ You can access the Bot seamlessly on both mobile (Telegram app) and desktop (Telegram Desktop).
-    </p>
-
-    <h3>How to install Telegram Messenger and find the bot</h3>
-    <p>
-      📱 To get started, download the Telegram app from the 
-      <a href="https://apps.apple.com/app/telegram-messenger/id686449807" target="_blank">App Store (iPhone)</a> or 
-      <a href="https://play.google.com/store/apps/details?id=org.telegram.messenger" target="_blank">Google Play (Android)</a>. 
-      After installing, open the app and search for <strong>@cheetahwaecbot</strong> — or simply click 
-      <a href="https://t.me/cheetahwaecbot" target="_blank">this link</a> to start the bot instantly.
-    </p>
-
-    <p style="text-align: center; font-size: 16px; margin-top: 10px;">
-      If you're new to Telegram, check out this beginner guide: 
-      <a href="https://www.wikihow.com/Use-Telegram" target="_blank">How to Use Telegram</a>.
-    </p>
-
-    <p>
-      To use the Telegram bot, just tap the buttons inside the chat — they’re very intuitive and easy to follow. 
-      If you ever get lost or the menu disappears, you can always access the main buttons again by tapping the menu icon like in the image below.
-    </p>
-    
-    <div style="text-align: center; margin-top: 10px;">
-      <img src="assets/images/button.jpg" alt="Telegram bot menu button" style="max-width: 300px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-    </div>
-    
-    
-  
-    <!-- Practice Mode -->
-    <h3>1. Practice Mode</h3>
-    <p>
-      Tap on <strong>"Start Practicing"</strong> in the bot. You'll see a few powerful ways to train:
-    </p>
-    <ul>
-      <li><strong>By Year:</strong> Practice past WAEC papers from <em>1988 to 2024</em>.</li>
-      <li><strong>By Topic:</strong> Choose any WAEC math topic and focus your study.</li>
-      <li><strong>Personalized Practice:</strong> The bot sends you questions based on your performance. It learns what topics you struggle with and delivers just the right level of questions to help you improve quickly.</li>
-    </ul>
-    <!-- Practice Mode Screenshots -->
-    <!-- Practice Mode Screenshots: Vertical Stack -->
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 30px 0;">
-      <img src="assets/images/practice1.png" alt="Practice Mode Screenshot 1"
-          style="max-width: 100%; width: 320px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
-          <p style="text-align: left; max-width: 700px; margin: 30px auto 10px; font-size: 16px; line-height: 1.6;">
-            Each question is beautifully formatted and easy to read. You can submit your answer by clicking a button (for MCQs) or typing it in (for FRQs). The bot will instantly check your answer and give you helpful feedback. You’ll also have the option to view the correct answer, see a full solution, or jump to a detailed lesson on our website—complete with examples that explain the topic clearly.
-          </p>
-          
-      <img src="assets/images/practice2.png" alt="Practice Mode Screenshot 2"
-          style="max-width: 100%; width: 320px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
-      <img src="assets/images/practice3.png" alt="Practice Mode Screenshot 3"
-          style="max-width: 100%; width: 320px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+    <div class="card">
+      <h2 style="margin-top: 0;">Practice on the website</h2>
+      <p class="muted" style="margin-top: 8px;">
+        Practice mode is now built into this website. You can practice by year or by topic, check answers instantly,
+        and open full solutions.
+      </p>
+      <div style="margin-top: 12px;">
+        <a class="btn" href="/practice.html">Open Practice</a>
+        <a class="btn secondary" href="login.html" style="margin-left: 8px;">Login</a>
+      </div>
     </div>
 
-
-    <p style="text-align: left; font-size: 18px; margin-top: 30px;">
-      Here is the video example on how to use Practice Mode of Cheetah WAEC bot:
-    </p>
-    
-    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@cheetahwaec/video/7495034838223834374?_r=1&_t=ZS-8vfqchdR0YJ" data-video-id="7495034838223834374" style="margin: 20px 0;" >
-      <section> </section>
-    </blockquote>
-    <script async src="https://www.tiktok.com/embed.js"></script>
-    
-  
-    <!-- Analytics -->
-    <h3>2. Analytics</h3>
-    <p>
-      Hit the <strong>"Analytics"</strong> button in the menu. Here's what you can do:
-    </p>
-    <ul>
-      <li>📈 Track your personal progress over time.</li>
-      <li>📊 See breakdowns of your performance by topic.</li>
-      <li>🤖 Chat with an AI tutor that helps you reflect on your strengths and weaknesses.</li>
-    </ul>
-    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@cheetahwaec/video/7495149428089589047?_r=1&_t=ZS-8vfrXIUTdGU" data-video-id="7495149428089589047" style="margin: 20px 0;" >
-      <section> </section>
-    </blockquote>
-    <script async src="https://www.tiktok.com/embed.js"></script>
-  
-    <!-- Scan Math Problem -->
-    <h3>3. Scan a Math Problem</h3>
-    <p>
-      Got a tricky question on paper or in a textbook? Just take a clear photo and send it to the bot.
-      Our system will scan it and match it to the closest problem in our database — then return a high-quality solution with steps.
-    </p>
-    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@cheetahwaec/video/7495152894186982661?_r=1&_t=ZS-8vfsXDxb5Jn" data-video-id="7495152894186982661" style="margin: 20px 0;" >
-      <section> </section>
-    </blockquote>
-    <script async src="https://www.tiktok.com/embed.js"></script>
-
-    <!-- Bot Access Button -->
-    <div class="chapter-card" style="max-width: 400px; margin: 40px auto;">
-      <a href="https://t.me/cheetahwaecbot" target="_blank" style="text-decoration: none; color: inherit;">
-        🚀 Launch Cheetah WAEC Bot
-      </a>
+    <div class="card">
+      <h3 style="margin-top: 0;">How to use it</h3>
+      <p class="muted" style="margin-top: 8px;">
+        1) Login once with Google (or email/password).<br>
+        2) Choose By year or By topic.<br>
+        3) Solve questions in pages of 10 and check your answers.
+      </p>
+      <p class="muted" style="margin-top: 8px;">
+        MCQ is checked instantly. FRQ is checked by AI and may take a few seconds.
+      </p>
     </div>
   </div>
-  
 
   <footer>
-    <p>&copy; 2025 Cheetah WAEC. All rights reserved.</p>
+    <p style="text-align:center;">&copy; 2025 Cheetah WAEC. All rights reserved.</p>
   </footer>
 </body>
 </html>
+
+
