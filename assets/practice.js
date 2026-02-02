@@ -140,11 +140,13 @@ function renderQuestions(rows) {
       ? `<img class="question-image" style="display:block;" src="${imageUrl}" alt="Question image" />`
       : "";
 
-    const choicesObj = typeof q.choices_json === "string" ? safeJsonParse(q.choices_json) : null;
+    const isFrq = String(q.mcq_frq || "").toUpperCase() === "FRQ";
+    const choicesObj =
+      !isFrq && typeof q.choices_json === "string" ? safeJsonParse(q.choices_json) : null;
     const groupName = `mcq_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
 
     let choicesHtml = "";
-    if (choicesObj && typeof choicesObj === "object") {
+    if (!isFrq && choicesObj && typeof choicesObj === "object") {
       const entries = Object.entries(choicesObj)
         .filter(([k]) => typeof k === "string" && k.trim())
         .sort(([a], [b]) => a.localeCompare(b));
@@ -168,7 +170,8 @@ function renderQuestions(rows) {
       const inputId = `freeAnswer_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
       choicesHtml = `
         <label style="display:block; font-weight:600; margin-bottom:6px;">Your answer</label>
-        <input id="${inputId}" type="text" placeholder="Type your answer" />
+        <input id="${inputId}" type="text" placeholder="Type your final answer" />
+        ${isFrq ? `<p class="muted" style="margin:8px 0 0 0;">FRQ answers are checked by AI.</p>` : ``}
       `;
     }
 
@@ -198,8 +201,10 @@ function renderQuestions(rows) {
 }
 
 function getAnswerFromCard(card, q) {
-  const choicesObj = typeof q.choices_json === "string" ? safeJsonParse(q.choices_json) : null;
-  if (choicesObj && typeof choicesObj === "object") {
+  const isFrq = String(q.mcq_frq || "").toUpperCase() === "FRQ";
+  const choicesObj =
+    !isFrq && typeof q.choices_json === "string" ? safeJsonParse(q.choices_json) : null;
+  if (!isFrq && choicesObj && typeof choicesObj === "object") {
     const groupName = `mcq_${q.question_id}`.replace(/[^a-zA-Z0-9_-]/g, "_");
     const checked = card.querySelector(`input[name="${groupName}"]:checked`);
     return checked ? String(checked.value) : "";
@@ -400,7 +405,7 @@ async function fetchYearPage(year, page) {
   const { data, error } = await supabase
     .from(TABLE)
     .select(
-      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image"
+      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image, mcq_frq"
     )
     .eq("year", year)
     .order("question_id", { ascending: true })
@@ -442,7 +447,7 @@ async function fetchQuestionsByIds(ids) {
   const { data, error } = await supabase
     .from(TABLE)
     .select(
-      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image"
+      "question_id, year, number, domain, topic, problem_difficulty, problem_text, choices_json, correct_answer, image_path, solution_text, solution_image, mcq_frq"
     )
     .in("question_id", ids);
   if (error) throw error;
@@ -647,21 +652,61 @@ questionsWrap.addEventListener("click", (e) => {
   if (!card || !q) return;
 
   if (action === "check") {
-    const userAns = normalizeAnswer(getAnswerFromCard(card, q));
-    if (!userAns) {
+    const rawUserAns = String(getAnswerFromCard(card, q) || "").trim();
+    if (!rawUserAns) {
       setCardResult(card, "Select (or type) an answer first.", "danger");
       return;
     }
-    const expected = normalizeAnswer(q.correct_answer);
-    if (!expected) {
-      setCardResult(card, "No correct_answer in DB for this question.", "danger");
+
+    const isFrq = String(q.mcq_frq || "").toUpperCase() === "FRQ";
+    if (!isFrq) {
+      const userAns = normalizeAnswer(rawUserAns);
+      const expected = normalizeAnswer(q.correct_answer);
+      if (!expected) {
+        setCardResult(card, "No correct_answer in DB for this question.", "danger");
+        return;
+      }
+      if (userAns === expected) {
+        setCardResult(card, "Correct.", "success");
+      } else {
+        setCardResult(card, `Wrong. Your answer: ${userAns}.`, "danger");
+      }
       return;
     }
-    if (userAns === expected) {
-      setCardResult(card, "Correct.", "success");
-    } else {
-      setCardResult(card, `Wrong. Your answer: ${userAns}.`, "danger");
-    }
+
+    // FRQ: grade via Edge Function (OpenRouter). Do NOT grade locally.
+    const checkBtn = card.querySelector('button[data-action="check"]');
+    if (checkBtn) checkBtn.disabled = true;
+    setCardResult(card, "Checking with AI...", "muted");
+
+    supabase.functions
+      .invoke("check-frq-answer", {
+        body: {
+          user_answer: rawUserAns,
+          problem_text: q.problem_text || "",
+          correct_answer: q.correct_answer || "",
+        },
+      })
+      .then(({ data, error }) => {
+        if (error) {
+          setCardResult(card, error.message || "AI check failed.", "danger");
+          return;
+        }
+        const res = data?.data;
+        const correct = !!res?.correct;
+        const expl = typeof res?.explanation === "string" ? res.explanation : "";
+        setCardResult(
+          card,
+          correct ? `Correct. ${expl}`.trim() : `Wrong. ${expl}`.trim(),
+          correct ? "success" : "danger"
+        );
+      })
+      .catch((err) => {
+        setCardResult(card, String(err?.message || err) || "AI check failed.", "danger");
+      })
+      .finally(() => {
+        if (checkBtn) checkBtn.disabled = false;
+      });
     return;
   }
 
