@@ -65,7 +65,12 @@
       cursor: pointer;
       transition: transform 0.06s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
-    .btn:hover { box-shadow: 0 10px 22px rgba(0,0,0,0.08); transform: translateY(-1px); }
+    .btn:hover {
+      box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+      color: #E65C00; /* match site hover accent */
+      border-color: #E65C00;
+    }
     .btn:active { transform: translateY(0px); box-shadow: none; }
     .btn.secondary {
       background: transparent;
@@ -181,6 +186,18 @@
       border: 1px solid #E0DED9;
       max-height: 340px;
       object-fit: contain;
+    }
+    /* Some questions embed multiple images inside problem_text/solution_text */
+    .problem img,
+    .solution img {
+      max-width: 100%;
+      height: auto;
+      max-height: 340px;
+      object-fit: contain;
+      display: block;
+      margin: 12px auto;
+      border-radius: 12px;
+      border: 1px solid #E0DED9;
     }
     .danger { color: #b00020; }
     .success { color: #0b6b2b; }
