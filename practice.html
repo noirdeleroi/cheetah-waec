@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VX6VXK0L0H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VX6VXK0L0H');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice – Cheetah WAEC</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script defer src="assets/script.js"></script>
+
+  <!-- MathJax (problem_text/solution_text already contain LaTeX like \(..\) / \[..\]) -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { background: #f8f6f2; }
+    .content {
+      max-width: 900px;
+      margin: 100px auto 60px auto;
+      padding: 0 20px;
+      font-family: sans-serif;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+      margin-bottom: 18px;
+    }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .row > * { flex: 1; min-width: 220px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; }
+    input {
+      width: 100%;
+      padding: 12px 12px;
+      border: 1px solid #E0DED9;
+      border-radius: 10px;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: transparent;
+      color: #111;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .muted { color: #555; font-size: 14px; }
+    .status { white-space: pre-wrap; }
+    .meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+    .pill {
+      background: #f3f1ec;
+      border: 1px solid #e0ded9;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #333;
+    }
+    .choices { margin-top: 14px; }
+    .choice {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #E0DED9;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+    .choice input { width: auto; margin-top: 2px; }
+    .question-image {
+      max-width: 100%;
+      height: auto;
+      display: none;
+      margin: 12px auto 0 auto;
+      border-radius: 12px;
+      border: 1px solid #E0DED9;
+    }
+    .danger { color: #b00020; }
+    .success { color: #0b6b2b; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <h1 style="display: flex; align-items: center;">
+        <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+          <img src="assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <span>Cheetah WAEC</span>
+        </a>
+      </h1>
+      <button class="menu-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="study-guide.html">Study Guide</a></li>
+        <li><a href="past-papers.html">Past Papers</a></li>
+        <li><a href="practice.html">Practice</a></li>
+        <li><a href="telegram.html">Telegram Bot</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="subscribe.html" class="subscribe-btn">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="card">
+      <h2 style="margin-top: 0;">Practice (Test Integration)</h2>
+      <p class="muted" style="margin-top: 6px;">
+        Login with Supabase, then load a random question from <code>questions_waec_math</code>.
+      </p>
+      <div id="authStatus" class="status muted"></div>
+    </div>
+
+    <div class="card" id="authCard">
+      <h3 style="margin-top: 0;">Login</h3>
+      <div class="row">
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+      </div>
+      <div class="row" style="margin-top: 12px;">
+        <button id="btnSignIn" type="button">Sign in</button>
+        <button id="btnSignUp" type="button" class="secondary">Sign up</button>
+        <button id="btnSignOut" type="button" class="secondary" style="display:none;">Sign out</button>
+      </div>
+      <div id="authMessage" class="muted" style="margin-top: 10px;"></div>
+    </div>
+
+    <div class="card" id="practiceCard" style="display:none;">
+      <div class="row">
+        <button id="btnRandom" type="button">Load random question</button>
+        <button id="btnShowSolution" type="button" class="secondary" disabled>Show solution</button>
+      </div>
+
+      <div id="questionMeta" class="meta" style="display:none;"></div>
+      <img id="questionImage" class="question-image" alt="Question image" />
+
+      <div id="problem" style="margin-top: 14px;"></div>
+      <div id="choices" class="choices"></div>
+
+      <div class="row" style="margin-top: 12px;">
+        <button id="btnCheck" type="button" disabled>Check answer</button>
+        <div id="result" class="status"></div>
+      </div>
+
+      <div id="solution" style="margin-top: 14px; display:none;"></div>
+    </div>
+
+    <div class="card">
+      <p class="muted" style="margin:0;">
+        Note: if question loading fails with a permissions error, you likely need an RLS policy in Supabase to allow
+        <code>authenticated</code> users to <code>select</code> from <code>questions_waec_math</code>.
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="assets/practice.js"></script>
+</body>
+</html>
+
