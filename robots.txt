@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /chapters/tochange/
+Disallow: /template
+Disallow: /output.html
+Disallow: /genius.html
+
+Sitemap: https://cheetahwaec.com/sitemap.xml
