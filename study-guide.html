@@ -91,6 +91,50 @@
     footer {
       margin-top: 80px;
     }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      .chapter-title {
+        margin-top: 24px;
+        padding: 0 14px;
+      }
+
+      .chapter-title h2 {
+        font-size: 32px;
+        line-height: 1.15;
+      }
+
+      .chapter-title p {
+        font-size: 16px;
+      }
+
+      .chapter-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 0 14px;
+        margin: 18px auto 28px auto;
+      }
+
+      .chapter-card {
+        padding: 18px 14px;
+        font-size: 18px;
+        border-radius: 16px;
+      }
+
+      footer {
+        margin-top: 40px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chapter-card {
+        transition: none;
+      }
+
+      .chapter-card:hover {
+        transform: none;
+      }
+    }
   </style>
   <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
