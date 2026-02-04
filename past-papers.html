@@ -93,27 +93,24 @@
     }
 
     .content a {
-      color: #0070f3;
-      text-decoration: none;
+      color: #444444;
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+      text-underline-offset: 2px;
     }
 
     .content a:hover {
-      text-decoration: underline;
+      color: #E65C00;
     }
-    .content a {
-  color: #444444; /* Orange to match your brand */
-  text-decoration: none;
-}
 
-.content a:hover {
-  color: #E65C00;
-  text-decoration: underline;
-}
-
-    /* Ensure CTA button text stays white inside `.content` */
-    .content a.black-button,
-    .content a.black-button:hover {
+    /* Keep CTA as a button (no underline); make text orange on hover */
+    .content a.black-button {
       color: #fff;
+      text-decoration: none;
+    }
+
+    .content a.black-button:hover {
+      color: #E65C00;
       text-decoration: none;
     }
 
