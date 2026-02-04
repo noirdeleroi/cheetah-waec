@@ -114,6 +114,22 @@
       text-decoration: none;
     }
 
+    .top-cta {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .content a.black-button.compact-cta {
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .top-cta { justify-content: center; }
+    }
+
     footer {
       margin-top: 80px;
       text-align: center;
@@ -142,6 +158,9 @@
   </nav>
 
   <div class="content">
+    <div class="top-cta">
+      <a href="/practice.html" class="black-button compact-cta">Interactive Practice</a>
+    </div>
     <h2>Complete WAEC Math Study Guide</h2>
     <p><a href="assets/waec-math-study-guide.pdf" download>Download the full PDF guide</a></p>
 
@@ -189,7 +208,7 @@
         Solve real WAEC past paper questions and get instant feedback. MCQ is checked instantly, and FRQ is checked by AI in real time.
         Completely free. (Sign in once.)
       </p>
-      <a href="/practice.html" class="black-button" style="display: inline-block; margin-top: 12px; font-size: 18px; padding: 14px 22px; border-radius: 12px;">Open Practice</a>
+      <a href="/practice.html" class="black-button" style="display: inline-block; margin-top: 12px; font-size: 18px; padding: 14px 22px; border-radius: 12px;">Interactive Practice</a>
     </div>
   </div>
 
