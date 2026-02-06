@@ -3,7 +3,11 @@ import { supabase } from "./supabaseClient.js";
 const mount = document.getElementById("feedbackMount");
 if (!mount) {
   console.warn("contactFeedback: missing #feedbackMount");
+} else if (mount.dataset.feedbackInit === "1") {
+  // Prevent duplicate rendering if this module is loaded multiple times.
+  console.warn("contactFeedback: already initialized");
 } else {
+  mount.dataset.feedbackInit = "1";
   let initSeq = 0;
 
   function el(tag, attrs = {}, children = []) {
