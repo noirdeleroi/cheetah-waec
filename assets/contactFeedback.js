@@ -4,6 +4,8 @@ const mount = document.getElementById("feedbackMount");
 if (!mount) {
   console.warn("contactFeedback: missing #feedbackMount");
 } else {
+  let initSeq = 0;
+
   function el(tag, attrs = {}, children = []) {
     const node = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs || {})) {
@@ -42,17 +44,20 @@ if (!mount) {
   }
 
   async function init() {
+    const seq = ++initSeq;
     mount.innerHTML = "";
 
     let user = null;
     try {
       user = await getSessionUser();
     } catch (e) {
+      if (seq !== initSeq) return;
       mount.appendChild(
         el("div", { className: "fb-muted fb-danger", text: e?.message || "Auth check failed." })
       );
       return;
     }
+    if (seq !== initSeq) return;
 
     const title = el("h3", { text: "Send feedback" });
     title.style.margin = "0 0 8px 0";
