@@ -1,7 +1,6 @@
 import { supabase } from "./supabaseClient.js";
 
 const mount = document.getElementById("feedbackMount");
-const feedbackCard = document.getElementById("feedbackCard");
 if (!mount) {
   console.warn("contactFeedback: missing #feedbackMount");
 } else {
@@ -31,10 +30,10 @@ if (!mount) {
     return data?.session?.user || null;
   }
 
-  async function insertFeedback({ user, message }) {
+  async function insertFeedback({ user, email, message }) {
     const payload = {
-      user_id: user.id,
-      email: user.email || null,
+      user_id: user?.id ?? null,
+      email: email || user?.email || null,
       message,
     };
 
@@ -44,7 +43,6 @@ if (!mount) {
 
   async function init() {
     mount.innerHTML = "";
-    if (feedbackCard) feedbackCard.style.display = "none";
 
     let user = null;
     try {
@@ -56,19 +54,22 @@ if (!mount) {
       return;
     }
 
-    if (!user) {
-      // Requirement: do not show the form to logged-out users.
-      return;
-    }
-
-    if (feedbackCard) feedbackCard.style.display = "block";
-
     const title = el("h3", { text: "Send feedback" });
     title.style.margin = "0 0 8px 0";
 
-    const note = el("div", {
-      className: "fb-muted",
-      text: `Signed in as ${user.email || user.id}. Your message goes straight to the team.`,
+    const noteText = user
+      ? `Signed in as ${user.email || user.id}.`
+      : "Not signed in. Please include your email so we can reply.";
+
+    const note = el("div", { className: "fb-muted", text: noteText });
+
+    const emailLabel = el("label", { for: "fbEmail", text: "Email (required)" });
+    const emailInput = el("input", {
+      id: "fbEmail",
+      type: "email",
+      autocomplete: "email",
+      placeholder: "you@example.com",
+      class: "fb-field",
     });
 
     const label = el("label", { for: "fbMessage", text: "Write any feedback or message" });
@@ -78,6 +79,7 @@ if (!mount) {
       maxlength: "2000",
       placeholder: "Type your message here...",
     });
+    textarea.className = "fb-field fb-textarea";
 
     const status = el("div", { className: "fb-muted", text: "" });
 
@@ -85,7 +87,13 @@ if (!mount) {
     btn.style.marginLeft = "auto";
 
     btn.addEventListener("click", async () => {
+      const email = String(emailInput.value || "").trim();
       const message = String(textarea.value || "").trim();
+
+      if (!user && !email) {
+        setStatus(status, "Email is required when you're not signed in.", "fb-muted fb-danger");
+        return;
+      }
       if (!message) {
         setStatus(status, "Message can't be empty.", "fb-muted fb-danger");
         return;
@@ -96,11 +104,13 @@ if (!mount) {
       }
 
       btn.disabled = true;
+      emailInput.disabled = true;
       textarea.disabled = true;
       setStatus(status, "Sending...", "fb-muted");
       try {
-        await insertFeedback({ user, message });
+        await insertFeedback({ user, email, message });
         textarea.value = "";
+        if (!user) emailInput.value = "";
         setStatus(status, "Thanks! Feedback received.", "fb-muted fb-success");
       } catch (e) {
         setStatus(
@@ -111,6 +121,7 @@ if (!mount) {
         );
       } finally {
         btn.disabled = false;
+        emailInput.disabled = false;
         textarea.disabled = false;
       }
     });
@@ -122,6 +133,12 @@ if (!mount) {
 
     mount.appendChild(title);
     mount.appendChild(note);
+
+    if (!user) {
+      mount.appendChild(emailLabel);
+      mount.appendChild(emailInput);
+    }
+
     mount.appendChild(el("div", {}, [label, textarea, row, status]));
   }
 

@@ -112,7 +112,19 @@
       white-space: nowrap;
     }
     .fb-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    #feedbackCard { display: none; }
+
+    .fb-field {
+      width: 100%;
+      padding: 12px 12px;
+      border: 1px solid #E0DED9;
+      border-radius: 12px;
+      background: #fff;
+      box-sizing: border-box;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .fb-textarea { min-height: 120px; resize: vertical; }
   </style>
 </head>
 <body>
@@ -170,6 +182,8 @@
           </a>
         </li>
       </ul>
+
+      <div id="feedbackMount" class="fb-wrap"></div>
     </div>
 
     <div class="card">
@@ -182,13 +196,6 @@
       </ul>
     </div>
 
-    <div class="card" id="feedbackCard">
-      <h2>Send feedback</h2>
-      <p style="font-size: 16px; margin-top: 0; color: #555;">
-        This section only appears when you're signed in.
-      </p>
-      <div id="feedbackMount" class="fb-wrap"></div>
-    </div>
   </main>
 
   <script type="module" src="assets/contactFeedback.js"></script>
