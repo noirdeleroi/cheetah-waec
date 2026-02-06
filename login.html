@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CQNXCWHX7"></script>
   <script>
@@ -10,16 +13,16 @@
     gtag('config', 'G-1CQNXCWHX7');
   </script>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="icon" href="/favicon.ico" />
-  <title>Login – Cheetah WAEC</title>
+
+  <title>Login - Cheetah WAEC</title>
   <meta name="description" content="Sign in with Google (or email) to unlock Practice mode on Cheetah WAEC and get real-time feedback on WAEC past questions.">
   <link rel="canonical" href="https://cheetahwaec.com/login">
+
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
 
@@ -84,24 +87,49 @@
     }
     .kpi h4 { margin: 0 0 6px 0; }
     .kpi ul { margin: 8px 0 0 18px; color: #333; }
+
+    .google-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      background: #111;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
     .btn-google {
-      background: #fff;
+      background: linear-gradient(#fff, #fafafa);
       color: #111;
-      border: 1px solid #E0DED9;
+      border: 2px solid #111;
       display: flex;
       gap: 10px;
       align-items: center;
       justify-content: center;
+      padding: 16px 16px;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .btn-google:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.10);
+    }
+    .btn-google:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
     }
     .gmark {
       width: 22px;
       height: 22px;
       border-radius: 999px;
-      border: 1px solid #E0DED9;
+      border: 1px solid #ddd;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12px;
       background: #fff;
     }
@@ -116,7 +144,7 @@
           <span>Cheetah WAEC</span>
         </a>
       </h1>
-      <button class="menu-toggle">☰</button>
+      <button class="menu-toggle">&#9776;</button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/study-guide">Study Guide</a></li>
@@ -153,9 +181,10 @@
     </div>
 
     <div class="card">
+      <div class="google-badge">Recommended</div>
       <button id="btnGoogle" type="button" class="btn btn-google">
         <span class="gmark">G</span>
-        Continue with Google
+        Login with Google
       </button>
       <p class="muted" style="margin: 10px 0 0 0;">
         Or use email and password:
@@ -167,7 +196,7 @@
         </div>
         <div>
           <label for="password">Password</label>
-          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+          <input id="password" type="password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password" />
         </div>
       </div>
 
@@ -184,24 +213,14 @@
   </div>
 
   <script type="module" src="assets/login.js"></script>
-<footer>
-  <p style="margin: 10px 0 6px 0;">
-    <a href="/about" style="color:#fff; text-decoration: none;">About</a> |
-    <a href="/contact" style="color:#fff; text-decoration: none;">Contact</a> |
-    <a href="/privacy-policy" style="color:#fff; text-decoration: none;">Privacy Policy</a> |
-    <a href="/terms" style="color:#fff; text-decoration: none;">Terms</a>
-  </p>
-  <p style="margin: 0 0 10px 0;">&copy; 2026 CheetahWAEC</p>
-</footer>
+  <footer>
+    <p style="margin: 10px 0 6px 0;">
+      <a href="/about" style="color:#fff; text-decoration: none;">About</a> |
+      <a href="/contact" style="color:#fff; text-decoration: none;">Contact</a> |
+      <a href="/privacy-policy" style="color:#fff; text-decoration: none;">Privacy Policy</a> |
+      <a href="/terms" style="color:#fff; text-decoration: none;">Terms</a>
+    </p>
+    <p style="margin: 0 0 10px 0;">&copy; 2026 CheetahWAEC</p>
+  </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
