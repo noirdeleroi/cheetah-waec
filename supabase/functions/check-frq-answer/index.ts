@@ -121,7 +121,8 @@ async function callOpenRouter(args: {
       "Content-Type": "application/json",
       // Optional but recommended by OpenRouter for analytics/rate-limits.
       "HTTP-Referer": "https://cheetahwaec.com",
-      "X-Title": "Cheetah WAEC Practice",
+      // Project name for OpenRouter analytics:
+      "X-Title": "cheetahwaec",
     },
     body: JSON.stringify({
       model: args.model,
