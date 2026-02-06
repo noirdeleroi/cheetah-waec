@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -7,6 +7,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+
     gtag('config', 'G-1CQNXCWHX7');
   </script>
 
@@ -18,73 +19,87 @@
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="icon" href="/favicon.ico" />
 
-  <title>Contact - CheetahWAEC</title>
-  <meta name="description" content="Contact CheetahWAEC for support, feedback, and corrections. Use the contact form or email support@cheetahwaec.com." />
-  <link rel="canonical" href="https://cheetahwaec.com/contact" />
+  <title>Contact - Cheetah WAEC</title>
+  <meta name="description" content="Contact Cheetah WAEC, join our community, and help us build the best free WAEC math learning platform.">
+  <link rel="canonical" href="https://cheetahwaec.com/contact">
 
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
 
   <style>
-    body { background: #f8f6f2; }
-    .wrap {
+    .content {
       max-width: 900px;
-      margin: 90px auto 60px auto;
+      margin: 80px auto 60px auto;
       padding: 0 20px;
       font-family: sans-serif;
     }
+
     .card {
       background: #fff;
       border-radius: 18px;
       padding: 22px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.04);
-      margin: 18px 0;
-    }
-    h1 { margin: 0 0 8px 0; font-size: 34px; }
-    .muted { color: #555; }
-
-    label { display:block; font-weight: 700; margin: 12px 0 6px 0; }
-    input, textarea {
-      width: 100%;
-      padding: 12px 12px;
-      border: 1px solid #E0DED9;
-      border-radius: 12px;
-      background: #fff;
-      box-sizing: border-box;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-    textarea { min-height: 140px; resize: vertical; }
-    .row { display:flex; gap: 12px; flex-wrap: wrap; }
-    .row > div { flex: 1; min-width: 220px; }
-    .btn {
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid #111;
-      background: #111;
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
+      margin: 18px auto;
     }
 
-    .fb-wrap {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid #eee;
-      text-align: left;
+    .content h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 14px 0;
+      text-align: center;
     }
-    .fb-wrap label { margin-top: 0; }
-    .fb-row {
-      display: flex;
+
+    .content h2 {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 0 0 12px 0;
+      text-align: center;
+    }
+
+    .content p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #333;
+      margin: 10px 0 0 0;
+      text-align: center;
+    }
+
+    .link-list {
+      font-size: 18px;
+      line-height: 2;
+      text-align: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .link-list li { margin: 6px 0; }
+
+    .link-list li a {
+      display: inline-flex;
+      gap: 10px;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 10px;
-      flex-wrap: wrap;
+      justify-content: center;
+      color: #444;
+      text-decoration: none;
+      font-weight: 600;
     }
-    .fb-muted { color: #555; font-size: 14px; }
-    .fb-danger { color: #b00020; }
+
+    .link-list li a:hover {
+      color: #E65C00;
+      text-decoration: underline;
+    }
+
+    .icon {
+      width: 22px;
+      text-align: center;
+    }
+
+    /* Feedback (only visible when logged in) */
+    .fb-wrap { margin-top: 14px; padding-top: 14px; border-top: 1px solid #eee; text-align: left; }
+    .fb-muted { color: #555; font-size: 14px; margin-top: 6px; }
+    .fb-danger { color: #8a1a1a; }
+    .fb-row { display: flex; gap: 12px; align-items: center; margin-top: 10px; }
     .fb-success { color: #0b6b2b; }
     .fb-btn {
       padding: 12px 14px;
@@ -97,11 +112,7 @@
       white-space: nowrap;
     }
     .fb-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    .links ul { list-style: none; padding: 0; margin: 0; }
-    .links li { margin: 6px 0; }
-    .links a { color: #111; text-decoration: none; font-weight: 600; }
-    .links a:hover { text-decoration: underline; }
+    #feedbackCard { display: none; }
   </style>
 </head>
 <body>
@@ -109,7 +120,7 @@
     <div class="nav-container">
       <h1 style="display:flex; align-items:center;">
         <a href="/" style="text-decoration:none; color:inherit; display:flex; align-items:center;">
-          <img src="assets/images/logo.png" alt="CheetahWAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+          <img src="assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
           <span>Cheetah WAEC</span>
         </a>
       </h1>
@@ -119,89 +130,76 @@
         <li><a href="/study-guide">Study Guide</a></li>
         <li><a href="/past-papers">Past Papers</a></li>
         <li><a href="/practice">Practice</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a href="/contact">Contact Us</a></li>
         <li><a href="/subscribe" class="subscribe-btn">Become a donor</a></li>
       </ul>
     </div>
   </nav>
 
-  <main class="wrap">
+  <main class="content">
     <div class="card">
-      <h1>Contact CheetahWAEC</h1>
-      <p class="muted" style="margin-top:6px;">
-        Send feedback, report an error, or ask a question. We read every message.
+      <h1>Our Mission</h1>
+      <p>
+        At <strong>Cheetah WAEC</strong>, our mission is to <strong>empower students across West Africa</strong> with
+        free, high-quality, and accessible tools to master mathematics.
       </p>
-      <p class="muted" style="margin-top:6px;">
-        Please don't send passwords or sensitive personal information.
+      <p>
+        We are committed to supporting <strong>equitable education</strong> by providing a modern, interactive platform
+        that simplifies learning, encourages practice, and builds confidence - especially for students preparing for the
+        <strong>WAEC examination</strong>.
+      </p>
+      <p>
+        We are building a community around WAEC preparation. If you are a passionate educator, tutor, or content creator
+        and want to help students learn better, we would love to work with you.
       </p>
     </div>
 
     <div class="card">
-      <h2 style="margin: 0 0 8px 0;">Contact form</h2>
-      <p class="muted" style="margin-top: 0;">
-        This form is a placeholder endpoint for now. If it doesn't work on your device, email us instead.
-      </p>
-
-      <form action="/api/contact" method="post">
-        <div class="row">
-          <div>
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" />
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
-          </div>
-        </div>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" maxlength="2000" placeholder="How can we help?" required></textarea>
-
-        <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px;">
-          <div class="muted" style="font-size: 14px;">Max 2000 characters.</div>
-          <button class="btn" type="submit">Send message</button>
-        </div>
-      </form>
-
-      <noscript>
-        <p class="muted" style="margin-top: 10px;">
-          JavaScript is disabled. You can contact us by email:
-          <a href="mailto:support@cheetahwaec.com">support@cheetahwaec.com</a>.
-        </p>
-      </noscript>
-
-      <p class="muted" style="margin-top: 12px;">
-        Email: <a href="mailto:support@cheetahwaec.com">support@cheetahwaec.com</a>
-      </p>
-
-      <div id="feedbackMount" class="fb-wrap"></div>
-    </div>
-
-    <div class="card links">
-      <h2 style="margin: 0 0 8px 0;">Follow & community</h2>
-      <ul>
-        <li><a href="https://www.reddit.com/r/CheetahWAEC/" target="_blank" rel="noopener">Reddit: r/CheetahWAEC</a></li>
-        <li><a href="https://www.tiktok.com/@cheetahwaec" target="_blank" rel="noopener">TikTok: @cheetahwaec</a></li>
-        <li><a href="https://www.instagram.com/cheetahwaec" target="_blank" rel="noopener">Instagram: @cheetahwaec</a></li>
-        <li><a href="https://m.facebook.com/61575094883653/" target="_blank" rel="noopener">Facebook: @cheetahwaec</a></li>
-        <li><a href="https://chat.whatsapp.com/H0apT6YvvvMGonRP0lkpa1" target="_blank" rel="noopener">WhatsApp Chat</a></li>
+      <h2>Contact Us</h2>
+      <ul class="link-list">
+        <li>
+          <a href="mailto:support@cheetahwaec.com">
+            <span class="icon">✉</span>
+            support@cheetahwaec.com
+          </a>
+        </li>
+        <li>
+          <a href="https://www.reddit.com/r/CheetahWAEC/" target="_blank" rel="noopener">
+            <span class="icon">◯</span>
+            Reddit: r/CheetahWAEC
+          </a>
+        </li>
       </ul>
+    </div>
+
+    <div class="card">
+      <h2>Follow Us Online</h2>
+      <ul class="link-list">
+        <li><a href="https://www.tiktok.com/@cheetahwaec" target="_blank" rel="noopener"><span class="icon">♪</span>TikTok: @cheetahwaec</a></li>
+        <li><a href="https://www.instagram.com/cheetahwaec" target="_blank" rel="noopener"><span class="icon">◎</span>Instagram: @cheetahwaec</a></li>
+        <li><a href="https://m.facebook.com/61575094883653/" target="_blank" rel="noopener"><span class="icon">f</span>Facebook: @cheetahwaec</a></li>
+        <li><a href="https://chat.whatsapp.com/H0apT6YvvvMGonRP0lkpa1" target="_blank" rel="noopener"><span class="icon">⟐</span>WhatsApp Chat</a></li>
+      </ul>
+    </div>
+
+    <div class="card" id="feedbackCard">
+      <h2>Send feedback</h2>
+      <p style="font-size: 16px; margin-top: 0; color: #555;">
+        This section only appears when you're signed in.
+      </p>
+      <div id="feedbackMount" class="fb-wrap"></div>
     </div>
   </main>
 
   <script type="module" src="assets/contactFeedback.js"></script>
-<footer>
-  <p style="margin: 10px 0 6px 0;">
-    <a href="/about" style="color:#fff; text-decoration: none;">About</a> |
-    <a href="/contact" style="color:#fff; text-decoration: none;">Contact</a> |
-    <a href="/privacy-policy" style="color:#fff; text-decoration: none;">Privacy Policy</a> |
-    <a href="/terms" style="color:#fff; text-decoration: none;">Terms</a>
-  </p>
-  <p style="margin: 0 0 10px 0;">&copy; 2026 CheetahWAEC</p>
-</footer>
+  <footer>
+    <p style="margin: 10px 0 6px 0;">
+      <a href="/about" style="color:#fff; text-decoration: none;">About</a> |
+      <a href="/contact" style="color:#fff; text-decoration: none;">Contact</a> |
+      <a href="/privacy-policy" style="color:#fff; text-decoration: none;">Privacy Policy</a> |
+      <a href="/terms" style="color:#fff; text-decoration: none;">Terms</a>
+    </p>
+    <p style="margin: 0 0 10px 0;">&copy; 2026 CheetahWAEC</p>
+  </footer>
 </body>
 </html>
-
-
-
-

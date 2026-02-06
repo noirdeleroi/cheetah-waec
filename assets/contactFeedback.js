@@ -1,6 +1,7 @@
 import { supabase } from "./supabaseClient.js";
 
 const mount = document.getElementById("feedbackMount");
+const feedbackCard = document.getElementById("feedbackCard");
 if (!mount) {
   console.warn("contactFeedback: missing #feedbackMount");
 } else {
@@ -43,6 +44,7 @@ if (!mount) {
 
   async function init() {
     mount.innerHTML = "";
+    if (feedbackCard) feedbackCard.style.display = "none";
 
     let user = null;
     try {
@@ -58,6 +60,8 @@ if (!mount) {
       // Requirement: do not show the form to logged-out users.
       return;
     }
+
+    if (feedbackCard) feedbackCard.style.display = "block";
 
     const title = el("h3", { text: "Send feedback" });
     title.style.margin = "0 0 8px 0";
@@ -127,4 +131,3 @@ if (!mount) {
 
   init().catch(() => {});
 }
-
