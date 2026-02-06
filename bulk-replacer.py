@@ -1,16 +1,11 @@
 from pathlib import Path
 
 # Set the folder where your HTML files are located
-html_folder = Path(r"C:\Users\User\Documents\work\jupiter_sg\chapters")  # 🔁 Adjust this path to your folder
+html_folder = Path(r"C:\Users\User\Documents\work\jupiter_sg\chapters")  # Adjust this path
 
-# Replacement rules
-replacements = {
-    '<li><a href="../telegram.html">Telegram Bot</a></li>':
-    '<li><a href="../../telegram.html">Telegram Bot</a></li>',
+# Replacement rules (kept empty; removed messaging page from the site)
+replacements: dict[str, str] = {}
 
-}
-
-# Loop through all .html files
 for file in html_folder.rglob("*.html"):
     content = file.read_text(encoding="utf-8")
     original_content = content
@@ -20,6 +15,4 @@ for file in html_folder.rglob("*.html"):
 
     if content != original_content:
         file.write_text(content, encoding="utf-8")
-        print(f"✅ Updated: {file}")
-    else:
-        print(f"— Skipped (no changes): {file}")
+        print(f"Updated: {file}")
