@@ -54,6 +54,11 @@ foreach($u in $urls){
 }
 $lines += '</urlset>'
 
-Set-Content -LiteralPath 'sitemap.xml' -Value ($lines -join "`n") -Encoding utf8
+# Write UTF-8 without BOM to avoid sitemap parsers seeing BOM bytes as "ï»¿"
+[System.IO.File]::WriteAllText(
+  'sitemap.xml',
+  ($lines -join "`n"),
+  (New-Object System.Text.UTF8Encoding($false))
+)
 
 "Generated sitemap.xml with $($urls.Count) URLs"
