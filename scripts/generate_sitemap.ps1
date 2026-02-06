@@ -22,11 +22,11 @@ function Get-CanonicalUrl([string]$fullName){
 
 function ShouldInclude([System.IO.FileInfo]$f){
   $rel=$f.FullName.Substring((Get-Location).Path.Length).TrimStart('\') -replace '\\','/'
-  if($rel -match '^(supabase|\\.git)/'){ return $false }
+  if($rel -match '^(supabase|\.git)/'){ return $false }
   if($rel -notmatch '^[^/]+\.html$' -and $rel -notmatch '^chapters/.*\.html$'){ return $false }
   if($rel -match '^chapters/tochange/'){ return $false }
   if($rel -match '^chapters/pr/'){ return $false }
-  if($rel -match '^template\\d+\\.html$'){ return $false }
+  if($rel -match '^template\d+\.html$'){ return $false }
   if($rel -in @('output.html','genius.html')){ return $false }
   if($rel -match '^chapters/commertial-mathematics/'){ return $false }
   return $true

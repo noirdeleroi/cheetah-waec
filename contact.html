@@ -1,15 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1CQNXCWHX7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1CQNXCWHX7');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1CQNXCWHX7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1CQNXCWHX7');
+  </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,110 +17,35 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="icon" href="/favicon.ico" />
-  <title>Contact – Cheetah WAEC</title>
-  <meta name="description" content="Contact Cheetah WAEC, join our community, and help us build the best free WAEC math learning platform.">
-  <link rel="canonical" href="https://cheetahwaec.com/contact">
+
+  <title>Contact â€“ CheetahWAEC</title>
+  <meta name="description" content="Contact CheetahWAEC for support, feedback, and corrections. Use the contact form or email support@cheetahwaec.com." />
+  <link rel="canonical" href="https://cheetahwaec.com/contact" />
+
   <link rel="stylesheet" href="assets/style.css" />
   <script defer src="assets/script.js"></script>
-  <style>
-    body {
-      background: #f8f6f2;
-    }
 
-    .content {
-      max-width: 800px;
-      margin: 100px auto 60px auto;
+  <style>
+    body { background: #f8f6f2; }
+    .wrap {
+      max-width: 900px;
+      margin: 90px auto 60px auto;
       padding: 0 20px;
       font-family: sans-serif;
     }
-
-    .content h2 {
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .content h3 {
-      font-size: 24px;
-      margin-top: 40px;
-    }
-
-    .content h4 {
-      font-size: 20px;
-      margin-top: 20px;
-    }
-
-    .content ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .content ul li {
-      margin: 6px 0;
-    }
-
     .card {
       background: #fff;
       border-radius: 18px;
       padding: 22px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.04);
-      margin: 18px auto;
+      margin: 18px 0;
     }
+    h1 { margin: 0 0 8px 0; font-size: 34px; }
+    .muted { color: #555; }
 
-    .link-list li a {
-      display: inline-flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .icon {
-      width: 22px;
-      text-align: center;
-    }
-
-    .content a {
-  color: #444444; /* Orange to match your brand */
-  text-decoration: none;
-}
-
-.content a:hover {
-  color: #E65C00;
-  text-decoration: underline;
-}
-
-    footer {
-      margin-top: 80px;
-      text-align: center;
-    }
-
-    a {
-  color: #FF6600;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-a:hover {
-  color: #E65C00;
-  text-decoration: underline;
-}
-
-    .fb-wrap {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid #eee;
-      text-align: left;
-    }
-
-    .fb-wrap label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .fb-wrap textarea {
+    label { display:block; font-weight: 700; margin: 12px 0 6px 0; }
+    input, textarea {
       width: 100%;
-      min-height: 120px;
       padding: 12px 12px;
       border: 1px solid #E0DED9;
       border-radius: 12px;
@@ -129,27 +53,11 @@ a:hover {
       box-sizing: border-box;
       font-size: 16px;
       line-height: 1.4;
-      resize: vertical;
     }
-
-    .fb-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .fb-muted {
-      color: #555;
-      font-size: 14px;
-    }
-
-    .fb-danger { color: #b00020; }
-    .fb-success { color: #0b6b2b; }
-
-    .fb-btn {
+    textarea { min-height: 140px; resize: vertical; }
+    .row { display:flex; gap: 12px; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 220px; }
+    .btn {
       padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid #111;
@@ -160,97 +68,139 @@ a:hover {
       white-space: nowrap;
     }
 
+    .fb-wrap {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #eee;
+      text-align: left;
+    }
+    .fb-wrap label { margin-top: 0; }
+    .fb-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .fb-muted { color: #555; font-size: 14px; }
+    .fb-danger { color: #b00020; }
+    .fb-success { color: #0b6b2b; }
+    .fb-btn {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
     .fb-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+    .links ul { list-style: none; padding: 0; margin: 0; }
+    .links li { margin: 6px 0; }
+    .links a { color: #111; text-decoration: none; font-weight: 600; }
+    .links a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <nav>
     <div class="nav-container">
-      <h1 style="display: flex; align-items: center;">
-        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-          <img src="assets/images/logo.png" alt="Cheetah WAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
+      <h1 style="display:flex; align-items:center;">
+        <a href="/" style="text-decoration:none; color:inherit; display:flex; align-items:center;">
+          <img src="assets/images/logo.png" alt="CheetahWAEC Logo" style="height:40px; vertical-align:middle; margin-right:10px;">
           <span>Cheetah WAEC</span>
         </a>
       </h1>
-      <button class="menu-toggle">☰</button>
+      <button class="menu-toggle">â˜°</button>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/study-guide">Study Guide</a></li>
         <li><a href="/past-papers">Past Papers</a></li>
         <li><a href="/practice">Practice</a></li>
-        <li><a href="/contact">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
         <li><a href="/subscribe" class="subscribe-btn">Become a donor</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="content" style="max-width: 900px; margin: 80px auto 20px auto; padding: 0 20px; font-family: sans-serif;">
+  <main class="wrap">
     <div class="card">
-    <h2 style="text-align: center; margin-top: 0;">Our Mission</h2>
-    <p style="font-size: 18px; line-height: 1.8; color: #333; text-align: center; margin-top: 10px;">
-      At <strong>Cheetah WAEC</strong>, our mission is to 
-      <strong>empower students across West Africa</strong> with free, high-quality, and accessible tools to master mathematics.
-      We are committed to supporting <strong>equitable education</strong> by providing a modern, interactive platform 
-      that simplifies learning, encourages practice, and builds confidence—especially for students preparing for the <strong>WAEC examination</strong>.
-    </p>
-    <p style="font-size: 18px; line-height: 1.8; color: #333; text-align: center; margin-top: 10px;">
-      We believe <strong>every student deserves the opportunity to succeed</strong>, and we’re here to bridge the gap 
-      with engaging content, smart technology, and a supportive learning community.
-    </p>
-    <p style="font-size: 18px; line-height: 1.8; color: #333; text-align: center; margin-top: 10px;">
-      We are building a community around WAEC preparation. If you are a passionate educator, tutor, or content creator
-      and want to help students learn better, we would love to work with you.
-    </p>
+      <h1>Contact CheetahWAEC</h1>
+      <p class="muted" style="margin-top:6px;">
+        Send feedback, report an error, or ask a question. We read every message.
+      </p>
+      <p class="muted" style="margin-top:6px;">
+        Please donâ€™t send passwords or sensitive personal information.
+      </p>
     </div>
-  </div>
-  
 
-  <div class="content" style="max-width: 900px; margin: 0 auto 60px auto; padding: 0 20px; font-family: sans-serif;">
     <div class="card">
-      <h2 style="text-align: center; margin-top: 0;">Contact Us</h2>
-      <ul class="link-list" style="font-size: 18px; line-height: 2; text-align: center; list-style: none; padding: 0; margin: 0;">
-        <li>
-          <a href="mailto:cheetahwaec@gmail.com">
-            <span class="icon">✉</span>
-            cheetahwaec@gmail.com
-          </a>
-        </li>
-        <li>
-          <a href="https://www.reddit.com/r/CheetahWAEC/" target="_blank">
-            <span class="icon">◯</span>
-            Reddit: r/CheetahWAEC
-          </a>
-        </li>
-      </ul>
+      <h2 style="margin: 0 0 8px 0;">Contact form</h2>
+      <p class="muted" style="margin-top: 0;">
+        This form is a placeholder endpoint for now. If it doesnâ€™t work on your device, email us instead.
+      </p>
+
+      <form action="/api/contact" method="post">
+        <div class="row">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" maxlength="2000" placeholder="How can we help?" required></textarea>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px;">
+          <div class="muted" style="font-size: 14px;">Max 2000 characters.</div>
+          <button class="btn" type="submit">Send message</button>
+        </div>
+      </form>
+
+      <noscript>
+        <p class="muted" style="margin-top: 10px;">
+          JavaScript is disabled. You can contact us by email:
+          <a href="mailto:support@cheetahwaec.com">support@cheetahwaec.com</a>.
+        </p>
+      </noscript>
+
+      <p class="muted" style="margin-top: 12px;">
+        Email: <a href="mailto:support@cheetahwaec.com">support@cheetahwaec.com</a>
+      </p>
 
       <div id="feedbackMount" class="fb-wrap"></div>
     </div>
 
-    <div class="card">
-      <h2 style="text-align: center; margin-top: 0;">Follow Us Online</h2>
-      <ul class="link-list" style="font-size: 18px; line-height: 2; text-align: center; list-style: none; padding: 0; margin: 0;">
-        <li><a href="https://www.tiktok.com/@cheetahwaec" target="_blank"><span class="icon">♪</span>TikTok: @cheetahwaec</a></li>
-        <li><a href="https://www.instagram.com/cheetahwaec" target="_blank"><span class="icon">◎</span>Instagram: @cheetahwaec</a></li>
-        <li><a href="https://m.facebook.com/61575094883653/" target="_blank"><span class="icon">f</span>Facebook: @cheetahwaec</a></li>
-        <li><a href="https://chat.whatsapp.com/H0apT6YvvvMGonRP0lkpa1" target="_blank"><span class="icon">⟐</span>WhatsApp Chat</a></li>
+    <div class="card links">
+      <h2 style="margin: 0 0 8px 0;">Follow & community</h2>
+      <ul>
+        <li><a href="https://www.reddit.com/r/CheetahWAEC/" target="_blank" rel="noopener">Reddit: r/CheetahWAEC</a></li>
+        <li><a href="https://www.tiktok.com/@cheetahwaec" target="_blank" rel="noopener">TikTok: @cheetahwaec</a></li>
+        <li><a href="https://www.instagram.com/cheetahwaec" target="_blank" rel="noopener">Instagram: @cheetahwaec</a></li>
+        <li><a href="https://m.facebook.com/61575094883653/" target="_blank" rel="noopener">Facebook: @cheetahwaec</a></li>
+        <li><a href="https://chat.whatsapp.com/H0apT6YvvvMGonRP0lkpa1" target="_blank" rel="noopener">WhatsApp Chat</a></li>
       </ul>
     </div>
-  </div>
-  
-
-  <footer>
-    <p>&copy; 2026 Cheetah WAEC. All rights reserved.</p>
-  </footer>
+  </main>
 
   <script type="module" src="assets/contactFeedback.js"></script>
+<footer>
+  <p style="margin: 10px 0 6px 0;">
+    <a href="/about" style="color:#fff; text-decoration: none;">About</a> |
+    <a href="/contact" style="color:#fff; text-decoration: none;">Contact</a> |
+    <a href="/privacy-policy" style="color:#fff; text-decoration: none;">Privacy Policy</a> |
+    <a href="/terms" style="color:#fff; text-decoration: none;">Terms</a>
+  </p>
+  <p style="margin: 0 0 10px 0;">&copy; 2026 CheetahWAEC</p>
+</footer>
 </body>
 </html>
-
-
-
-
-
 
 
 
