@@ -106,6 +106,62 @@ a:hover {
   text-decoration: underline;
 }
 
+    .fb-wrap {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #eee;
+      text-align: left;
+    }
+
+    .fb-wrap label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .fb-wrap textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px 12px;
+      border: 1px solid #E0DED9;
+      border-radius: 12px;
+      background: #fff;
+      box-sizing: border-box;
+      font-size: 16px;
+      line-height: 1.4;
+      resize: vertical;
+    }
+
+    .fb-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .fb-muted {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .fb-danger { color: #b00020; }
+    .fb-success { color: #0b6b2b; }
+
+    .fb-btn {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .fb-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
   </style>
 </head>
 <body>
@@ -167,6 +223,8 @@ a:hover {
           </a>
         </li>
       </ul>
+
+      <div id="feedbackMount" class="fb-wrap"></div>
     </div>
 
     <div class="card">
@@ -184,6 +242,8 @@ a:hover {
   <footer>
     <p>&copy; 2026 Cheetah WAEC. All rights reserved.</p>
   </footer>
+
+  <script type="module" src="assets/contactFeedback.js"></script>
 </body>
 </html>
 
