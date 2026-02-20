@@ -20,6 +20,20 @@ function Get-CanonicalUrl([string]$fullName){
   return "$siteBase/$rel"
 }
 
+function Get-Priority([string]$url){
+  if($url -match '/$' -or $url -eq "$siteBase/"){ return '1.0' }
+  if($url -match '/(study-guide|past-papers|practice|about)$'){ return '0.95' }
+  if($url -match '/chapters/[^/]+$'){ return '0.9' }   # chapter index
+  if($url -match '/chapters/'){ return '0.85' }        # sub-chapters
+  if($url -match '/(contact|subscribe|terms|privacy-policy|login|sitemap)$'){ return '0.8' }
+  return '0.7'
+}
+
+function Get-Changefreq([string]$url){
+  if($url -match '/(past-papers|practice)$'){ return 'weekly' }
+  return 'monthly'
+}
+
 function ShouldInclude([System.IO.FileInfo]$f){
   $rel=$f.FullName.Substring((Get-Location).Path.Length).TrimStart('\') -replace '\\','/'
   if($rel -match '^(supabase|\.git)/'){ return $false }
@@ -47,9 +61,13 @@ $lines=@()
 $lines += '<?xml version="1.0" encoding="UTF-8"?>'
 $lines += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 foreach($u in $urls){
+  $priority = Get-Priority $u.loc
+  $changefreq = Get-Changefreq $u.loc
   $lines += '  <url>'
   $lines += ('    <loc>{0}</loc>' -f $u.loc)
   $lines += ('    <lastmod>{0}</lastmod>' -f $u.lastmod)
+  $lines += ('    <changefreq>{0}</changefreq>' -f $changefreq)
+  $lines += ('    <priority>{0}</priority>' -f $priority)
   $lines += '  </url>'
 }
 $lines += '</urlset>'

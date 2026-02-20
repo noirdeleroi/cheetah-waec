@@ -7,7 +7,8 @@ $footerInner=@"
     <a href="/about" style="color:#fff; text-decoration: none;">About</a> |
     <a href="/contact" style="color:#fff; text-decoration: none;">Contact</a> |
     <a href="/privacy-policy" style="color:#fff; text-decoration: none;">Privacy Policy</a> |
-    <a href="/terms" style="color:#fff; text-decoration: none;">Terms</a>
+    <a href="/terms" style="color:#fff; text-decoration: none;">Terms</a> |
+    <a href="/sitemap" style="color:#fff; text-decoration: none;">Sitemap</a>
   </p>
   <p style="margin: 0 0 10px 0;">&copy; $year CheetahWAEC</p>
 "@
