@@ -207,7 +207,14 @@ function renderQuestions(rows) {
     let choicesHtml = "";
     if (!isFrq && choicesObj && typeof choicesObj === "object") {
       const entries = Object.entries(choicesObj)
-        .filter(([k]) => typeof k === "string" && k.trim())
+        .filter(
+          ([k, val]) =>
+            typeof k === "string" &&
+            k.trim() &&
+            val !== null &&
+            val !== undefined &&
+            String(val).trim()
+        )
         .sort(([a], [b]) => a.localeCompare(b));
 
       choicesHtml =
