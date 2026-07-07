@@ -382,6 +382,9 @@ async function loadYears() {
       yearChips.innerHTML = `<span class="muted">No years found.</span>`;
       return;
     }
+    if (!Number.isFinite(Number(currentYear))) {
+      currentYear = years[0];
+    }
     renderChipButtons(
       yearChips,
       years,
@@ -817,8 +820,12 @@ questionsWrap.addEventListener("click", (e) => {
 
   await Promise.all([loadYears(), loadDomains()]);
   await loadTopicsForDomain("");
-  // Default mode is "By topic".
-  onModeChange("topic");
+  // Default to the newest available year, so newly uploaded papers are visible immediately.
+  onModeChange("year");
+  syncLoadButtons();
+  if (Number.isFinite(Number(currentYear))) {
+    await startYear();
+  }
 })();
 
 supabase.auth.onAuthStateChange((_event, session) => {
